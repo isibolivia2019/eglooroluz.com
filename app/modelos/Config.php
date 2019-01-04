@@ -1,5 +1,12 @@
 <?php
 ini_set('display_errors', '1');
+define('DB_USER', "root"); // Usuario
+define('DB_PASSWORD', '$IsiBolivia2018'); // Contraseña
+define('DB_DATABASE', "eglooroluz_bd"); // Nombre de la base de datos
+define('DB_LOCALHOST', "localhost:3306"); // localhost
+
+define('DB_SERVER', "127.0.0.1"); // db server --> no es necesario para esta aplicacion
+define('URL', "http://localhost/eglooroluz.com/"); // db server --> no es necesario para esta aplicacion
 class Config{
 	protected $dbh;
 	public function conexion(){

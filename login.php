@@ -1,45 +1,33 @@
-<?php
-require_once('app/controladores/Usuarios.php');
-$usuarios = new Usuarios();
-$datos = $usuarios->usuarioPrueba();
-print_r($datos);
-if (isset($_POST["btnLogin"]) and $_POST["btnLogin"] == "si") {
-	$usuarios->autentificacionLogin();
-	exit();
-}
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Inicio de Sesion del Sistema Importadora ORO LUZ">
+    <meta name="keywords" content="login, inicio, sesion, inicio de sesion, inicio sesion, ingresar, oro luz, oroluz, eglooroluz, eglo login, oro luz, login, importadora oro luz login,">
+    <title>Inicio de Sesion</title>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="msapplication-tap-highlight" content="no">
-  <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
-  <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
-  <title>Inicio de Sesion</title>
-
-  <!-- Favicons-->
-  <link rel="icon" href="imagenes/sistema/favicon.jpg" sizes="32x32">
-  <!-- Favicons-->
-  <link rel="apple-touch-icon-precomposed" href="imagenes/sistema/favicon119.jpg">
-  <!-- For iPhone -->
-  <meta name="msapplication-TileColor" content="#00bcd4">
-  <meta name="msapplication-TileImage" content="imagenes/sistema/favicon119.jpg">
-  <!-- For Windows Phone -->
+    <!-- Favicons-->
+    <link rel="icon" href="public/imagenes/sistema/favicon.jpg" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="public/imagenes/sistema/favicon119.jpg">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="public/imagenes/sistema/favicon119.jpg">
+    <!-- For Windows Phone -->
 
 
-  <!-- CORE CSS-->
+    <!-- CORE CSS-->
   
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="public/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="public/css/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="public/css/page-center.css" type="text/css" rel="stylesheet" media="screen,projection">
 
-  <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
-  <link href="css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
-  <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="public/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
   
 </head>
 
@@ -52,34 +40,32 @@ if (isset($_POST["btnLogin"]) and $_POST["btnLogin"] == "si") {
   </div>
   <!-- End Page Loading -->
 
-
-
   <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-      <form class="login-form">
+      <form class="login-form" method="post">
         <div class="row">
           <div class="input-field col s12 center">
-            <img src="imagenes/sistema/oroluz.gif" alt="" class="">
+            <img src="public/imagenes/sistema/oroluz.gif" width="350px">
             <p class="center login-form-text">Inicio de Sesion</p>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input id="username" type="text">
-            <label for="username" class="center-align">Usuario</label>
+            <input type="text" id="usuario" name="usuario">
+            <label for="usuario" class="center-align">Usuario</label>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password" type="password">
-            <label for="password">Contraseña</label>
+            <input id="pass" name="pass" type="password">
+            <label for="pass">Contraseña</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <a href="" class="btn waves-effect waves-light col s12" name="btnLogin" value="si">INICIAR SESION</a>
+            <a class="btn waves-effect waves-light col s12" onclick="prueba()">INICIAR SESION</a>
           </div>
         </div>
       </form>
@@ -92,17 +78,45 @@ if (isset($_POST["btnLogin"]) and $_POST["btnLogin"] == "si") {
     Scripts
     ================================================ -->
 
+  <script>
+  function prueba(){
+    var action = "autentificacionUsuario";
+    var usuario = document.getElementById('usuario').value;
+    var pass = document.getElementById('pass').value;
+    if(usuario != "" && pass != ""){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        $datos = JSON.parse(xhttp.response);
+        if($datos.length > 0){
+          location.href = "inicio.php";
+        }else{
+          document.getElementById('pass').value = ""
+          Materialize.toast('Usuario y/o Contraseña Incorrectos', 5000)
+        }
+      //document.getElementById("login").innerHTML = xhttp.responseText;
+      }
+    };
+    xhttp.open("POST", "app/controladores/Usuarios.php", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("action="+action+"&usuario="+usuario+"&pass="+pass);
+    }else{
+      Materialize.toast('Ingrese su Usuario y Contraseña porfavor.', 5000)
+    }
+  }
+  </script>
+
   <!-- jQuery Library -->
-  <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
   <!--materialize js-->
-  <script type="text/javascript" src="js/materialize.js"></script>
+  <script type="text/javascript" src="public/js/materialize.js"></script>
   <!--prism-->
-  <script type="text/javascript" src="js/prism.js"></script>
+  <script type="text/javascript" src="public/js/prism.js"></script>
   <!--scrollbar-->
-  <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <script type="text/javascript" src="public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
   <!--plugins.js - Some Specific JS codes for Plugin Settings-->
-  <script type="text/javascript" src="js/plugins.js"></script>
+  <script type="text/javascript" src="public/js/plugins.js"></script>
 
 </body>
 
