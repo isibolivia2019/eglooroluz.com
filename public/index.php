@@ -1,3 +1,4 @@
 <?php
-echo "Bienvenido a Importadorea Oro Luz";
+require_once '../app/iniciador.php';
+$iniciar = new Core;
 ?>
