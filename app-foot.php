@@ -1,19 +1,22 @@
-<!-- ================================================
-Scripts
-================================================ -->
-
 <!-- jQuery Library -->
 <script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>    
 <!--materialize js-->
 <script type="text/javascript" src="public/js/materialize.min.js"></script>
 <!--scrollbar-->
 <script type="text/javascript" src="public/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+
+<!--prism-->
+<script type="text/javascript" src="public/js/prism.js"></script>
+
+<!-- data-tables -->
+<script type="text/javascript" src="public/js/plugins/data-tables/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="public/js/plugins/data-tables/data-tables-script.js"></script>
    
 <!-- chartist -->
 <script type="text/javascript" src="public/js/plugins/chartist-js/chartist.min.js"></script>   
 <!-- chartjs -->
 <script type="text/javascript" src="public/js/plugins/chartjs/chart.min.js"></script>
-<script type="text/javascript" src="public/js/plugins/chartjs/chart-script.js"></script>
+
 <!-- sparkline -->
 <script type="text/javascript" src="public/js/plugins/sparkline/jquery.sparkline.min.js"></script>
 <script type="text/javascript" src="public/js/plugins/sparkline/sparkline-script.js"></script>

@@ -1,13 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<!--================================================================================
-	Item Name: Materialize - Material Design Admin Template
-	Version: 1.0
-	Author: GeeksLabs
-	Author URL: http://www.themeforest.net/user/geekslabs
-================================================================================ -->
-
 <?php require("app-head.php");?>
 
 <body>

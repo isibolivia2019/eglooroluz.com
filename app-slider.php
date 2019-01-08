@@ -18,12 +18,12 @@
         </li>
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
-                <li class="bold"><a href="inicio.html" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Inicio</a></li>
+                <li class="bold"><a href="inicio.php" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Inicio</a></li>
                 <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Usuarios</a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="table-basic.html">Lista de Usuarios</a></li>
-                            <li><a href="usuario-agregar.html">Agregar Nuevo Usuario</a></li>
+                            <li><a href="usuario-lista.php">Lista de Usuarios</a></li>
+                            <li><a href="usuario-agregar.php">Agregar Nuevo Usuario</a></li>
                         </ul>
                     </div>
                 </li>

@@ -31,7 +31,7 @@
   
 </head>
 
-<body class="cyan">
+<body class="cyan" onload="miFuncion();">
   <!-- Start Page Loading -->
   <div id="loader-wrapper">
       <div id="loader"></div>        
@@ -104,6 +104,11 @@
       Materialize.toast('Ingrese su Usuario y Contraseña porfavor.', 5000)
     }
   }
+  </script>
+<script>
+  function miFuncion() {
+			alert('Login');
+		}
   </script>
 
   <!-- jQuery Library -->
