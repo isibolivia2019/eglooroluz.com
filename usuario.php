@@ -25,8 +25,8 @@
                                 <div class="col s12 m12 l12">
                                     <h5 class="breadcrumbs-title">Lista de Usuarios</h5>
                                     <ol class="breadcrumb">
-                                        <li><a href="index.html">Usuarios</a></li>
-                                        <li class="active">Lista</li>
+                                        <li><a href="inicio.php">Inicio</a></li>
+                                        <li class="active">Usuarios Habilitados</li>
                                     </ol>
                                 </div>
                             </div>
@@ -82,7 +82,8 @@
     <script>
         $(document).ready(function() {
             var parametros = {
-                "action" : "listaUsuario"
+                "action" : "listaUsuarioEstado",
+                "estado" : "1"
             };
             var table = $('#table-simple').DataTable({
                 "destroy":true,

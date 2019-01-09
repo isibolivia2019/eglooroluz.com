@@ -31,7 +31,7 @@
   
 </head>
 
-<body class="cyan" onload="miFuncion();">
+<body class="cyan">
   <!-- Start Page Loading -->
   <div id="loader-wrapper">
       <div id="loader"></div>        
@@ -65,7 +65,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <a class="btn waves-effect waves-light col s12" onclick="prueba()">INICIAR SESION</a>
+            <a class="btn waves-effect waves-light col s12" onclick="autentificacion()">INICIAR SESION</a>
           </div>
         </div>
       </form>
@@ -79,38 +79,45 @@
     ================================================ -->
 
   <script>
-  function prueba(){
-    var action = "autentificacionUsuario";
+  function autentificacion(){
     var usuario = document.getElementById('usuario').value;
     var pass = document.getElementById('pass').value;
-    if(usuario != "" && pass != ""){
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-      if (xhttp.readyState == 4 && xhttp.status == 200) {
-        $datos = JSON.parse(xhttp.response);
-        if($datos.length > 0){
-          location.href = "inicio.php";
-        }else{
-          document.getElementById('pass').value = ""
-          Materialize.toast('Usuario y/o Contraseña Incorrectos', 5000)
-        }
-      //document.getElementById("login").innerHTML = xhttp.responseText;
+    if(usuario != ""){
+      if(pass != ""){
+        var parametros = {
+           "action" : "autentificacionUsuario",
+           "usuario" : usuario,
+           "pass" : pass
+        };
+        $.ajax({
+          type:'POST',
+          data: parametros,
+          url:'app/controladores/Usuarios.php',
+          success:function(data){
+            console.log("llego:",data)
+            $datos = JSON.parse(data);
+            if($datos.length > 0){
+              if($datos[0].estado_usuario == "1"){
+                location.href = "inicio.php";
+              }else{
+                document.getElementById('pass').value = ""
+                Materialize.toast('Usuario Bloqueado para el Uso del Sistema.', 5000)
+              }
+
+            }else{
+              document.getElementById('pass').value = ""
+              Materialize.toast('Usuario y/o Contraseña Incorrectos.', 5000)
+            }
+          }
+        })
+      }else{
+        Materialize.toast('Ingrese su Contraseña porfavor.', 5000)
       }
-    };
-    xhttp.open("POST", "app/controladores/Usuarios.php", true);
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("action="+action+"&usuario="+usuario+"&pass="+pass);
     }else{
-      Materialize.toast('Ingrese su Usuario y Contraseña porfavor.', 5000)
+      Materialize.toast('Ingrese su Usuario porfavor.', 5000)
     }
   }
   </script>
-<script>
-  function miFuncion() {
-			alert('Login');
-		}
-  </script>
-
   <!-- jQuery Library -->
   <script type="text/javascript" src="public/js/jquery-1.11.2.min.js"></script>
   <!--materialize js-->

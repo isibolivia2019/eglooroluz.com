@@ -11,7 +11,7 @@
                         <li class="divider"></li>
                         <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i> Cerrar</a></li>
                     </ul>
-                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><?php $_SESSION['personal']?><i class="mdi-navigation-arrow-drop-down right"></i></a>
                     <p class="user-roal">Administrator</p>
                 </div>
             </div>
@@ -22,7 +22,8 @@
                 <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Usuarios</a>
                     <div class="collapsible-body">
                         <ul>
-                            <li><a href="usuario-lista.php">Lista de Usuarios</a></li>
+                            <li><a href="usuario.php">Usuarios Habilitados</a></li>
+                            <li><a href="usuario-deshabilitado.php">Usuarios Deshabilitados</a></li>
                             <li><a href="usuario-agregar.php">Agregar Nuevo Usuario</a></li>
                         </ul>
                     </div>
