@@ -1,3 +1,7 @@
+<?php
+ini_set('display_errors', '1');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -94,7 +98,6 @@
           data: parametros,
           url:'app/controladores/Usuarios.php',
           success:function(data){
-            console.log("llego:",data)
             $datos = JSON.parse(data);
             if($datos.length > 0){
               if($datos[0].estado_usuario == "1"){

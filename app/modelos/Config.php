@@ -7,6 +7,7 @@ define('DB_LOCALHOST', "localhost:3306"); // localhost
 
 define('DB_SERVER', "127.0.0.1"); // db server --> no es necesario para esta aplicacion
 define('URL', "http://localhost/eglooroluz.com/"); // db server --> no es necesario para esta aplicacion
+
 class Config{
 	protected $dbh;
 	public function conexion(){

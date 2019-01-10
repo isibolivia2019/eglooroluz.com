@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Registrar Nueva Sucursal</h5>
+                                    <h5 class="breadcrumbs-title">Asignar Sueldo a un Personal</h5>
                                     <ol class="breadcrumb">
-                                        <li><a href="sucursal.php">Sucursales</a></li>
-                                        <li class="active">Registrar Sucursal</li>
+                                        <li><a href="sueldo.php">Sueldo</a></li>
+                                        <li class="active">Asignar Sueldo</li>
                                     </ol>
                                 </div>
                             </div>
@@ -38,28 +38,33 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Llene el Siguiente Formulario.</p>
+                            <p class="caption">Seleccione un Sueldo y un Personal</p>
                             <div class="divider"></div>
                             <div class="row">
                                 <form class="col s12">
                                     <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="nombre" type="text">
-                                            <label for="nombre">Nombre de la Sucursal</label>
+                                    <div class="input-field col s12">
+                                            <select id="sueldo">
+                                                <option value="" disabled selected>Seleccione el Sueldo</option>
+                                            </select>
+                                            <label>Cargo</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="direccion" type="text">
-                                            <label for="direccion">Direccion de la Sucursal</label>
+                                            <select id="usuario">
+                                                <option value="" disabled selected>Seleccione al Personal</option>
+                                            </select>
+                                            <label>Personal</label>
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
+                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Asignar Sueldo
                                                     <i class="mdi-content-send right"></i>
                                                 </button>
                                             </div>
@@ -81,7 +86,7 @@ session_start();
     <script>
 
         $(document).ready(function() {
-            verificarAcceso("Permiso_Sucursal");
+            verificarAcceso("Permiso_Sueldo");
         });
     </script>
 </body>

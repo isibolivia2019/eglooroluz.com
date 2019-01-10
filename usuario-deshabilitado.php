@@ -1,4 +1,7 @@
-<?php ini_set('display_errors', '1');?>
+<?php
+ini_set('display_errors', '1');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -81,6 +84,7 @@
 
     <script>
         $(document).ready(function() {
+            verificarAcceso("Permiso_Usuario");
             var parametros = {
                 "action" : "listaUsuarioEstado",
                 "estado" : "0"

@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Lista de Usuarios</h5>
+                                    <h5 class="breadcrumbs-title">Lista de Horarios</h5>
                                     <ol class="breadcrumb">
-                                        <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Usuarios Habilitados</li>
+                                        <li><a href="horario.php">Horario</a></li>
+                                        <li class="active">Lista de Horarios</li>
                                     </ol>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Usuarios habilitados para el uso del sistema.</p>
+                            <p class="caption">Horarios habilitados para el uso de Personal.</p>
                             <div class="divider"></div>
                             <div id="table-datatables">
                                 <h4 class="header">Usuarios</h4>
@@ -47,24 +47,36 @@ session_start();
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>Nombre(s)</th>
-                                                    <th>Ap. Paterno</th>
-                                                    <th>Ap. Materno</th>
-                                                    <th>Telefono</th>
+                                                    <th>Entrada</th>
+                                                    <th>Salida</th>
+                                                    <th>Tolerancia</th>
+                                                    <th>L</th>
+                                                    <th>M</th>
+                                                    <th>M</th>
+                                                    <th>J</th>
+                                                    <th>V</th>
+                                                    <th>S</th>
+                                                    <th>D</th>
                                                     <th>Ver Datos</th>
                                                     <th>Editar</th>
-                                                    <th>Estado</th>
+                                                    <th>Eliminar</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Nombre(s)</th>
-                                                    <th>Ap. Paterno</th>
-                                                    <th>Ap. Materno</th>
-                                                    <th>Telefono</th>
+                                                    <th>Entrada</th>
+                                                    <th>Salida</th>
+                                                    <th>Tolerancia</th>
+                                                    <th>L</th>
+                                                    <th>M</th>
+                                                    <th>M</th>
+                                                    <th>J</th>
+                                                    <th>V</th>
+                                                    <th>S</th>
+                                                    <th>D</th>
                                                     <th>Ver Datos</th>
                                                     <th>Editar</th>
-                                                    <th>Estado</th>
+                                                    <th>Eliminar</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -85,23 +97,28 @@ session_start();
     <script>
 
         $(document).ready(function() {
-            verificarAcceso("Permiso_Usuario");
+            verificarAcceso("Permiso_Horario");
             var parametros = {
-                "action" : "listaUsuarioEstado",
-                "estado" : "1"
+                "action" : "listaHorarios"
             };
             var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Usuarios.php"
+                    "url": "app/controladores/Horarios.php"
                 },
                 "columns": [
-                    {"data" : "nombre_usuario"},
-                    {"data" : "appat_usuario"},
-                    {"data" : "apmat_usuario"},
-                    {"data" : "telefono_usuario"},
+                    {"data" : "entrada_horario"},
+                    {"data" : "salida_horario"},
+                    {"data" : "tiempo_espera"},
+                    {"data" : "dia_lunes"},
+                    {"data" : "dia_martes"},
+                    {"data" : "dia_miercoles"},
+                    {"data" : "dia_jueves"},
+                    {"data" : "dia_viernes"},
+                    {"data" : "dia_sabado"},
+                    {"data" : "dia_domingo"},
                     {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
                     {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
                     {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-content-send'></i></button>"}
@@ -119,15 +136,15 @@ session_start();
         var btn_editar = function(tbody, table){
                 $(tbody).on("click", "button.editar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("usuario", data.cod_usuario);
-                    location.href = "usuario-editar.php";
+                    localStorage.setItem("horario", data.cod_horario);
+                    location.href = "horario-editar.php";
                 })
         }
         var btn_ver_datos = function(tbody, table){
                 $(tbody).on("click", "button.datos", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("usuario", data.cod_usuario);
-                    location.href = "usuario-datos.php";
+                    localStorage.setItem("horario", data.cod_horario);
+                    location.href = "horario-datos.php";
                 })
         }
     </script>

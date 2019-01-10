@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Registrar Nueva Sucursal</h5>
+                                    <h5 class="breadcrumbs-title">Registrar Nuevo Almacen</h5>
                                     <ol class="breadcrumb">
-                                        <li><a href="sucursal.php">Sucursales</a></li>
-                                        <li class="active">Registrar Sucursal</li>
+                                        <li><a href="almacen.php">Almacenes</a></li>
+                                        <li class="active">Registrar Almacen</li>
                                     </ol>
                                 </div>
                             </div>
@@ -45,13 +45,13 @@ session_start();
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <input id="nombre" type="text">
-                                            <label for="nombre">Nombre de la Sucursal</label>
+                                            <label for="nombre">Nombre del Almacen</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <input id="direccion" type="text">
-                                            <label for="direccion">Direccion de la Sucursal</label>
+                                            <label for="direccion">Direccion del Almacen</label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -81,7 +81,7 @@ session_start();
     <script>
 
         $(document).ready(function() {
-            verificarAcceso("Permiso_Sucursal");
+            verificarAcceso("Permiso_Almacen");
         });
     </script>
 </body>

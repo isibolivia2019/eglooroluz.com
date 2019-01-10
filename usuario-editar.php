@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Registrar Usuario</h5>
+                                    <h5 class="breadcrumbs-title">Editar datos de Usuario</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="usuario.php">Usuarios</a></li>
-                                        <li class="active">Registrar Usuario</li>
+                                        <li class="active">Editar Usuario</li>
                                     </ol>
                                 </div>
                             </div>
@@ -38,7 +38,7 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Llene el Siguiente Formulario.</p>
+                            <p class="caption">Modifique el Siguiente Formulario.</p>
                             <div class="divider"></div>
                             <div class="row">
                                 <form class="col s12">

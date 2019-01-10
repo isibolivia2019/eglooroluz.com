@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Registrar Nueva Sucursal</h5>
+                                    <h5 class="breadcrumbs-title">Editar datos del Cargo</h5>
                                     <ol class="breadcrumb">
-                                        <li><a href="sucursal.php">Sucursales</a></li>
-                                        <li class="active">Registrar Sucursal</li>
+                                        <li><a href="cargo.php">Cargo</a></li>
+                                        <li class="active">Editar Cargo</li>
                                     </ol>
                                 </div>
                             </div>
@@ -38,20 +38,20 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Llene el Siguiente Formulario.</p>
+                            <p class="caption">Modifique el Siguiente Formulario.</p>
                             <div class="divider"></div>
                             <div class="row">
                                 <form class="col s12">
                                     <div class="row">
                                         <div class="input-field col s12">
                                             <input id="nombre" type="text">
-                                            <label for="nombre">Nombre de la Sucursal</label>
+                                            <label for="nombre">Nombre del Cargo</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="direccion" type="text">
-                                            <label for="direccion">Direccion de la Sucursal</label>
+                                            <input id="descripcion" type="text">
+                                            <label for="descripcion">Descripcion del Cargo</label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -59,7 +59,7 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
+                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Actualizar
                                                     <i class="mdi-content-send right"></i>
                                                 </button>
                                             </div>
@@ -81,7 +81,7 @@ session_start();
     <script>
 
         $(document).ready(function() {
-            verificarAcceso("Permiso_Sucursal");
+            verificarAcceso("Permiso_Cargo");
         });
     </script>
 </body>
