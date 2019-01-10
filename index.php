@@ -1,18 +1,35 @@
 <?php
 echo "-------------------------------------";
+echo "<br>";
 echo "Solicitud aceptada con exito... 100%";
+echo "<br>";
 echo "DNS actualizado...  100%";
+echo "<br>";
 echo "IPv4 aprobado... 100%";
+echo "<br>";
 echo "IPv6 verificando... 38%";
+echo "<br>";
 echo "Registro de dominio... pendiente... 0%";
+echo "<br>";
 echo "Encriptacion de datos (0/954123)... 0%";
+echo "<br>";
 echo "--------------------------------------";
+echo "<br>";
 echo "no cancele el progreso.";
+echo "<br>";
 echo "Disculpe las molestias y el tiempo de espera";
+echo "<br>";
 echo "La seguridad y estabilidad de su sitio web es";
+echo "<br>";
 echo "importante por ello incrementamos nuevas medidas de seguridad";
+echo "<br>";
 echo "--------------------------------------";
+echo "<br>";
 echo "        GOOGLE CLOUD PLATFORM";
+echo "<br>";
 echo "--------------------------------------";
+echo "<br>";
 echo "progreso en general... 52%";
+echo "<br>";
+echo "--------------------------------------";
 ?>
