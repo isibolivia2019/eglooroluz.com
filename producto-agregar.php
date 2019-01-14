@@ -55,28 +55,28 @@ session_start();
                                     </div>
                                     <div class="row">
                                         <div class="form-group input-field col s12">
-                                            <input id="nombre" type="text">
+                                            <input id="nombre" name="nombre" type="text">
                                             <label for="nombre">Nombre del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group input-field col s12">
-                                            <input id="descripcion" type="text">
+                                            <input id="descripcion" name="descripcion" type="text">
                                             <label for="descripcion">Descripcion del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group input-field col s12">
-                                            <input id="color" type="text">
+                                            <input id="color" name="color" type="text">
                                             <label for="color">Color del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group file-field input-field col s12">
-                                            <input class="file-path validate" type="text" id="txtImagen" disabled/>
+                                            <input class="file-path validate" type="text" id="txtImagen" name="txtImagen" disabled/>
                                             <div class="btn">
                                                 <span>Imagen</span>
-                                                <input type="file" id="imagen"/>
+                                                <input type="file" name="imagen" id="imagen"/>
                                             </div>
                                         </div>
                                     </div>
@@ -111,9 +111,9 @@ session_start();
             $("#formulario").on('submit', function(e){
                 
                 e.preventDefault();
-                var f = $(this);
-                var formData = new FormData(document.getElementById("formulario"));
-                console.log("formData:", formData)
+                //var f = $(this);
+                //var formData = new FormData(document.getElementById("formulario"));
+                //console.log("formData:", formData)
                 $.ajax({
                     type: 'POST',
                     url: 'app/controladores/Productos.php',
@@ -127,7 +127,21 @@ session_start();
                     },
                     success: function(data){
                         console.log("data:", data)
-                        //Materialize.toast(msg, 5000)
+                        datos = JSON.parse(data);
+                        if(datos.resp == "true"){
+                            Materialize.toast('Producto Registrado con exito', 5000)
+                            document.getElementById('codigo').value = "";
+                            document.getElementById('nombre').value = "";
+                            document.getElementById('descripcion').value = "";
+                            document.getElementById('color').value = "";
+                            document.getElementById('txtImagen').value = "";
+                        }
+                        if(datos.resp == "false"){
+                            Materialize.toast('Hubo un fallo al registrar el Producto. Vuelva a Intentarlo', 5000)
+                        }
+                        if(datos.resp != "true" && datos.resp != "false"){
+                            Materialize.toast('Hubo un fallo al registrar el Producto COD:'+datos.resp, 5000)
+                        }
                         $('#formulario').css("opacity","");
                         $(".submitBtn").removeAttr("disabled");
                     }
@@ -142,7 +156,7 @@ session_start();
                 if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
                     $.alert({
                         title: 'FORMATO NO VALIDO',
-                        content: 'El archivo elejido no es una formato valido de Imagen. Los Formatos validos son: .JPEG, .JPG .PNG',
+                        content: 'El archivo elegido no es una formato valido de Imagen. Los Formatos validos son: .JPEG, .JPG .PNG',
                         buttons: {
                             deAcuerdo: {
                                 text: 'De Acuerdo',

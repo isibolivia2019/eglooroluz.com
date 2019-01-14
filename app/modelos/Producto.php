@@ -13,7 +13,7 @@ class Producto{
 
 	public function agregarProducto($datos){
 		$sql = "INSERT INTO producto(cod_item_producto, nombre_producto, descripcion_producto, color_producto, imagen_producto, estado_producto) VALUES(?,?,?,?,?,?);";
-		return $this->db->select($sql, $datos);
+		return $this->db->insert($sql, $datos);
 	}
 }
 ?>
