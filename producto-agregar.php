@@ -41,35 +41,43 @@ session_start();
                             <p class="caption">Llene el Siguiente Formulario.</p>
                             <div class="divider"></div>
                             <div class="row">
-                                <form class="col s12">
+                                <form enctype="multipart/form-data" id="formulario" method="post">
                                     <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="codigo" type="text">
+                                        <div class="form-group input-field col s12">
+                                            <input id="action" name="action" type="text" value="agregarProducto" style="display:none">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group input-field col s12">
+                                            <input id="codigo" name="codigo" type="text">
                                             <label for="codigo">Codigo del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s12">
+                                        <div class="form-group input-field col s12">
                                             <input id="nombre" type="text">
                                             <label for="nombre">Nombre del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s12">
+                                        <div class="form-group input-field col s12">
                                             <input id="descripcion" type="text">
                                             <label for="descripcion">Descripcion del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s12">
+                                        <div class="form-group input-field col s12">
                                             <input id="color" type="text">
                                             <label for="color">Color del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="input-field col s12">
-                                            <input id="descripcion" type="text">
-                                            <label for="descripcion">Imagen del Producto</label>
+                                        <div class="form-group file-field input-field col s12">
+                                            <input class="file-path validate" type="text" id="txtImagen" disabled/>
+                                            <div class="btn">
+                                                <span>Imagen</span>
+                                                <input type="file" id="imagen"/>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -77,7 +85,7 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
+                                                <button class="btn cyan waves-effect waves-light right submitBtn" type="submit" name="submit">Registrar
                                                     <i class="mdi-content-send right"></i>
                                                 </button>
                                             </div>
@@ -97,9 +105,59 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
-        $(document).ready(function() {
+        $(document).ready(function(e) {
             verificarAcceso("Permiso_Producto");
+            
+            $("#formulario").on('submit', function(e){
+                
+                e.preventDefault();
+                var f = $(this);
+                var formData = new FormData(document.getElementById("formulario"));
+                console.log("formData:", formData)
+                $.ajax({
+                    type: 'POST',
+                    url: 'app/controladores/Productos.php',
+                    data: new FormData(this),
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function(){
+                        $('.submitBtn').attr("disabled","disabled");
+                        $('#formulario').css("opacity",".5");
+                        Materialize.toast('Aguarde porfavor mientras se procesede al registro', 5000)
+                    },
+                    success: function(data){
+                        console.log("data:", data)
+                        //Materialize.toast(msg, 5000)
+                        $('#formulario').css("opacity","");
+                        $(".submitBtn").removeAttr("disabled");
+                    }
+                });
+            });
+
+            //file type validation
+            $("#imagen").change(function() {
+                var file = this.files[0];
+                var imagefile = file.type;
+                var match= ["image/jpeg","image/png","image/jpg"];
+                if(!((imagefile==match[0]) || (imagefile==match[1]) || (imagefile==match[2]))){
+                    $.alert({
+                        title: 'FORMATO NO VALIDO',
+                        content: 'El archivo elejido no es una formato valido de Imagen. Los Formatos validos son: .JPEG, .JPG .PNG',
+                        buttons: {
+                            deAcuerdo: {
+                                text: 'De Acuerdo',
+                                btnClass: 'btn-blue',
+                                keys: ['enter'],
+                                action: function(){
+                                    ""
+                                }
+                            }
+                        }
+                    });
+                    $("#txtImagen").val('');
+                    return false;
+                }
+            });
         });
     </script>
 </body>

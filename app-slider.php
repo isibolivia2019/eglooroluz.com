@@ -101,7 +101,7 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="categoria.php">Lista de Categorias</a></li>
-                                <li><a href="categoria-agregar.php">Agregar Nueva Categoria</a></li>
+                                <li><a href="categoria-agregar.php">Agregar Categoria</a></li>
                                 <li><a href="categoria-asignar.php">Asignar Categorias</a></li>
                             </ul>
                         </div>
@@ -111,10 +111,10 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Descuentos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Actuales Descuentos</a></li>
-                                <li><a href="table-data.html">Lista Total Descuentos</a></li>
-                                <li><a href="descuentos-agregar.html">Agregar Descuentos</a></li>
-                                <li><a href="table-data.html">Agregar Varios </a></li>
+                                <li><a href="descuento.php">Actuales Descuentos</a></li>
+                                <li><a href="descuento-total.php">Lista Total Descuentos</a></li>
+                                <li><a href="descuento-agregar.php">Agregar Descuentos</a></li>
+                                <li><a href="descuento-agregar-varios.php">Agregar Varios </a></li>
                             </ul>
                         </div>
                     </li>
@@ -143,8 +143,8 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Ventas</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Listas</a></li>
-                                <li><a href="table-basic.html">Ventas</a></li>
+                                <li><a href="venta-lista.php">Listas</a></li>
+                                <li><a href="venta.php">Ventas</a></li>
                             </ul>
                         </div>
                     </li>
@@ -153,7 +153,7 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Cotizaciones</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Cotizar Venta</a></li>
+                                <li><a href="cotizacion.php">Cotizar Venta</a></li>
                             </ul>
                         </div>
                     </li>

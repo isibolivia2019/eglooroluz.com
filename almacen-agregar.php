@@ -16,7 +16,7 @@ session_start();
         </div>
 
         <?php require("app-header.php");?>
-        
+
         <div id="main">
             <div class="wrapper">
                 <?php require("app-slider.php");?>
@@ -59,9 +59,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                    <a class="btn waves-effect waves-light col s12" onclick="agregarAlmacen()">Registrar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -83,6 +83,38 @@ session_start();
         $(document).ready(function() {
             verificarAcceso("Permiso_Almacen");
         });
+
+        function agregarAlmacen(){
+            verificarAcceso("Permiso_Almacen");
+          var nombre = document.getElementById('nombre').value;
+          var direccion = document.getElementById('direccion').value;
+
+          var parametros = {
+             "action" : "agregarAlmacen",
+             "nombre" : nombre,
+             "direccion" : direccion
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Almacenes.php',
+            success:function(data){
+                console.log(data)
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Almacen Registrado con exito', 5000)
+                    document.getElementById('nombre').value = "";
+                    document.getElementById('direccion').value = "";
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al registrar el Almacen. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al registrar el Almacen COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

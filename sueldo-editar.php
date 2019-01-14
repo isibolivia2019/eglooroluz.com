@@ -44,7 +44,7 @@ session_start();
                                 <form class="col s12">
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="sueldo" type="number">
+                                            <input placeholder="" id="sueldo" type="number">
                                             <label for="sueldo">Monto del Sueldo</label>
                                         </div>
                                     </div>
@@ -53,9 +53,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Actualizar
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                  <a class="btn waves-effect waves-light col s12" onclick="actualizarSueldo()">Actualizar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -73,10 +73,49 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
+            var parametros = {
+                "action" : "sueldoEspecifico",
+                "cod_sueldo" : localStorage.getItem("sueldo")
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Sueldos.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                document.getElementById('sueldo').value = datos[0].sueldo;
+              }
+            })
         });
+
+        function actualizarSueldo(){
+          var sueldo = document.getElementById('sueldo').value;
+
+          var parametros = {
+             "action" : "actualizarSueldo",
+             "codigo" : localStorage.getItem("sueldo"),
+             "sueldo" : sueldo,
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Sueldos.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Sueldo Actualizado con exito', 5000)
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Sueldo. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Sueldo COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

@@ -14,10 +14,18 @@ session_start();
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
         </div>
+        
 
         <?php require("app-header.php");?>
         
         <div id="main">
+            <div id="myModal" class="modal">
+                  <div id="modalText" class="modal-content teal white-text">
+                    </div>
+                  <div class="modal-footer  teal lighten-4">
+                    <a class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
+                  </div>
+                </div>
             <div class="wrapper">
                 <?php require("app-slider.php");?>
                 
@@ -41,7 +49,17 @@ session_start();
                             <p class="caption">Inventario de Productos</p>
                             <div class="divider"></div>
                             <div id="table-datatables">
-                                <h4 class="header">Almacenes</h4>
+                                <h4 class="header">Datos del Almacen</h4>
+                                <div class="row">
+                                  <div class="col s12 m12 l12">
+                                    <ul class="collection">
+                                        <li class="collection-item avatar" id="lblDatos1">
+                                            
+                                        </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <h4 class="header">Inventario</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
@@ -52,6 +70,7 @@ session_start();
                                                     <th>Cantidad</th>
                                                     <th>Precio de Compra</th>
                                                     <th>Precio de Venta</th>
+                                                    <th>Bolivianos</th>
                                                     <th>Historial</th>
                                                 </tr>
                                             </thead>
@@ -62,6 +81,7 @@ session_start();
                                                     <th>Cantidad</th>
                                                     <th>Precio de Compra</th>
                                                     <th>Precio de Venta</th>
+                                                    <th>Bolivianos</th>
                                                     <th>Historial</th>
                                                 </tr>
                                             </tfoot>
@@ -81,11 +101,11 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
         $(document).ready(function() {
             verificarAcceso("Permiso_Almacen");
             var parametros = {
-                "action" : "listaAlmacenes"
+                "action" : "listaInventarioActual",
+                "codigo" : localStorage.getItem("almacen")
             };
             var table = $('#table-simple').DataTable({
                 "destroy":true,
@@ -95,35 +115,70 @@ session_start();
                     "url": "app/controladores/Almacenes.php"
                 },
                 "columns": [
-                    {"data" : "nombre_almacen"},
-                    {"data" : "direccion_almacen"},
-                    {"data" : "nombre_almacen"},
-                    {"data" : "direccion_almacen"},
-                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
+                    {"data" : "cod_item_producto"},
+                    {"data" : "nombre_producto"},
+                    {"data" : "cant_producto"},
+                    {"data" : "compra_unit_producto"},
+                    {"data" : "precio_sugerido_venta"},
+                    {"defaultContent" : "<button id='conversion' class='conversion btn waves-effect green' type='button' name='editar'><i class='mdi-image-transform'></i></button>"},
+                    {"defaultContent" : "<button id='historial' class='historial btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-insert-drive-file'></i></button>"},
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
                 }
             });
-            btn_editar("#table-simple tbody", table);
-            btn_ver_datos("#table-simple tbody", table);
+            btn_historial("#table-simple tbody", table);
+            btn_conversion("#table-simple tbody", table);
+
+            parametros = {
+                "action" : "almacenEspecifico",
+                "cod_almacen" : localStorage.getItem("almacen")
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Almacenes.php',
+              success:function(data){
+                let datos = JSON.parse(data);
+                document.getElementById("lblDatos1").innerHTML = 
+                "<i class='mdi-maps-store-mall-directory circle'></i>"+
+                "<span class='title'>Almacen: "+datos[0].nombre_almacen+"</span>"+
+                "<p>Direccion: "+datos[0].direccion_almacen+
+                "</p>";
+              }
+            })
         });
 
-        
-
-        var btn_editar = function(tbody, table){
-                $(tbody).on("click", "button.editar", function(){
+        var btn_historial = function(tbody, table){
+                $(tbody).on("click", "button.historial", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("almacen", data.cod_almacen);
-                    location.href = "almacen-editar.php";
+                    localStorage.setItem("almacen", data.cod_inventario);
+                    location.href = "almacen-historial.php";
                 })
         }
-        var btn_ver_datos = function(tbody, table){
-                $(tbody).on("click", "button.datos", function(){
+        var btn_conversion = function(tbody, table){
+                $(tbody).on("click", "button.conversion", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("almacen", data.cod_almacen);
-                    location.href = "almacen-datos.php";
+                    var parametros = {
+                       "action" : "conversionMonedaProducto",
+                       "codInventario" : data.cod_inventario,
+                    };
+                    $.ajax({
+                      type:'POST',
+                      data: parametros,
+                      url:'app/controladores/Almacenes.php',
+                      success:function(data){
+                            datos = JSON.parse(data);
+                            datos = datos.data
+                            $('#myModal').openModal();
+                            document.getElementById("modalText").innerHTML = 
+                            "<span class='title'>Nombre: "+datos[0].nombre_producto+"</span><p></p>"+
+                            "<span class='title'>**** Precio en Bolivianos **** </span>"+
+                            "<p>Precio Adquicion: "+datos[0].compra_unit_producto+"</p>"+
+                            "<p>Precio Sugerido de Venta: "+datos[0].precio_sugerido_venta+"</p>"+
+                            "<p>Cantidad Disponible: "+datos[0].cant_producto+"</p>"
+                      }
+                    })
                 })
         }
     </script>

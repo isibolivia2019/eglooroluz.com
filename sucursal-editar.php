@@ -44,13 +44,13 @@ session_start();
                                 <form class="col s12">
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="nombre" type="text">
+                                            <input placeholder="" id="nombre" type="text">
                                             <label for="nombre">Nombre de la Sucursal</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="direccion" type="text">
+                                            <input placeholder="" id="direccion" type="text">
                                             <label for="direccion">Direccion de la Sucursal</label>
                                         </div>
                                     </div>
@@ -59,9 +59,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Actualizar
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                  <a class="btn waves-effect waves-light col s12" onclick="actualizarSucursal()">Actualizar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -79,10 +79,51 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
         $(document).ready(function() {
             verificarAcceso("Permiso_Sucursal");
+            var parametros = {
+                "action" : "sucursalEspecifico",
+                "cod_sucursal" : localStorage.getItem("sucursal")
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Sucursales.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                document.getElementById('nombre').value = datos[0].nombre_sucursal;
+                document.getElementById('direccion').value = datos[0].direccion_sucursal;
+              }
+            })
         });
+
+        function actualizarSucursal(){
+          var nombre = document.getElementById('nombre').value;
+          var direccion = document.getElementById('direccion').value;
+          var parametros = {
+             "action" : "actualizarSucursal",
+             "codigo" : localStorage.getItem("sucursal"),
+             "nombre" : nombre,
+             "direccion" : direccion,
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Sucursales.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Sucursal Actualizado con exito', 5000)
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al actualizar la Sucursal. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al actualizar la Sucursal COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

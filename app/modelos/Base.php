@@ -25,9 +25,16 @@ class Base extends Config{
 			$stmt->bindValue(($i + 1), $datos[$i]);
 		}
 
-		$stmt->execute();
-		$resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $resultado;
+		try {
+			$stmt->execute();
+			if ($stmt->rowCount() > 0){
+				return "true";
+			}else{
+				return "false";
+			}
+	   	} catch (PDOException $e) {
+			return $e->getCode();
+		}
 	}
 
 	public function update($sql, $datos){
@@ -39,9 +46,12 @@ class Base extends Config{
 			$stmt->bindValue(($i + 1), $datos[$i]);
 		}
 
-		$stmt->execute();
-		$resultado = $stmt->fetch(PDO::FETCH_ASSOC);
-		return $resultado;
+		try {
+			$stmt->execute();
+			return "true";
+	   	} catch (PDOException $e) {
+			return $e->getCode();
+		}
 	}
 }
 

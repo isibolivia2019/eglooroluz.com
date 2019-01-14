@@ -241,7 +241,7 @@ li.li-hover:hover{
 #loader-wrapper .loader-section {
   position: fixed;
   top: 0;
-  width: 51%;
+  width: 50%;
   height: 100%;
   background: #222222;
   z-index: 1000;

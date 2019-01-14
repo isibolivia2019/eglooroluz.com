@@ -95,9 +95,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Actualizar
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                  <a class="btn waves-effect waves-light col s12" onclick="actualizarHorario()">Actualizar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -118,7 +118,75 @@ session_start();
 
         $(document).ready(function() {
             verificarAcceso("Permiso_Horario");
+            var parametros = {
+                "action" : "horarioEspecifico",
+                "cod_horario" : localStorage.getItem("horario")
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Horarios.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                document.getElementById('entrada').value = datos[0].entrada_horario;
+                document.getElementById('salida').value = datos[0].salida_horario;
+                document.getElementById('tolerancia').value = datos[0].tiempo_espera;
+                document.getElementById('cboxLunes').checked = Boolean(Number(datos[0].dia_lunes));
+                document.getElementById('cboxMartes').checked = Boolean(Number(datos[0].dia_martes));
+                document.getElementById('cboxMiercoles').checked = Boolean(Number(datos[0].dia_miercoles));
+                document.getElementById('cboxJueves').checked = Boolean(Number(datos[0].dia_jueves));
+                document.getElementById('cboxViernes').checked = Boolean(Number(datos[0].dia_viernes));
+                document.getElementById('cboxSabado').checked = Boolean(Number(datos[0].dia_sabado));
+                document.getElementById('cboxDomingo').checked = Boolean(Number(datos[0].dia_domingo));
+              }
+            })
         });
+
+        function actualizarHorario(){
+          var entrada = document.getElementById('entrada').value;
+          var salida = document.getElementById('salida').value;
+          var tolerancia = document.getElementById('tolerancia').value;
+          var cboxLunes = Number(document.getElementById("cboxLunes").checked);
+          var cboxMartes = Number(document.getElementById("cboxMartes").checked);
+          var cboxMiercoles = Number(document.getElementById("cboxMiercoles").checked);
+          var cboxJueves = Number(document.getElementById("cboxJueves").checked);
+          var cboxViernes = Number(document.getElementById("cboxViernes").checked);
+          var cboxSabado = Number(document.getElementById("cboxSabado").checked);
+          var cboxDomingo = Number(document.getElementById("cboxDomingo").checked);
+
+          var parametros = {
+             "action" : "actualizarHorario",
+             "codigo" : localStorage.getItem("horario"),
+             "entrada" : entrada,
+             "salida" : salida,
+             "tolerancia" : tolerancia,
+             "cboxLunes" : cboxLunes,
+             "cboxMartes" : cboxMartes,
+             "cboxMiercoles" : cboxMiercoles,
+             "cboxJueves" : cboxJueves,
+             "cboxViernes" : cboxViernes,
+             "cboxSabado" : cboxSabado,
+             "cboxDomingo" : cboxDomingo,
+             
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Horarios.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Horario Actualizado con exito', 5000)
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Horario. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Horario COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

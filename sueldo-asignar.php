@@ -44,18 +44,16 @@ session_start();
                                 <form class="col s12">
                                     <div class="row">
                                     <div class="input-field col s12">
-                                            <select id="sueldo">
+                                            <select class="browser-default" id="cboxSueldo">
                                                 <option value="" disabled selected>Seleccione el Sueldo</option>
                                             </select>
-                                            <label>Cargo</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <select id="usuario">
+                                            <select class="browser-default" id="cboxUsuario">
                                                 <option value="" disabled selected>Seleccione al Personal</option>
                                             </select>
-                                            <label>Personal</label>
                                         </div>
 
                                     </div>
@@ -64,9 +62,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Asignar Sueldo
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                  <a class="btn waves-effect waves-light col s12" onclick="asignarUsuarioSueldo()">Asignar a Usuario</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -84,10 +82,80 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
+            listaUsuarios();
+            var cboxSueldo = document.getElementById("cboxSueldo");
+            var parametros = {
+             "action" : "listaSueldos"        
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Sueldos.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                datos = datos.data
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_sueldo);
+                    tag.innerHTML = datos[i].sueldo;
+                    cboxSueldo.appendChild(tag);
+                }
+            }
+          })
         });
+
+        function listaUsuarios(){
+            verificarAcceso("Permiso_Sueldo");
+            var cboxUsuario = document.getElementById("cboxUsuario");
+            var parametros = {
+             "action" : "listaUsuarioSinCargo"        
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Usuarios.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_usuario);
+                    tag.innerHTML = datos[i].nombre_usuario+" "+datos[i].appat_usuario+" "+datos[i].apmat_usuario;
+                    cboxUsuario.appendChild(tag);
+                }
+            }
+          })
+        }
+
+        function asignarUsuarioSueldo(){
+            //$('body').addClass('loaded');
+            verificarAcceso("Permiso_Sueldo");
+            var cboxUsuario = document.getElementById("cboxUsuario").value;
+            var cboxSueldo = document.getElementById("cboxSueldo").value;
+            var parametros = {
+                "action" : "asignarUsuarioSueldo",
+                "usuario" : cboxUsuario,
+                "sueldo" : cboxSueldo
+            };
+            $.ajax({
+                type:'POST',
+                data: parametros,
+                url:'app/controladores/Sueldos.php',
+                success:function(data){
+                    datos = JSON.parse(data);
+                    if(datos.resp == "true"){
+                        Materialize.toast('El Usuario fue asignado correctamente al Sueldo', 7000)
+                    }
+                    if(datos.resp == "false"){
+                        Materialize.toast('El Usuario ya se encuentra asignado a este Sueldo', 7000)
+                    }
+                    if(datos.resp != "true" && datos.resp != "false"){
+                        Materialize.toast('Hubo un fallo al asignar al Usuario en el Sueldo COD:'+datos.resp, 7000)
+                    }      
+                }
+            })
+        }
     </script>
 </body>
 </html>

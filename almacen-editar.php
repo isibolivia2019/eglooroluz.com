@@ -26,7 +26,7 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Editar datos del Almacen</h5>
+                                    <h5 class="breadcrumbs-title">Editar datos de un Almacen</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="almacen.php">Almacenes</a></li>
                                         <li class="active">Editar Almacen</li>
@@ -44,13 +44,13 @@ session_start();
                                 <form class="col s12">
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="nombre" type="text">
+                                            <input placeholder="" id="nombre" type="text">
                                             <label for="nombre">Nombre del Almacen</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="direccion" type="text">
+                                            <input placeholder="" id="direccion" type="text">
                                             <label for="direccion">Direccion del Almacen</label>
                                         </div>
                                     </div>
@@ -59,9 +59,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Actualizar
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                  <a class="btn waves-effect waves-light col s12" onclick="actualizarAlmacen()">Actualizar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -79,10 +79,51 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
         $(document).ready(function() {
             verificarAcceso("Permiso_Almacen");
+            var parametros = {
+                "action" : "almacenEspecifico",
+                "cod_almacen" : localStorage.getItem("almacen")
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Almacenes.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                document.getElementById('nombre').value = datos[0].nombre_almacen;
+                document.getElementById('direccion').value = datos[0].direccion_almacen;
+              }
+            })
         });
+
+        function actualizarAlmacen(){
+          var nombre = document.getElementById('nombre').value;
+          var direccion = document.getElementById('direccion').value;
+          var parametros = {
+             "action" : "actualizarAlmacen",
+             "codigo" : localStorage.getItem("almacen"),
+             "nombre" : nombre,
+             "direccion" : direccion,
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Almacenes.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Almacen Actualizado con exito', 5000)
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Almacen. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Almacen COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

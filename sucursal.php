@@ -93,15 +93,15 @@ session_start();
                 "columns": [
                     {"data" : "nombre_sucursal"},
                     {"data" : "direccion_sucursal"},
-                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
+                    {"defaultContent" : "<button id='inventario' class='inventario btn waves-effect green' type='submit' name='action'><i class='mdi-action-store'></i></button>"},
+                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-border-color'></i></button>"},
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
                 }
             });
             btn_editar("#table-simple tbody", table);
-            btn_ver_datos("#table-simple tbody", table);
+            btn_inventario("#table-simple tbody", table);
         });
 
         
@@ -109,14 +109,14 @@ session_start();
         var btn_editar = function(tbody, table){
                 $(tbody).on("click", "button.editar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("sucursal", data.cod_cargo);
+                    localStorage.setItem("sucursal", data.cod_sucursal);
                     location.href = "sucursal-editar.php";
                 })
         }
-        var btn_ver_datos = function(tbody, table){
-                $(tbody).on("click", "button.datos", function(){
+        var btn_inventario = function(tbody, table){
+                $(tbody).on("click", "button.inventario", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("sucursal", data.cod_cargo);
+                    localStorage.setItem("sucursal", data.cod_sucursal);
                     location.href = "sucursal-inventario.php";
                 })
         }

@@ -95,9 +95,9 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
-                                                    <i class="mdi-content-send right"></i>
-                                                </button>
+                                                <div class="input-field col s6 right">
+                                                  <a class="btn waves-effect waves-light col s12" onclick="agregarHorario()">Registrar</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -119,6 +119,62 @@ session_start();
         $(document).ready(function() {
             verificarAcceso("Permiso_Horario");
         });
+
+        function agregarHorario(){
+          var entrada = document.getElementById('entrada').value;
+          var salida = document.getElementById('salida').value;
+          var tolerancia = document.getElementById('tolerancia').value;
+          var cboxLunes = Number(document.getElementById("cboxLunes").checked);
+          var cboxMartes = Number(document.getElementById("cboxMartes").checked);
+          var cboxMiercoles = Number(document.getElementById("cboxMiercoles").checked);
+          var cboxJueves = Number(document.getElementById("cboxJueves").checked);
+          var cboxViernes = Number(document.getElementById("cboxViernes").checked);
+          var cboxSabado = Number(document.getElementById("cboxSabado").checked);
+          var cboxDomingo = Number(document.getElementById("cboxDomingo").checked);
+
+          var parametros = {
+             "action" : "agregarHorario",
+             "entrada" : entrada,
+             "salida" : salida,
+             "tolerancia" : tolerancia,
+             "cboxLunes" : cboxLunes,
+             "cboxMartes" : cboxMartes,
+             "cboxMiercoles" : cboxMiercoles,
+             "cboxJueves" : cboxJueves,
+             "cboxViernes" : cboxViernes,
+             "cboxSabado" : cboxSabado,
+             "cboxDomingo" : cboxDomingo,
+             
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Horarios.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Horario Registrado con exito', 5000)
+
+                    document.getElementById('entrada').value = "";
+                    document.getElementById('salida').value = "";
+                    document.getElementById('tolerancia').value = "";
+                    document.getElementById('cboxLunes').checked = false;
+                    document.getElementById('cboxMartes').checked = false;
+                    document.getElementById('cboxMiercoles').checked = false;
+                    document.getElementById('cboxJueves').checked = false;
+                    document.getElementById('cboxViernes').checked = false;
+                    document.getElementById('cboxSabado').checked = false;
+                    document.getElementById('cboxDomingo').checked = false;
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al registrar el Horario. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al registrar el Horario COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

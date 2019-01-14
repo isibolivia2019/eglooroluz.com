@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Lista de Almacenes</h5>
+                                    <h5 class="breadcrumbs-title">Lista de Categorias</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Almacenes</li>
+                                        <li class="active">Categorias</li>
                                     </ol>
                                 </div>
                             </div>
@@ -38,27 +38,31 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Almacenes registrados en el Sistema.</p>
+                            <p class="caption">Categorias registrados para publicar en la pagina principal.</p>
                             <div class="divider"></div>
                             <div id="table-datatables">
-                                <h4 class="header">Almacenes</h4>
+                                <h4 class="header">Cargos</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
                                             <thead>
                                                 <tr>
-                                                    <th>Almacen</th>
-                                                    <th>Direccion</th>
-                                                    <th>Inventario</th>
+                                                    <th></th>
+                                                    <th>categoria</th>
+                                                    <th>Detalle</th>
+                                                    <th>Ver Datos</th>
                                                     <th>Editar</th>
+                                                    <th>Eliminar</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th>Almacen</th>
-                                                    <th>Direccion</th>
-                                                    <th>Inventario</th>
+                                                    <th></th>
+                                                    <th>categoria</th>
+                                                    <th>Detalle</th>
+                                                    <th>Ver Datos</th>
                                                     <th>Editar</th>
+                                                    <th>Eliminar</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -79,29 +83,31 @@ session_start();
     <script>
 
         $(document).ready(function() {
-            verificarAcceso("Permiso_Almacen");
+            verificarAcceso("Permiso_Categoria");
             var parametros = {
-                "action" : "listaAlmacenes"
+                "action" : "listaCategorias"
             };
             var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Almacenes.php"
+                    "url": "app/controladores/Categorias.php"
                 },
                 "columns": [
-                    {"data" : "nombre_almacen"},
-                    {"data" : "direccion_almacen"},
-                    {"defaultContent" : "<button id='inventario' class='inventario btn waves-effect green' type='submit' name='action'><i class='mdi-action-store'></i></button>"},
-                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-border-color'></i></button>"},
+                    {"data" : "nombre_categoria"},
+                    {"data" : "nombre_categoria"},
+                    {"data" : "descripcion_categoria"},
+                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
+                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
+                    {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-content-send'></i></button>"}
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
                 }
             });
             btn_editar("#table-simple tbody", table);
-            btn_inventario("#table-simple tbody", table);
+            btn_ver_datos("#table-simple tbody", table);
         });
 
         
@@ -109,15 +115,15 @@ session_start();
         var btn_editar = function(tbody, table){
                 $(tbody).on("click", "button.editar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("almacen", data.cod_almacen);
-                    location.href = "almacen-editar.php";
+                    localStorage.setItem("cargo", data.cod_cargo);
+                    location.href = "categoria-editar.php";
                 })
         }
-        var btn_inventario = function(tbody, table){
-                $(tbody).on("click", "button.inventario", function(){
+        var btn_ver_datos = function(tbody, table){
+                $(tbody).on("click", "button.datos", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("almacen", data.cod_almacen);
-                    location.href = "almacen-inventario.php";
+                    localStorage.setItem("cargo", data.cod_cargo);
+                    location.href = "categoria-datos.php";
                 })
         }
     </script>
