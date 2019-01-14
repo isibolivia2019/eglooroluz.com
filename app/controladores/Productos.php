@@ -53,7 +53,10 @@ function agregarProducto(){
         $file_extension = end($temporary);
         if((($_FILES["imagen"]["type"] == "image/png") || ($_FILES["imagen"]["type"] == "image/jpg") || ($_FILES["imagen"]["type"] == "image/jpeg")) && in_array($file_extension, $valid_extensions)){
             $sourcePath = $_FILES['imagen']['tmp_name'];
-            $targetPath = "public/".$fileName;
+            require_once("../modelos/Config.php");
+            $config = new Config();
+            $url = $config->ruta();
+            $targetPath = $url."/public/imagenes/".$fileName;
             if(move_uploaded_file($sourcePath,$targetPath)){
                 $imagen = $fileName;
             }
