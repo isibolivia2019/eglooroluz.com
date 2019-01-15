@@ -233,25 +233,25 @@ session_start();
 
                 if(datos.inventario.action == "actualizar"){
                     if(datos.inventario.resp == "true"){
-                        Materialize.toast('La cantidad del Inventario fue Actualizado exitosamente', 5000)
+                        Materialize.toast('La cantidad del Inventario fue Actualizado exitosamente', 6000)
                     }
                     if(datos.inventario.resp == "false"){
-                        Materialize.toast('Hubo un fallo al actualizar el inventario. Vuelva a Intentarlo', 5000)
+                        Materialize.toast('Hubo un fallo al actualizar el inventario. Vuelva a Intentarlo', 6000)
                     }
                     if(datos.inventario.resp != "true" && datos.resp != "false"){
-                        Materialize.toast('Hubo un fallo al actualizar el inventario COD:'+datos.resp, 5000)
+                        Materialize.toast('Hubo un fallo al actualizar el inventario COD:'+datos.resp, 6000)
                     }
                 }
 
                 if(datos.inventario.action == "agregar"){
                     if(datos.inventario.resp == "true"){
-                        Materialize.toast('Un nuevo producto agregado al Inventario', 5000)
+                        Materialize.toast('Un nuevo producto agregado al Inventario', 6000)
                     }
                     if(datos.inventario.resp == "false"){
-                        Materialize.toast('Hubo un fallo al registrar el producto en el inventario. Vuelva a Intentarlo', 5000)
+                        Materialize.toast('Hubo un fallo al registrar el producto en el inventario. Vuelva a Intentarlo', 6000)
                     }
                     if(datos.inventario.resp != "true" && datos.resp != "false"){
-                        Materialize.toast('Hubo un fallo al registrar el producto en el inventario COD:'+datos.resp, 5000)
+                        Materialize.toast('Hubo un fallo al registrar el producto en el inventario COD:'+datos.resp, 6000)
                     }
                 }
             }

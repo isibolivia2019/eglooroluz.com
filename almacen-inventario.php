@@ -65,6 +65,7 @@ session_start();
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
                                             <thead>
                                                 <tr>
+                                                    <th>Imagen</th>
                                                     <th>Codigo</th>
                                                     <th>Nombre</th>
                                                     <th>Cantidad</th>
@@ -76,6 +77,7 @@ session_start();
                                             </thead>
                                             <tfoot>
                                                 <tr>
+                                                    <th>Imagen</th>
                                                     <th>Codigo</th>
                                                     <th>Nombre</th>
                                                     <th>Cantidad</th>
@@ -115,6 +117,10 @@ session_start();
                     "url": "app/controladores/Almacenes.php"
                 },
                 "columns": [
+                    {"render": function (data, type, JsonResultRow, meta) {
+                            return "<img width='150'src=public/imagenes/productos/"+JsonResultRow.imagen_producto+">";
+                        }
+                    },
                     {"data" : "cod_item_producto"},
                     {"data" : "nombre_producto"},
                     {"data" : "cant_producto"},
