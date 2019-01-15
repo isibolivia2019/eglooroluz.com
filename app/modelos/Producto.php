@@ -45,5 +45,6 @@ class Producto{
 		$sql = "SELECT * FROM compra_producto WHERE cod_producto = ? ORDER BY cod_compra_producto desc limit 1";
 		return $this->db->select($sql, $datos);
 	}
+	
 }
 ?>

@@ -64,13 +64,13 @@ session_start();
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="costo" type="number" step="0.01">
+                                            <input id="costo" placeholder="" type="number" step="0.01">
                                             <label for="costo">Costo de Adquision</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <input id="precio" type="number" step="0.01">
+                                            <input id="precio" placeholder="" type="number" step="0.01">
                                             <label for="precio">Precio sugerido de Venta</label>
                                         </div>
                                     </div>
@@ -153,7 +153,7 @@ session_start();
             }
           })
           parametros = {
-             "action" : "listaSucursales"        
+             "action" : "listaSucursales"      
           };
           $.ajax({
             type:'POST',
@@ -167,6 +167,23 @@ session_start();
                     tag.setAttribute('value', datos[i].cod_sucursal);
                     tag.innerHTML = datos[i].nombre_sucursal;
                     cboxAlmacenamiento.appendChild(tag);
+                }
+            }
+          })
+          parametros = {
+             "action" : "ultimaCompraProducto",
+             "cod_producto" : localStorage.getItem("producto")  
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Productos.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                datos = datos.data;
+                if(datos.length > 0){
+                    document.getElementById('costo').value = datos[0].precio_unit_compra_producto
+                    document.getElementById('precio').value = datos[0].precio_sugerido_venta
                 }
             }
           })
@@ -200,15 +217,42 @@ session_start();
             success:function(data){
                 console.log("data", data)
                 datos = JSON.parse(data);
-                if(datos.resp == "true"){
+
+                if(datos.producto == "true"){
                     Materialize.toast('Compra del Producto Registrado con exito', 5000)
-                    document.getElementById('sueldo').value = "";
+                    document.getElementById('cantidad').value = "";
+                    document.getElementById('observacion').value = "";
                 }
-                if(datos.resp == "false"){
+                if(datos.producto == "false"){
                     Materialize.toast('Hubo un fallo al registrar la compra del Producto. Vuelva a Intentarlo', 5000)
                 }
-                if(datos.resp != "true" && datos.resp != "false"){
+                if(datos.producto != "true" && datos.resp != "false"){
                     Materialize.toast('Hubo un fallo al registrar la compra del Producto COD:'+datos.resp, 5000)
+                }
+
+
+                if(datos.inventario.action == "actualizar"){
+                    if(datos.inventario.resp == "true"){
+                        Materialize.toast('La cantidad del Inventario fue Actualizado exitosamente', 5000)
+                    }
+                    if(datos.inventario.resp == "false"){
+                        Materialize.toast('Hubo un fallo al actualizar el inventario. Vuelva a Intentarlo', 5000)
+                    }
+                    if(datos.inventario.resp != "true" && datos.resp != "false"){
+                        Materialize.toast('Hubo un fallo al actualizar el inventario COD:'+datos.resp, 5000)
+                    }
+                }
+
+                if(datos.inventario.action == "agregar"){
+                    if(datos.inventario.resp == "true"){
+                        Materialize.toast('Un nuevo producto agregado al Inventario', 5000)
+                    }
+                    if(datos.inventario.resp == "false"){
+                        Materialize.toast('Hubo un fallo al registrar el producto en el inventario. Vuelva a Intentarlo', 5000)
+                    }
+                    if(datos.inventario.resp != "true" && datos.resp != "false"){
+                        Materialize.toast('Hubo un fallo al registrar el producto en el inventario COD:'+datos.resp, 5000)
+                    }
                 }
             }
           })

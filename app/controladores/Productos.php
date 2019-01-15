@@ -27,6 +27,9 @@ if (isset($_POST['action'])) {
         case 'agregarCompra' :
             agregarCompra();
             break;
+        case 'ultimaCompraProducto' :
+            ultimaCompraProducto();
+            break;
         default:
             echo "No se Encontro la Funcion";
     }
@@ -35,6 +38,16 @@ if (isset($_POST['action'])) {
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function ultimaCompraProducto(){
+    $cod_producto = $_POST['cod_producto'];
+    $datos = array($cod_producto);
+    $modelo = modelo('Producto');
+    $lista = $modelo->ultimaCompraProducto($datos);
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
 }
 
 function listaProductos(){
@@ -68,8 +81,25 @@ function agregarCompra(){
     $datos = array($cod_producto, $cantidad, $costo, $precio, $observacion, $fecha, $hora, $cboxAlmacenamiento, $usuario);
     $modelo = modelo('Producto');
     $resp = $modelo->agregarCompra($datos);
-    $data = ['resp' => $resp];
-    echo json_encode($lista);
+    
+    $datos = array($cod_producto, $cboxAlmacenamiento);
+    $modelo = modelo('Inventario');
+    $lista = $modelo->listaInventarioCodigoAlmanenamiento($datos);
+    if(sizeof($lista) > 0){
+        $cant = $lista[0]['cant_producto'] + $cantidad;
+        $datos = array($cant, $lista[0]['cod_inventario']);
+        $modelo = modelo('Inventario');
+        $resp1 = $modelo->actualizarCantidadInventario($datos);
+        $d = ['resp' => $resp1, 'action' => 'actualizar'];
+    }else{
+        $datos = array($cboxAlmacenamiento, $cod_producto, $cantidad, $costo, $precio);
+        $modelo = modelo('Inventario');
+        $resp1 = $modelo->agregarInventario($datos);
+        $d = ['resp' => $resp1, 'action' => 'agregar'];
+    }
+    $data = ['producto' => $resp, 'inventario' => $d];
+
+    echo json_encode($data);
 }
 
 function agregarProducto(){
