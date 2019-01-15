@@ -49,13 +49,13 @@ session_start();
                                     </div>
                                     <div class="row">
                                         <div class="form-group input-field col s12">
-                                            <input id="codigo" name="codigo" type="text">
+                                            <input id="codigo" name="codigo" type="text" required>
                                             <label for="codigo">Codigo del Producto</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group input-field col s12">
-                                            <input id="nombre" name="nombre" type="text">
+                                            <input id="nombre" name="nombre" type="text" required>
                                             <label for="nombre">Nombre del Producto</label>
                                         </div>
                                     </div>
@@ -111,9 +111,6 @@ session_start();
             $("#formulario").on('submit', function(e){
                 
                 e.preventDefault();
-                //var f = $(this);
-                //var formData = new FormData(document.getElementById("formulario"));
-                //console.log("formData:", formData)
                 $.ajax({
                     type: 'POST',
                     url: 'app/controladores/Productos.php',
@@ -126,7 +123,6 @@ session_start();
                         Materialize.toast('Aguarde porfavor mientras se procesede al registro', 5000)
                     },
                     success: function(data){
-                        console.log("data:", data)
                         datos = JSON.parse(data);
                         if(datos.resp == "true"){
                             Materialize.toast('Producto Registrado con exito', 5000)

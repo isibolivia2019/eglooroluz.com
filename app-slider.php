@@ -4,7 +4,7 @@
         <li class="user-details cyan darken-2">
             <div class="row">
                 <div class="col col s4 m4 l4">
-                    <img src="public/images/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                    <img src="public/imagenes/usuarios/sin_imagen_usuario.jpg" alt="" class="circle responsive-img valign profile-image">
                 </div>
                 <div class="col col s8 m8 l8">
                     <ul id="profile-dropdown" class="dropdown-content">
@@ -35,9 +35,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Cargos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="cargo.php">Lista de Cargos</a></li>
-                                <li><a href="cargo-agregar.php">Agregar Nuevo Cargo</a></li>
-                                <li><a href="cargo-asignar.php">Asignar Cargos</a></li>
+                                <li><a href="verificacion-1.php">Lista de Cargos</a></li>
+                                <li><a href="verificacion-1.php">Agregar Nuevo Cargo</a></li>
+                                <li><a href="verificacion-1.php">Asignar Cargos</a></li>
                             </ul>
                         </div>
                     </li>
@@ -91,7 +91,7 @@
                             <ul>
                                 <li><a href="producto.php">Lista de Productos</a></li>
                                 <li><a href="producto-agregar.php">Agregar Producto</a></li>
-                                <li><a href="producto-compra-registro.php">Productos Comprados</a></li>
+                                <li><a href="producto-compra-registro.php">Registro de Compras</a></li>
                             </ul>
                         </div>
                     </li>
@@ -100,9 +100,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Categorias</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="categoria.php">Lista de Categorias</a></li>
-                                <li><a href="categoria-agregar.php">Agregar Categoria</a></li>
-                                <li><a href="categoria-asignar.php">Asignar Categorias</a></li>
+                                <li><a href="verificacion-1.php">Lista de Categorias</a></li>
+                                <li><a href="verificacion-1.php">Agregar Categoria</a></li>
+                                <li><a href="verificacion-1.php">Asignar Categorias</a></li>
                             </ul>
                         </div>
                     </li>
@@ -111,10 +111,10 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Descuentos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="descuento.php">Actuales Descuentos</a></li>
-                                <li><a href="descuento-total.php">Lista Total Descuentos</a></li>
-                                <li><a href="descuento-agregar.php">Agregar Descuentos</a></li>
-                                <li><a href="descuento-agregar-varios.php">Agregar Varios </a></li>
+                                <li><a href="verificacion-1.php">Actuales Descuentos</a></li>
+                                <li><a href="verificacion-1.php">Lista Total Descuentos</a></li>
+                                <li><a href="verificacion-1.php">Agregar Descuentos</a></li>
+                                <li><a href="verificacion-1.php">Agregar Varios </a></li>
                             </ul>
                         </div>
                     </li>
@@ -123,7 +123,7 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Transferencias</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Actuales Descuentos</a></li>
+                                <li><a href="verificacion-1.php">Actuales Descuentos</a></li>
                             </ul>
                         </div>
                     </li>
@@ -132,9 +132,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Productos Perdidos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Inventario</a></li>
-                                <li><a href="table-basic.html">Agregar</a></li>
-                                <li><a href="table-basic.html">Registros</a></li>
+                                <li><a href="verificacion-1.php">Inventario</a></li>
+                                <li><a href="verificacion-1.php">Agregar</a></li>
+                                <li><a href="verificacion-1.php">Registros</a></li>
                             </ul>
                         </div>
                     </li>
@@ -153,7 +153,7 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Cotizaciones</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="cotizacion.php">Cotizar Venta</a></li>
+                                <li><a href="verificacion-1.php">Cotizar Venta</a></li>
                             </ul>
                         </div>
                     </li>
@@ -162,12 +162,12 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Reportes</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Compras</a></li>
-                                <li><a href="table-basic.html">Ventas</a></li>
-                                <li><a href="table-basic.html">Traspasos</a></li>
-                                <li><a href="table-basic.html">Descuentos</a></li>
-                                <li><a href="table-basic.html">Invenntario</a></li>
-                                <li><a href="table-basic.html">Caja Chica</a></li>
+                                <li><a href="verificacion-1.php">Compras</a></li>
+                                <li><a href="verificacion-1.php">Ventas</a></li>
+                                <li><a href="verificacion-1.php">Traspasos</a></li>
+                                <li><a href="verificacion-1.php">Descuentos</a></li>
+                                <li><a href="verificacion-1.php">Invenntario</a></li>
+                                <li><a href="verificacion-1.php">Caja Chica</a></li>
                             </ul>
                         </div>
                     </li>
@@ -176,9 +176,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Accesos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Del Personal</a></li>
-                                <li><a href="table-basic.html">Sucursal / Almacen</a></li>
-                                <li><a href="table-basic.html">Listas</a></li>
+                                <li><a href="verificacion-1.php">Del Personal</a></li>
+                                <li><a href="verificacion-1.php">Sucursal / Almacen</a></li>
+                                <li><a href="verificacion-1.php">Listas</a></li>
                             </ul>
                         </div>
                     </li>
@@ -187,8 +187,8 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Caja Chica</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Lista de gastos</a></li>
-                                <li><a href="table-basic.html">Agregar gastos</a></li>
+                                <li><a href="verificacion-1.php">Lista de gastos</a></li>
+                                <li><a href="verificacion-1.php">Agregar gastos</a></li>
                             </ul>
                         </div>
                     </li>
@@ -197,8 +197,8 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Clientes</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Lista de Clientes</a></li>
-                                <li><a href="table-basic.html">Agregar Cliente</a></li>
+                                <li><a href="verificacion-1.php">Lista de Clientes</a></li>
+                                <li><a href="verificacion-1.php">Agregar Cliente</a></li>
                             </ul>
                         </div>
                     </li>
@@ -207,13 +207,13 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Configuraciones</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="table-basic.html">Tipo de Cambio</a></li>
-                                <li><a href="table-basic.html">Datos Empresa</a></li>
-                                <li><a href="table-basic.html">Datos Facturacion</a></li>
-                                <li><a href="table-basic.html">Prueba Certificacion</a></li>
-                                <li><a href="table-basic.html">Eliminar Compra</a></li>
-                                <li><a href="table-basic.html">Actualizar Cant Inven</a></li>
-                                <li><a href="table-basic.html">Editar precios</a></li>
+                                <li><a href="verificacion-1.php">Tipo de Cambio</a></li>
+                                <li><a href="verificacion-1.php">Datos Empresa</a></li>
+                                <li><a href="verificacion-1.php">Datos Facturacion</a></li>
+                                <li><a href="verificacion-1.php">Prueba Certificacion</a></li>
+                                <li><a href="verificacion-1.php">Eliminar Compra</a></li>
+                                <li><a href="verificacion-1.php">Actualizar Cant Inven</a></li>
+                                <li><a href="verificacion-1.php">Editar precios</a></li>
                             </ul>
                         </div>
                     </li>
@@ -222,16 +222,6 @@
             </ul>
         </li>
         <li class="li-hover"><div class="divider"></div></li>
-        <li class="li-hover"><p class="ultra-small margin more-text">Daily Sales</p></li>
-        <li class="li-hover">
-            <div class="row">
-                <div class="col s12 m12 l12">
-                    <div class="sample-chart-wrapper">                            
-                        <div class="ct-chart ct-golden-section" id="ct2-chart"></div>
-                    </div>
-                </div>
-            </div>
-        </li>
     </ul>
     <a href="" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only darken-2"><i class="mdi-navigation-menu" ></i></a>
 </aside>

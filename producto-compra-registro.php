@@ -91,7 +91,7 @@ session_start();
         $(document).ready(function() {
             verificarAcceso("Permiso_Producto");
             var parametros = {
-                "action" : "listaProductos"
+                "action" : "listaCompraProductos"
             };
             var table = $('#table-simple').DataTable({
                 "destroy":true,
@@ -101,16 +101,23 @@ session_start();
                     "url": "app/controladores/Productos.php"
                 },
                 "columns": [
+                    {"data" : "fecha_compra_producto"},
+                    {"render": function (data, type, JsonResultRow, meta) {
+                            return "<img width='100'src=public/imagenes/productos/"+JsonResultRow.imagen_producto+">";
+                        }
+                    },
                     {"data" : "cod_item_producto"},
                     {"data" : "nombre_producto"},
-                    {"data" : "descripcion_producto"},
-                    {"data" : "color_producto"},
-                    {"data" : "nombre_producto"},
-                    {"data" : "descripcion_producto"},
-                    {"data" : "color_producto"},
-                    {"data" : "descripcion_producto"},
-                    {"data" : "color_producto"},
+                    {"data" : "cantidad_compra_producto"},
+                    {"data" : "precio_unit_compra_producto"},
+                    {"data" : "observacion_compra_producto"},
+                    {"data" : "nombre_almacenamiento"},
+                    {"data" : "personal"}
                 ],
+                "columnDefs": [
+   		        	{ "type": "date-euro", "targets": 0 }
+                ],
+                "order": [[ 0, "desc" ]],
                 "language": {
                     "url": "public/Spanish.lang"
                 }

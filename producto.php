@@ -47,6 +47,7 @@ session_start();
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
                                             <thead>
                                                 <tr>
+                                                    <th>Imagen</th>
                                                     <th>Codigo</th>
                                                     <th>Nombre</th>
                                                     <th>Descripcion</th>
@@ -57,6 +58,7 @@ session_start();
                                             </thead>
                                             <tfoot>
                                                 <tr>
+                                                    <th>Imagen</th>
                                                     <th>Codigo</th>
                                                     <th>Nombre</th>
                                                     <th>Descripcion</th>
@@ -95,12 +97,16 @@ session_start();
                     "url": "app/controladores/Productos.php"
                 },
                 "columns": [
+                    {"render": function (data, type, JsonResultRow, meta) {
+                            return "<img width='150'src=public/imagenes/productos/"+JsonResultRow.imagen_producto+">";
+                        }
+                    },
                     {"data" : "cod_item_producto"},
                     {"data" : "nombre_producto"},
                     {"data" : "descripcion_producto"},
                     {"data" : "color_producto"},
-                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
+                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-action-shopping-cart'></i></button>"},
+                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-border-color'></i></button>"},
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
@@ -123,7 +129,7 @@ session_start();
                 $(tbody).on("click", "button.datos", function(){
                     var data = table.row( $(this).parents("tr") ).data();
                     localStorage.setItem("producto", data.cod_producto);
-                    location.href = "producto-compra.php";
+                    location.href = "producto-compra-agregar.php";
                 })
         }
     </script>

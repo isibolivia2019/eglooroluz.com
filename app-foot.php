@@ -27,6 +27,7 @@
 <script type="text/javascript" src="public/js/plugins/jvectormap/vectormap-script.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+<script src="public/js/plugins/js_tabla/date-euro.js"></script>
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
 <script type="text/javascript" src="public/js/plugins.js"></script>
 <script type="text/javascript" src="public/js/acceso.js"></script>
