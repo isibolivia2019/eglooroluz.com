@@ -123,7 +123,8 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Transferencias</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Actuales Descuentos</a></li>
+                                <li><a href="transferencia.php">Transferir Producto</a></li>
+                                <li><a href="transferencia-lista.php">Lista de Transferencias</a></li>
                             </ul>
                         </div>
                     </li>
@@ -177,7 +178,8 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="verificacion-1.php">Del Personal</a></li>
-                                <li><a href="verificacion-1.php">Sucursal / Almacen</a></li>
+                                <li><a href="acceso-sucursal.php">a Sucursal</a></li>
+                                <li><a href="acceso-almacen.php">a Almacen</a></li>
                                 <li><a href="verificacion-1.php">Listas</a></li>
                             </ul>
                         </div>

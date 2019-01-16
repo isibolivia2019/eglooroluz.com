@@ -24,13 +24,30 @@ if (isset($_POST['action'])) {
         case 'conversionMonedaProducto' :
             conversionMonedaProducto();
             break;
-            
+        case 'listaInventarioVenta' :
+            listaInventarioVenta();
+            break;
     }
 }
 
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function listaInventarioVenta(){
+    $codigo = $_POST['codigo'];
+    $data = array();
+    $datos = array($codigo);
+    $modelo = modelo('Inventario');
+    $lista = $modelo->listaInventarioActual($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
+        $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
+        $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
+    }
+    $data = ['data' => $lista];
+    echo json_encode($data);
 }
 
 function conversionMonedaProducto(){

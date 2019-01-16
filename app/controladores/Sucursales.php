@@ -21,6 +21,9 @@ if (isset($_POST['action'])) {
         case 'listaInventarioActual' :
             listaInventarioActual();
             break;
+        case 'listaInventarioVenta' :
+            listaInventarioVenta();
+            break;
         case 'conversionMonedaProducto' :
             conversionMonedaProducto();
             break;
@@ -133,6 +136,21 @@ function listaInventarioActual(){
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
         $lista[$i]["cant_producto"] = $lista[$i]["cant_producto"].' Uds.';
+        $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
+        $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
+    }
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
+function listaInventarioVenta(){
+    $codigo = $_POST['codigo'];
+    $data = array();
+    $datos = array($codigo);
+    $modelo = modelo('Inventario');
+    $lista = $modelo->listaInventarioActual($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
         $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
         $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
     }
