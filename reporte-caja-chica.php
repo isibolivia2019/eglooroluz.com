@@ -139,8 +139,8 @@ session_start();
             var cboxSucursal = document.getElementById("cboxSucursal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-             //window.open("newpage.html",'New Window'); 
-            var parametros = {
+            window.open("reportes/reporte.php",'New Window'); 
+            /*var parametros = {
                 "action" : "listaVentas",
                 "sucursal" : cboxSucursal,
                 "año" : cboxAño,
@@ -152,7 +152,7 @@ session_start();
                 url:'reportes/reporte.php',
                 success:function(data){
                 }
-            })
+            })*/
         }
         
     </script>
