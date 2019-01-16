@@ -189,8 +189,8 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Caja Chica</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Lista de gastos</a></li>
-                                <li><a href="verificacion-1.php">Agregar gastos</a></li>
+                                <li><a href="caja-chica.php">Lista de gastos</a></li>
+                                <li><a href="caja-chica-agregar.php">Agregar gastos</a></li>
                             </ul>
                         </div>
                     </li>
