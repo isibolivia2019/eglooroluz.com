@@ -163,6 +163,7 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Reportes</a>
                         <div class="collapsible-body">
                             <ul>
+                                <li><a href="reporte-caja-chica.php">Caja Chica</a></li>
                                 <li><a href="verificacion-1.php">Compras</a></li>
                                 <li><a href="verificacion-1.php">Ventas</a></li>
                                 <li><a href="verificacion-1.php">Traspasos</a></li>
