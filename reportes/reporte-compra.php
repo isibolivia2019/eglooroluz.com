@@ -96,12 +96,15 @@ $empty = array(utf8_decode("Fecha: ".date("d/m/Y", strtotime($fecha))." - Hora: 
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-if($sucursal == "todos"){
-	$empty = array(utf8_decode(strtoupper('TODOS LOS PUNTOS')));
+if(sizeof($lista) > 0){
+	if($sucursal == "todos"){
+		$empty = array(utf8_decode(strtoupper('TODOS LOS PUNTOS')));
+	}else{
+		$empty = array(utf8_decode(strtoupper($lista[0]['nombre_almacenamiento'])));
+	}
 }else{
-	$empty = array(utf8_decode(strtoupper($lista[0]['nombre_almacenamiento'])));
+	$empty = array("SIN RESULTADOS");
 }
-
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> SetTextColor(33, 152, 158);

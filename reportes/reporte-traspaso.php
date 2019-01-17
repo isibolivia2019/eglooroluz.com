@@ -132,20 +132,24 @@ $pdf -> SetTextColor(0, 0, 0);
 
 $pdf -> SetFont('Arial','B', 11);
 $pdf -> Cell(260, 10, utf8_decode('TRANSFERENCIAS DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
-
-if($sucDe == "todos"){
-	if($sucA == "todos"){
-		$pdf -> Cell(260, 10, utf8_decode(strtoupper('TODOS LOS TRASPASOS')), 0, 1, 'C');
+if(sizeof($lista) > 0){
+	if($sucDe == "todos"){
+		if($sucA == "todos"){
+			$pdf -> Cell(260, 10, utf8_decode(strtoupper('TODOS LOS TRASPASOS')), 0, 1, 'C');
+		}else{
+			$pdf -> Cell(260, 10, utf8_decode(strtoupper('ORIGEN: TODOS --> DESTINO: '.$lista[0]["nombre_destino"])), 0, 1, 'C');
+		}
 	}else{
-		$pdf -> Cell(260, 10, utf8_decode(strtoupper('ORIGEN: TODOS --> DESTINO: '.$lista[0]["nombre_destino"])), 0, 1, 'C');
+		if($sucA == "todos"){
+			$pdf -> Cell(260, 10, utf8_decode(strtoupper('ORIGEN: '.$lista[0]["nombre_origen"].' --> DESTINO: TODOS')), 0, 1, 'C');
+		}else{
+			$pdf -> Cell(260, 10, utf8_decode(strtoupper('ORIGEN: '.$lista[0]["nombre_origen"].' --> DESTINO: '.$lista[0]["nombre_destino"])), 0, 1, 'C');
+		}
 	}
 }else{
-	if($sucA == "todos"){
-		$pdf -> Cell(260, 10, utf8_decode(strtoupper('ORIGEN: '.$lista[0]["nombre_origen"].' --> DESTINO: TODOS')), 0, 1, 'C');
-	}else{
-		$pdf -> Cell(260, 10, utf8_decode(strtoupper('ORIGEN: '.$lista[0]["nombre_origen"].' --> DESTINO: '.$lista[0]["nombre_destino"])), 0, 1, 'C');
-	}
+	$empty = array("SIN RESULTADOS");
 }
+
 
 $pdf -> SetFont('Arial','B', 11);
 $pdf->SetWidths(array(10,25,30,30,30,17,25,25,40,30));

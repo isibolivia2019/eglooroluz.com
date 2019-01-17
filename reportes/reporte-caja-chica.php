@@ -75,7 +75,12 @@ $empty = array(utf8_decode("Fecha: ".date("d/m/Y", strtotime($fecha))." - Hora: 
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array(utf8_decode(strtoupper($lista[0]['nombre_sucursal'])));
+if(sizeof($lista) > 0){
+	$empty = array(utf8_decode(strtoupper($lista[0]['nombre_sucursal'])));
+}else{
+	$empty = array("SIN RESULTADOS");
+}
+
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> SetTextColor(33, 152, 158);
