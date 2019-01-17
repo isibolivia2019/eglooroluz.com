@@ -1,7 +1,7 @@
 <?php
+ini_set('display_errors', '1');
 require_once("../public/fpdf/mc_table.php");
 define('FPDF_FONTPATH', 'font/');
-ini_set('display_errors', '1');
 session_start();
 class PDF extends FPDF {
 	
