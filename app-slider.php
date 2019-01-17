@@ -164,12 +164,11 @@
                         <div class="collapsible-body">
                             <ul>
                                 <li><a href="reporte-caja-chica.php">Caja Chica</a></li>
-                                <li><a href="verificacion-1.php">Compras</a></li>
-                                <li><a href="verificacion-1.php">Ventas</a></li>
-                                <li><a href="verificacion-1.php">Traspasos</a></li>
-                                <li><a href="verificacion-1.php">Descuentos</a></li>
-                                <li><a href="verificacion-1.php">Invenntario</a></li>
-                                <li><a href="verificacion-1.php">Caja Chica</a></li>
+                                <li><a href="reporte-compra.php">Compras</a></li>
+                                <li><a href="reporte-venta.php">Ventas</a></li>
+                                <li><a href="reporte-traspaso.php">Traspasos</a></li>
+                                <li><a href="reporte-descuento">Descuentos</a></li>
+                                <li><a href="reporte-inventario.php">Inventario</a></li>
                             </ul>
                         </div>
                     </li>

@@ -32,10 +32,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Reportes de Caja Chica</h5>
+                                    <h5 class="breadcrumbs-title">Reportes de Ventas</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Caja Chica</li>
+                                        <li class="active">Ventas</li>
                                     </ol>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@ session_start();
             var cboxSucursal = document.getElementById("cboxSucursal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            window.open("reportes/reporte-caja-chica.php?suc="+cboxSucursal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+            window.open("reportes/reporte-venta.php?suc="+cboxSucursal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
         }
         
     </script>

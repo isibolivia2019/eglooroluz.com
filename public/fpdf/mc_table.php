@@ -98,9 +98,9 @@ function Row($data)
         $x=$this->GetX(); 
         $y=$this->GetY(); 
         //Draw the border 
-        $this->Rect($x,$y,$w,$h,$style); 
+        $this->Rect($x,$y,$w,$h,'B'); 
         //Print the text 
-        $this->MultiCell($w,5,$data[$i],'LTR',$a,$fill); 
+        $this->MultiCell($w,5,$data[$i],'LTR',$a,''); 
         //Put the position to the right of the cell 
         $this->SetXY($x+$w,$y); 
     } 
