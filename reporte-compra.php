@@ -83,7 +83,7 @@ session_start();
                                         <div class="row">
                                             <div class="input-field col s12 submitBtn">
                                                 <div class="input-field col s12 right ">
-                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Generar Reporte de Caja Chica</a>
+                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Generar Reporte de Compras</a>
                                                 </div>
                                             </div>
                                         </div>

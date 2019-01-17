@@ -32,10 +32,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Reportes de Ventas</h5>
+                                    <h5 class="breadcrumbs-title">Reportes de Compra de productos</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Ventas</li>
+                                        <li class="active">Compra de Productos</li>
                                     </ol>
                                 </div>
                             </div>
@@ -49,7 +49,7 @@ session_start();
                                 <form class="col s12">
                                 <h4 class="header">Seleccione el Mes / Año</h4>
                                     <div class="row">
-                                        <div class="col s12 m6 l4">
+                                        <div class="col s12 m6 l3">
                                             <label>Mes</label>
                                             <select class="browser-default" id="cboxMes">
                                                 <option value="" disabled selected>Seleccione el Mes</option>
@@ -67,22 +67,30 @@ session_start();
                                                 <option value="12">Diciembre</option>
                                             </select>
                                         </div>
-                                        <div class="col s12 m6 l4">
+                                        <div class="col s12 m6 l3">
                                             <label>Año</label>
                                             <select class="browser-default" id="cboxAño">
                                                 <option value="" disabled selected>Seleccione el Año</option>
                                             </select>
                                         </div>
-                                        <div class="col s12 m12 l4">
-                                            <label>Año</label>
-                                            <select class="browser-default" id="cboxSucursal">
-                                                <option value="" disabled selected>Seleccione la Sucursal</option>
+                                        <div class="col s12 m6 l3">
+                                            <label>Traspaso De</label>
+                                            <select class="browser-default" id="cboxDe">
+                                                <option value="" disabled selected>Seleccione un opcion</option>
+                                                <option value="todos">Todos</option>
+                                            </select>
+                                        </div>
+                                        <div class="col s12 m6 l3">
+                                            <label>Traspaso A</label>
+                                            <select class="browser-default" id="cboxA">
+                                                <option value="" disabled selected>Seleccione un opcion</option>
+                                                <option value="todos">Todos</option>
                                             </select>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12 submitBtn">
                                                 <div class="input-field col s12 right ">
-                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Generar Reporte de Ventas</a>
+                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Generar Reporte de Traspasos</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -103,26 +111,58 @@ session_start();
     <script>
         $(document).ready(function() {
             verificarAcceso("Permiso_Venta");
-            var cboxSucursal = document.getElementById("cboxSucursal");
+            var cboxDe = document.getElementById("cboxDe");
+            var cboxA = document.getElementById("cboxA");
             var cboxAño = document.getElementById("cboxAño");
             var parametros = {
-                "action" : "listaAccesosSucursales"        
-            };
-            $.ajax({
-                type:'POST',
-                data: parametros,
-                url:'app/controladores/Accesos.php',
-                success:function(data){
-                    datos = JSON.parse(data);
-                    datos = datos.data
-                    for(let i=0 ; i<datos.length ; i++){
-                        var tag = document.createElement('option');
-                        tag.setAttribute('value', datos[i].cod_sucursal);
-                        tag.innerHTML = datos[i].nombre_sucursal;
-                        cboxSucursal.appendChild(tag);
-                    }
+            "action" : "listaAlmacenes"            
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Almacenes.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                datos = datos.data;
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_almacen);
+                    tag.innerHTML = datos[i].nombre_almacen;
+                    cboxDe.appendChild(tag);
                 }
-            })
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_almacen);
+                    tag.innerHTML = datos[i].nombre_almacen;
+                    cboxA.appendChild(tag);
+                }
+            }
+          })
+          parametros = {
+             "action" : "listaSucursales"      
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Sucursales.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                datos = datos.data;
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_sucursal);
+                    tag.innerHTML = datos[i].nombre_sucursal;
+                    cboxDe.appendChild(tag);
+                }
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_sucursal);
+                    tag.innerHTML = datos[i].nombre_sucursal;
+                    cboxA.appendChild(tag);
+                }
+            }
+        })
+            
 
             var fecha = new Date();
             var año = fecha.getFullYear();
@@ -136,10 +176,11 @@ session_start();
 
         function generarReporte(){
             verificarAcceso("Permiso_Reporte");
-            var cboxSucursal = document.getElementById("cboxSucursal").value;
+            var cboxDe = document.getElementById("cboxDe").value;
+            var cboxA = document.getElementById("cboxA").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            window.open("reportes/reporte-venta.php?suc="+cboxSucursal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+            window.open("reportes/reporte-traspaso.php?sucde="+cboxDe+"&suca="+cboxA+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
         }
         
     </script>
