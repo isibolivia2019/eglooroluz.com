@@ -67,11 +67,11 @@ $empty = array("Reporte impreso por :");
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array(utf8_decode('usuario'));
+$empty = array($_SESSION['personal']);
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array(utf8_decode("Fecha: ".date("d/m/Y", strtotime($fecha))." - Hora: ".$hora));
+$empty = array("Fecha: ".date("d/m/Y", strtotime($fecha))." - Hora: ".$hora);
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
