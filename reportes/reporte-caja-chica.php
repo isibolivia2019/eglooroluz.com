@@ -5,7 +5,7 @@ ini_set('display_errors', '1');
 session_start();
 class PDF extends FPDF {
 	
-   	function Header() {
+   	/*function Header() {
       $this->Image('images/logooroluz.png',10,8,33);
       $this->Cell(100,10,'',0,1,'C');
    	}
@@ -14,7 +14,7 @@ class PDF extends FPDF {
 		$this->SetY(-10);
 		$this->SetFont('Arial','I',8);
 		$this->Cell(0,10,'Pagina '.$this->PageNo(),0,0,'C');
-   	}
+	}*/
 }
 function modelo($modelo){
     require_once '../app/modelos/'.$modelo.'.php';
@@ -28,8 +28,8 @@ $mes = $_GET['m'];
 date_default_timezone_set('America/La_Paz');
 $hora = date("H:i:s");
 $fecha = date("Y-m-d");
-echo "fecha:".$fecha.":=";
-echo "usuario:".$_SESSION['personal'].":=";
+/*echo "fecha:".$fecha.":=";
+echo "usuario:".$_SESSION['personal'].":=";*/
 $datos = array($sucursal, $mes, $año);
 $modelo = modelo('CajaChica');
 $lista = $modelo->reporteListaCajaChica($datos);
@@ -62,7 +62,7 @@ $align = array('C');
 $style = array('B');
 $pdf->SetWidths(array(80));
 
-$pdf -> Cell(180, 10, "", 0, 0, 'C');
+/*$pdf -> Cell(180, 10, "", 0, 0, 'C');
 $empty = array("Reporte impreso por :");
 $pdf->FancyRow($empty, $border, $align, $style);
 
@@ -76,7 +76,7 @@ $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
 $empty = array(utf8_decode(strtoupper($lista[0]['nombre_sucursal'])));
-$pdf->FancyRow($empty, $border, $align, $style);
+$pdf->FancyRow($empty, $border, $align, $style);*/
 
 $pdf -> SetTextColor(33, 152, 158);
 $pdf->SetWidths(array(100));
