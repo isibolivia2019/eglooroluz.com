@@ -67,7 +67,7 @@ $empty = array("Reporte impreso por :");
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array(utf8_decode($_SESSION['personal']));
+$empty = array(utf8_decode('usuario'));
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
