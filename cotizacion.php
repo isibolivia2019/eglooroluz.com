@@ -61,10 +61,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Registrar Venta</h5>
+                                    <h5 class="breadcrumbs-title">Cotización</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Carrito de Ventas</li>
+                                        <li class="active">Cotización</li>
                                     </ol>
                                 </div>
                             </div>
@@ -73,14 +73,14 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Seleccione un Punto de Venta</p>
+                            <p class="caption">Seleccione una Sucursal</p>
                             <div class="divider"></div>
                             <div class="row">
                                 <form class="col s12">
                                     <div class="row">
                                         <div class="col s12 m8 l9">
                                             <label>Sucursal</label>
-                                            <select class="browser-default cbox" id="cboxSucursal" onchange="listaProductos()">
+                                            <select class="browser-default" id="cboxSucursal" onchange="listaProductos()">
                                                 <option value="" disabled selected>Seleccione una Sucursal</option>
                                             </select>
                                         </div>
@@ -89,7 +89,7 @@ session_start();
                             </div>
                             <br>
                             <div class="divider"></div> 
-                            <h4 class="header">Productos Disponibles</h4>
+                            <h4 class="header">Stock Disponible</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
@@ -123,7 +123,7 @@ session_start();
                                 <br>
                                 <br>
                                 <div class="divider"></div> 
-                                <h4 class="header">CARRITO DE COMPRAS</h4>
+                                <h4 class="header">CARRITO DE COTIZACION</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="table-carrito" class="responsive-table display" cellspacing="0">
@@ -170,7 +170,7 @@ session_start();
                                 <div class="row">
                                     <div class="input-field col s12 submitBtn">
                                         <div class="input-field col s12 right ">
-                                          <a class="btn waves-effect waves-light col s12" onclick="venderProducto()">Realizar Venta</a>
+                                          <a class="btn waves-effect waves-light col s12" onclick="cotizacion()">Realizar Cotizacion</a>
                                         </div>
                                     </div>
                                 </div>
@@ -207,7 +207,7 @@ session_start();
                         $.ajax({
                           type:'POST',
                           data: parametros,
-                          url:'app/controladores/Ventas.php',
+                          url:'app/controladores/Cotizaciones.php',
                           success:function(data){
                               datos = JSON.parse(data);
                               if(datos.resp == "true"){
@@ -273,7 +273,6 @@ session_start();
 
         function listaProductos(){
             verificarAcceso("Permiso_Venta");
-            $('.cbox').attr("disabled","disabled");
             var cboxSucursal = document.getElementById("cboxSucursal").value;
             listaCarrito(cboxSucursal)
             totalPagar(cboxSucursal)
@@ -381,20 +380,20 @@ session_start();
             $.ajax({
               type:'POST',
               data: parametros,
-              url:'app/controladores/Ventas.php',
+              url:'app/controladores/Cotizaciones.php',
               success:function(data){
                   datos = JSON.parse(data);
                   if(datos.resp == "true"){
                       table.row(tableRemove).remove().draw(false);
                       tableCarrito.ajax.reload();
                       totalPagar(document.getElementById("cboxSucursal").value)
-                      Materialize.toast('Producto agregado al Carrito de Ventas.', 5000)
+                      Materialize.toast('Producto agregado al Carrito de Cotizaciones.', 5000)
                   }
                   if(datos.resp == "false"){
-                      Materialize.toast('Hubo un fallo al agregar al carrito de compras. Vuelva a Intentarlo', 5000)
+                      Materialize.toast('Hubo un fallo al agregar al carrito de cotizaciones. Vuelva a Intentarlo', 5000)
                   }
                   if(datos.resp != "true" && datos.resp != "false"){
-                      Materialize.toast('Hubo un fallo al agregar al carrito de compras COD:'+datos.resp, 5000)
+                      Materialize.toast('Hubo un fallo al agregar al carrito de cotizaciones COD:'+datos.resp, 5000)
                   }
               }
             })
@@ -410,7 +409,7 @@ session_start();
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Ventas.php"
+                    "url": "app/controladores/Cotizaciones.php"
                 },
                 "columns": [
                     {"data" : "cod_item_producto"},
@@ -439,16 +438,16 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     var parametros = {
                        "action" : "eliminarCarrito",
-                       "cod_carrito" : data.cod_carrito
+                       "cod_carrito" : data.codigo
                     };
                     $.ajax({
                       type:'POST',
                       data: parametros,
-                      url:'app/controladores/Ventas.php',
+                      url:'app/controladores/Cotizaciones.php',
                       success:function(data){
                           datos = JSON.parse(data);
                           if(datos.resp == "true"){
-                              Materialize.toast('Producto eliminado del Carrito Satisfactoriamene', 5000)
+                              Materialize.toast('Producto eliminado del Carrito  de Cotizaciones Satisfactoriamene', 5000)
                               totalPagar(document.getElementById("cboxSucursal").value)
                               table.row(tableRemove).remove().draw(false);
                           }
@@ -468,16 +467,16 @@ session_start();
                     var data = table.row( $(this).parents("tr") ).data();
                     var parametros = {
                        "action" : "listaCarritoEspecifico",
-                       "codCarrito" : data.cod_carrito,
+                       "codCarrito" : data.codigo,
                     };
                     $.ajax({
                       type:'POST',
                       data: parametros,
-                      url:'app/controladores/Ventas.php',
+                      url:'app/controladores/Cotizaciones.php',
                       success:function(data){
                             datos = JSON.parse(data);
                             datos = datos.data
-                            document.getElementById('modalCarrito').value = datos[0].cod_carrito;
+                            document.getElementById('modalCarrito').value = datos[0].codigo;
                             document.getElementById('modalInventario').value = datos[0].cod_inventario;
                             document.getElementById('modalCantidad').value = datos[0].cantidad;
                             document.getElementById('modalPrecio').value = datos[0].total;
@@ -492,12 +491,12 @@ session_start();
                 var data = table.row( $(this).parents("tr") ).data();
                 var parametros = {
                    "action" : "conversionMonedaProducto",
-                   "codCarrito" : data.cod_carrito,
+                   "codCarrito" : data.codigo,
                 };
                 $.ajax({
                   type:'POST',
                   data: parametros,
-                  url:'app/controladores/Ventas.php',
+                  url:'app/controladores/Cotizaciones.php',
                   success:function(data){
                         datos = JSON.parse(data);
                         datos = datos.data
@@ -521,7 +520,7 @@ session_start();
             $.ajax({
               type:'POST',
               data: parametros,
-              url:'app/controladores/Ventas.php',
+              url:'app/controladores/Cotizaciones.php',
               success:function(data){
                     datos = JSON.parse(data);
                     moneda = datos.total;
@@ -546,7 +545,7 @@ session_start();
               }
             })
         }
-        function venderProducto(){
+        function cotizacion(){
             var sucursal = document.getElementById("cboxSucursal").value;
             var parametros = {
                 "action" : "agregarVenta",
@@ -557,7 +556,6 @@ session_start();
               data: parametros,
               url:'app/controladores/Ventas.php',
               success:function(data){
-                  console.log("data", data)
                     datos = JSON.parse(data);
                     if(datos.resp == "true"){
                         tableCarrito.ajax.reload();

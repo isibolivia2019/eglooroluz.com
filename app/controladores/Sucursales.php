@@ -148,7 +148,7 @@ function listaInventarioVenta(){
     $data = array();
     $datos = array($codigo);
     $modelo = modelo('Inventario');
-    $lista = $modelo->listaInventarioActual($datos);
+    $lista = $modelo->listaInventarioActualStock($datos);
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
         $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];

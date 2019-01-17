@@ -154,7 +154,7 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Cotizaciones</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Cotizar Venta</a></li>
+                                <li><a href="cotizacion.php">Cotizar Venta</a></li>
                             </ul>
                         </div>
                     </li>
