@@ -62,28 +62,28 @@ $align = array('C');
 $style = array('B');
 $pdf->SetWidths(array(80));
 
-/*$pdf -> Cell(180, 10, "", 0, 0, 'C');
+$pdf -> Cell(180, 10, "", 0, 0, 'C');
 $empty = array("Reporte impreso por :");
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array($_SESSION['personal']);
+$empty = array(utf8_decode($_SESSION['personal']));
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array("Fecha: ".date("d/m/Y", strtotime($fecha))." - Hora: ".$hora);
+$empty = array(utf8_decode("Fecha: ".date("d/m/Y", strtotime($fecha))." - Hora: ".$hora));
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
 $empty = array(utf8_decode(strtoupper($lista[0]['nombre_sucursal'])));
-$pdf->FancyRow($empty, $border, $align, $style);*/
+$pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> SetTextColor(33, 152, 158);
 $pdf->SetWidths(array(100));
 $style = array('B');
 $pdf -> SetFont('Arial','B', 20);
 $pdf -> Cell(80, 15, "", 0, 0, 'C');
-$empty = array("REPORTE DE CAJA CHICA");
+$empty = array(utf8_decode("REPORTE DE CAJA CHICA"));
 $pdf->FancyRow($empty, $border, $align, $style);
 $pdf->Ln(5);
 
