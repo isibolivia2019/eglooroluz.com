@@ -27,6 +27,9 @@ if (isset($_POST['action'])) {
         case 'conversionMonedaProducto' :
             conversionMonedaProducto();
             break;
+        case 'agregarCotizacion' :
+            agregarCotizacion();
+            break;
             
     }
 }
@@ -34,6 +37,42 @@ if (isset($_POST['action'])) {
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function agregarCotizacion(){
+    $sucursal = $_POST['sucursal'];
+    $empresa = $_POST['empresa'];
+    $atencion = $_POST['atencion'];
+
+    $usuario = $_SESSION['codigo'];
+    date_default_timezone_set('America/La_Paz');
+    $hora = date("H:i:s");
+    $fecha = date("Y-m-d");
+
+    $datos = array($sucursal);
+    $modelo = modelo('Cotizacion');
+    $lista = $modelo->listaCarritoCotizacion($datos);
+
+    $datos = array();
+    $modelo = modelo('Cotizacion');
+    $listaUltimo = $modelo->listaCotizacionUltimo($datos);
+
+    $resp = "";
+
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $datos = array($sucursal, $lista[$i]['cod_inventario'], $lista[$i]['cantidad'], $lista[$i]['descuento'], $lista[$i]['total'], ($listaUltimo[0]['nro_orden'] + 1), $empresa, $atencion, $fecha, $hora, $usuario);
+        $modelo = modelo('Cotizacion');
+        $resp = $modelo->agregarCotizacion($datos);
+    }
+
+    $datos = array($sucursal);
+    $modelo = modelo('Cotizacion');
+    $resp = $modelo->vaciarCarrito($datos);
+
+    $data = array();
+    $data = ['resp' => $resp,
+    'nro' => ($listaUltimo[0]['nro_orden'] + 1)];
+    echo json_encode($data);
 }
 
 function conversionMonedaProducto(){

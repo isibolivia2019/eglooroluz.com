@@ -80,7 +80,7 @@ session_start();
                                     <div class="row">
                                         <div class="col s12 m8 l9">
                                             <label>Sucursal</label>
-                                            <select class="browser-default" id="cboxSucursal" onchange="listaProductos()">
+                                            <select class="browser-default cbox" id="cboxSucursal" onchange="listaProductos()">
                                                 <option value="" disabled selected>Seleccione una Sucursal</option>
                                             </select>
                                         </div>
@@ -167,6 +167,17 @@ session_start();
 
                                     </div>
                                 </div>
+                                <div class="row">
+                                        <div class="input-field col s12 m6">
+                                            <input id="empresa" type="text">
+                                            <label for="empresa">Empresa / Institucion</label>
+                                        </div>
+
+                                        <div class="input-field col s12 m6">
+                                            <input id="atencion" type="text">
+                                            <label for="atencion">Atencion</label>
+                                        </div>
+                                    </div>
                                 <div class="row">
                                     <div class="input-field col s12 submitBtn">
                                         <div class="input-field col s12 right ">
@@ -273,6 +284,7 @@ session_start();
 
         function listaProductos(){
             verificarAcceso("Permiso_Venta");
+            $('.cbox').attr("disabled","disabled");
             var cboxSucursal = document.getElementById("cboxSucursal").value;
             listaCarrito(cboxSucursal)
             totalPagar(cboxSucursal)
@@ -342,7 +354,7 @@ session_start();
 
                 if(cant != ""){
                     if(precio != ""){
-                        if(Number(cant) <= Number(data.cant_producto) && Number(cant) > 0){
+                        if(Number(cant) > 0){
                             actualizarCarrito(data.cod_inventario, data.cod_almacenamiento, cant, precio, table, tableRemove);
                         }else{
                             $.alert({
@@ -547,29 +559,36 @@ session_start();
         }
         function cotizacion(){
             var sucursal = document.getElementById("cboxSucursal").value;
+            var empresa = document.getElementById("empresa").value;
+            var atencion = document.getElementById("atencion").value;
             var parametros = {
-                "action" : "agregarVenta",
-                "sucursal" : sucursal
+                "action" : "agregarCotizacion",
+                "sucursal" : sucursal,
+                "empresa" : empresa,
+                "atencion" : atencion
             };
             $.ajax({
-              type:'POST',
-              data: parametros,
-              url:'app/controladores/Ventas.php',
-              success:function(data){
+                type:'POST',
+                data: parametros,
+                url:'app/controladores/Cotizaciones.php',
+                success:function(data){
                     datos = JSON.parse(data);
                     if(datos.resp == "true"){
+                        document.getElementById("empresa").value = "";
+                        document.getElementById("atencion").value = "";
+                        document.location.href="reportes/cotizacion.php?nro="+datos.nro;
                         tableCarrito.ajax.reload();
                         table.ajax.reload();
                         totalPagar(sucursal);
-                        Materialize.toast('Venta realizada con exito', 6000)
+                        Materialize.toast('Cotizacion realizada con exito', 6000)
                     }
                     if(datos.resp == "false"){
-                        Materialize.toast('Hubo un fallo al registrar la Venta. Vuelva a Intentarlo', 5000)
+                        Materialize.toast('Hubo un fallo al registrar la Cotizacion. Vuelva a Intentarlo', 5000)
                     }
                     if(datos.resp != "true" && datos.resp != "false"){
-                        Materialize.toast('Hubo un fallo al registrar la Venta COD:'+datos.resp, 5000)
+                        Materialize.toast('Hubo un fallo al registrar la Cotizacion COD:'+datos.resp, 5000)
                     }
-              }
+                }
             })
         }
     </script>

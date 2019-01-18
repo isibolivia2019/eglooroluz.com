@@ -28,14 +28,26 @@ $mes = $_GET['m'];
 date_default_timezone_set('America/La_Paz');
 $hora = date("H:i:s");
 $fecha = date("Y-m-d");
-/*echo "fecha:".$fecha.":=";
-echo "usuario:".$_SESSION['personal'].":=";*/
+
+$nombreMes = "";
+if($mes == 1){$nombreMes = "Enero";}
+if($mes == 2){$nombreMes = "Febrero";}
+if($mes == 3){$nombreMes = "Marzo";}
+if($mes == 4){$nombreMes = "Abril";}
+if($mes == 5){$nombreMes = "Mayo";}
+if($mes == 6){$nombreMes = "Junio";}
+if($mes == 7){$nombreMes = "Julio";}
+if($mes == 8){$nombreMes = "Agosto";}
+if($mes == 9){$nombreMes = "Septiembre";}
+if($mes == 10){$nombreMes = "Octubre";}
+if($mes == 11){$nombreMes = "Novimebre";}
+if($mes == 12){$nombreMes = "Diciembre";}
+
 $datos = array($sucursal, $mes, $año);
 $modelo = modelo('CajaChica');
 $lista = $modelo->reporteListaCajaChica($datos);
 for($i = 0 ; $i < sizeof($lista) ; $i++){
     $lista[$i]["fecha"] = date("d/m/Y", strtotime($lista[$i]["fecha"])).' '.$lista[$i]["hora"];
-    //$lista[$i]["monto_gasto"] = 'Bs. '.$lista[$i]["monto_gasto"];
 }
 $nombreMes = "";
 if($mes == 1){$nombreMes = "Enero";}

@@ -1,5 +1,5 @@
 <?php
-require_once("fpdf/mc_table.php");
+require_once("../public/fpdf/mc_table.php");
 define('FPDF_FONTPATH', 'font/');
 class PDF extends FPDF {
 	
@@ -15,14 +15,15 @@ class PDF extends FPDF {
    	}
 }
 
-require_once("/home/eglooroluz/app/controladores/Cotizaciones.php");
-require_once("/home/eglooroluz/app/controladores/Empresas.php");
-$orden = $dato['orden'];
-/*$mes = $dato['mes'];
-$codSucursal = $dato['codSucursal'];
-$nombreSucursal = $dato['nombreSucursal'];
+function modelo($modelo){
+    require_once '../app/modelos/'.$modelo.'.php';
+    return new $modelo();
+}
+
+$nro = $_GET['nro'];
+
 $nombreMes = "";
-if($mes == 1){$nombreMes = "Enero";}
+/*if($mes == 1){$nombreMes = "Enero";}
 if($mes == 2){$nombreMes = "Febrero";}
 if($mes == 3){$nombreMes = "Marzo";}
 if($mes == 4){$nombreMes = "Abril";}
@@ -34,9 +35,15 @@ if($mes == 9){$nombreMes = "Septiembre";}
 if($mes == 10){$nombreMes = "Octubre";}
 if($mes == 11){$nombreMes = "Novimebre";}
 if($mes == 12){$nombreMes = "Diciembre";}*/
-$cotizacion = new Cotizaciones();
-$datos = $cotizacion->cotizacionActual($orden);
-$sucursal = $cotizacion->datosSucursales($datos[0]['cod_sucursal']);
+
+$datos = array($nro);
+$modelo = modelo('Cotizacion');
+$lista = $modelo->listaCotizacionNroOrden($datos);
+
+$datos = array($lista[0]['cod_sucursal']);
+$modelo = modelo('Sucursal');
+$listaSucursal = $modelo->sucursalEspecifico($datos);
+
 $pdf = new PDF_MC_Table('L','mm',array(279.4,215.9));
 $pdf -> AddPage();
 
@@ -49,11 +56,11 @@ $style = array('');
 $pdf->SetWidths(array(80));
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array($sucursal[0]['nombre_sucursal']);
+$empty = array($listaSucursal[0]['nombre_sucursal']);
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
-$empty = array($sucursal[0]['direccion_sucursal']);
+$empty = array($listaSucursal[0]['direccion_sucursal']);
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> SetTextColor(33, 152, 158);
@@ -75,33 +82,43 @@ $pdf -> SetTextColor(0, 0, 0);
 $pdf -> SetFont('Arial','B', 11);
 $pdf->SetWidths(array(100, 145));
 $pdf->SetAligns(array('L','C'));
-$pdf->Row(array("FECHA :",  utf8_decode($datos[0]['fecha'])));
-$pdf->Row(array( utf8_decode("EMPRESA / INSTITUCIÓN :"),  utf8_decode($datos[0]['empresa'])));
-$pdf->Row(array( utf8_decode("ATENCIÓN :"),  utf8_decode($datos[0]['personal'])));
+$pdf->Row(array("FECHA :",  utf8_decode(date("d/m/Y", strtotime($lista[0]["fecha"])))));
+$pdf->Row(array( utf8_decode("EMPRESA / INSTITUCIÓN :"), utf8_decode($lista[0]['empresa'])));
+$pdf->Row(array( utf8_decode("ATENCIÓN :"),  utf8_decode($lista[0]['personal'])));
 $pdf->Ln(10);
 
-	$pdf -> SetFont('Arial','B', 10);
-	$pdf->SetWidths(array(10,25,50,15,20,25,25,25,25,25));
-	$pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C'));
-	$pdf->Row(array('NRO', 'CODIGO', 'DETALLE', 'UNID.', 'CANTIDAD', 'PRECIO UNITARIO', 'TOTAL', 'DESCUENTO', 'PRECIO CON DESCUENTO', 'TOTAL CON DESCUENTO'));
+$pdf -> SetFont('Arial','B', 10);
+$pdf->SetWidths(array(10,25,45,18,23,25,25,25,25,25));
+$pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C'));
+$pdf->Row(array('NRO', 'CODIGO', 'DETALLE', 'UNID.', 'CANTIDAD', 'PRECIO UNITARIO', 'TOTAL', 'DESCUENTO', 'PRECIO CON DESCUENTO', 'TOTAL CON DESCUENTO'));
+$totalSinDescuento = 0;
+$totalConDescuento = 0;
 
-	$totalSinDescuento = 0;
-	$totalConDescuento = 0;
+for($i=0;$i<sizeof($lista);$i++){
+	$pdf -> SetFont('Arial','', 10);
+	$totalSinDescuento = $totalSinDescuento + ($lista[$i]['precio_sugerido_venta'] * $lista[$i]['cant_producto']);
+	$totalConDescuento = $totalConDescuento + round(($lista[$i]['total_unitario'] * $lista[$i]['cant_producto']),2);
 
-for($i=0;$i<sizeof($datos);$i++){
-	$pdf -> SetFont('Arial','', 9);
-	$totalSinDescuento = $totalSinDescuento + ($datos[$i]['precio_sugerido_venta'] * $datos[$i]['cant_producto']);
-	$totalConDescuento = $totalConDescuento + $datos[$i]['total_unitario'];
-
-	$pdf->Row(array(($i + 1), utf8_decode($datos[$i]['cod_item_producto']), utf8_decode($datos[$i]['nombre_producto']." ".$datos[$i]['descripcion_producto'].', color: '.$datos[$i]['color_producto']), utf8_decode('PIEZA'), utf8_decode($datos[$i]['cant_producto']), utf8_decode($datos[$i]['precio_sugerido_venta']), utf8_decode($datos[$i]['precio_sugerido_venta'] * $datos[$i]['cant_producto']), utf8_decode($datos[$i]['descuento_porcentaje_venta_producto']), utf8_decode($datos[$i]['total_unitario'] / $datos[$i]['cant_producto']), utf8_decode($datos[$i]['total_unitario']))); 
+	$pdf->Row(array(
+		($i + 1),
+		utf8_decode('#'.$lista[$i]['cod_item_producto']),
+		utf8_decode($lista[$i]['nombre_producto']." ".$lista[$i]['descripcion_producto'].', color: '.$lista[$i]['color_producto']), 
+		utf8_decode('PIEZA'), utf8_decode($lista[$i]['cant_producto']),
+		utf8_decode('$us '.round($lista[$i]['precio_sugerido_venta'],2)),
+		utf8_decode('$us '.round(($lista[$i]['precio_sugerido_venta'] * $lista[$i]['cant_producto']),2)),
+		utf8_decode($lista[$i]['descuento_porcentaje_venta_producto']." %"),
+		utf8_decode('$us '.round($lista[$i]['total_unitario'],2)),
+		utf8_decode('$us '.round(($lista[$i]['total_unitario'] * $lista[$i]['cant_producto']),2))
+	)); 
 }
+$pdf -> SetFont('Arial','', 11);
 $border = array("","","", "", "", "", "1", "", "", "1");
 $align = array('C','C','C','C','C','C','C','C','C','C');
 $style = array("","","", "", "", "", "B", "", "", "B");
-$pdf->SetWidths(array(10,25,50,15,20,25,25,25,25,25));
-$empty = array("","","", "", "", "", $totalSinDescuento, "", "", $totalConDescuento);
+$pdf->SetWidths(array(10,25,45,18,23,25,25,25,25,25));
+$empty = array("","","", "", "", "", '$us '.round($totalSinDescuento,2), "", "", '$us '.round($totalConDescuento,2));
 $pdf->FancyRow($empty, $border, $align, $style);
 	
-	$pdf->Image("http://www.eglooroluz.com/public/imagenes/eglo.png", 10 ,10, 76 , 26,'PNG', 'http://www.eglooroluz.com');
+$pdf->Image("../public/imagenes/sistema/eglo.png", 10 ,10, 76 , 26,'PNG', 'http://www.eglooroluz.com');
 $pdf -> Output();
 ?>
