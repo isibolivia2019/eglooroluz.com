@@ -22,8 +22,9 @@
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">
                             <div class="widget widget_footer widget_worktime">
                                 <h2 class="widget-title">Horarios de Atencion<span></span></h2>
-                                <p>Monday - Friday <br> 08:00 am - 08:30 pm</p><p> ==== </p>
-                                <p>Satuday - Sunday <br> 10:00 am - 4:30 pm</p>
+                                <span>ISAAC TAMAYO</span>
+                                <p>LUNES - VIERNES<br> 08:00 am - 08:30 pm</p><p> ==== </p>
+                                <p>SABADO <br> 10:00 am - 4:30 pm</p>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 ">

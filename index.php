@@ -71,7 +71,7 @@
               </div>
         </div>
       </div>
-    </div>
+    </div>*/?>
     <div class="ps-section ps-home-promotions">
       <div class="ps-container">
         <div class="ps-section__header text-center">
@@ -281,14 +281,30 @@
         </div>
       </div>
     </div>
-    <div class="ps-home-collection-2">
-      <div class="ps-collection double"><a class="ps-collection__overlay" href="#"></a><img src="public/images/collection/home-2-1.jpg" alt=""></div>
-      <div class="ps-collection"><a class="ps-collection__overlay" href="#"></a><img src="public/images/collection/home-2-2.jpg" alt=""></div>
-      <div class="ps-collection"><a class="ps-collection__overlay" href="#"></a><img src="public/images/collection/home-2-3.jpg" alt=""></div>
+      <div class="ps-home-collection-2">
+          <div class="ps-collection double"><a class="ps-collection__overlay" href="#"></a><img src="public/imagenes/paginaweb/m-img1.jpg" alt=""></div>
+          <div class="ps-collection double"><a class="ps-collection__overlay" href="#"></a><img src="public/imagenes/paginaweb/m-img2.jpg" alt=""></div>
+          <div class="ps-collection double"><a class="ps-collection__overlay" href="#"></a><img src="public/imagenes/paginaweb/m-img3.jpg" alt=""></div>
+      </div>
     </div>
     <div class="ps-partners">
       <div class="ps-container">
-        <div class="ps-slider--partners owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="5000" data-owl-gap="50" data-owl-nav="false" data-owl-dots="false" data-owl-item="7" data-owl-item-xs="3" data-owl-item-sm="5" data-owl-item-md="6" data-owl-item-lg="7" data-owl-duration="1000" data-owl-mousedrag="on"><img src="public/images/partner/1.png" alt=""><img src="public/images/partner/2.png" alt=""><img src="public/images/partner/3.png" alt=""><img src="public/images/partner/4.png" alt=""><img src="public/images/partner/5.png" alt=""><img src="public/images/partner/6.png" alt=""><img src="public/images/partner/7.png" alt=""></div>
+        <div class="ps-slider--partners owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="1000" data-owl-gap="50" data-owl-nav="false" data-owl-dots="false" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="3" data-owl-item-md="4" data-owl-item-lg="5" data-owl-duration="1000" data-owl-mousedrag="on">
+          <img src="public/imagenes/paginaweb/p-img00.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img01.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img02.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img03.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img04.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img05.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img06.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img07.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img08.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img09.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img10.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img11.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img12.jpg" alt="">
+          <img src="public/imagenes/paginaweb/p-img13.jpg" alt="">
+          </div>
       </div>
     </div>
     <div class="ps-home-product-list">
@@ -421,10 +437,10 @@
                 </div>
               </div>
         </div>
-        <div class="ps-section__footer pt-50"><a href="#"><img src="public/images/collection/sale.jpg" alt=""></a></div>
+        <div class="ps-section__footer pt-50"><a href="#"><img src="public/imagenes/paginaweb/img4.jpg" alt=""></a></div>
       </div>
     </div>
-    <div class="ps-section ps-home-blog second">
+    <?php /*<div class="ps-section ps-home-blog second">
       <div class="ps-container">
         <div class="ps-section__header text-center">
           <p>Last news</p>
@@ -516,21 +532,21 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>*/?>
     <div class="ps-subscribe-2">
       <div class="container">
         <div class="ps-section__header">
-          <h3>SIGN UP TO NEWSLETTERS</h3>
-          <p>And receive <span> $25 coupon </span>for first shopping ...!</p>
+          <h3>INGRESE SU CORRE ELECTRONICO</h3>
+          <p>Para hacerle llegar acerca de nuestras <span> PROMOCIONES y PRODUCTOS</span></p>
         </div>
         <form class="ps-form--subscribe" action="http://warethemes.com/html/flourish/do_action" method="post">
-          <input class="form-control" type="text" placeholder="Type your email...">
-          <button>Subscribe</button>
+          <input class="form-control" type="text" placeholder="ingrese su Correo Electronico...">
+          <button>ENVIAR</button>
         </form>
-        <div class="ps-section__content"><img src="public/images/subscribe.png" alt=""></div>
+        <div class="ps-section__content"><img src="public/imagenes/paginaweb/subscribirse.png" alt=""></div>
       </div>
     </div>
-    <?php require("public-footer.php");*/?>
+    <?php require("public-footer.php");?>
     <div class="ps-loading"><div class="loader ">
 <div class="loader__item"></div>
 <div class="loader__item"></div>

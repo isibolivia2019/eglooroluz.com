@@ -561,35 +561,47 @@ session_start();
             var sucursal = document.getElementById("cboxSucursal").value;
             var empresa = document.getElementById("empresa").value;
             var atencion = document.getElementById("atencion").value;
-            var parametros = {
-                "action" : "agregarCotizacion",
-                "sucursal" : sucursal,
-                "empresa" : empresa,
-                "atencion" : atencion
-            };
-            $.ajax({
-                type:'POST',
-                data: parametros,
-                url:'app/controladores/Cotizaciones.php',
-                success:function(data){
-                    datos = JSON.parse(data);
-                    if(datos.resp == "true"){
-                        document.getElementById("empresa").value = "";
-                        document.getElementById("atencion").value = "";
-                        document.location.href="reportes/cotizacion.php?nro="+datos.nro;
-                        tableCarrito.ajax.reload();
-                        table.ajax.reload();
-                        totalPagar(sucursal);
-                        Materialize.toast('Cotizacion realizada con exito', 6000)
+            if(sucursal != ""){
+                if(empresa != ""){
+                    if(atencion != ""){
+                        var parametros = {
+                            "action" : "agregarCotizacion",
+                            "sucursal" : sucursal,
+                            "empresa" : empresa,
+                            "atencion" : atencion
+                        };
+                        $.ajax({
+                            type:'POST',
+                            data: parametros,
+                            url:'app/controladores/Cotizaciones.php',
+                            success:function(data){
+                                datos = JSON.parse(data);
+                                if(datos.resp == "true"){
+                                    document.getElementById("empresa").value = "";
+                                    document.getElementById("atencion").value = "";
+                                    document.location.href="reportes/cotizacion.php?nro="+datos.nro;
+                                    tableCarrito.ajax.reload();
+                                    table.ajax.reload();
+                                    totalPagar(sucursal);
+                                    Materialize.toast('Cotizacion realizada con exito', 6000)
+                                }
+                                if(datos.resp == "false"){
+                                    Materialize.toast('Hubo un fallo al registrar la Cotizacion. Vuelva a Intentarlo', 5000)
+                                }
+                                if(datos.resp != "true" && datos.resp != "false"){
+                                    Materialize.toast('Hubo un fallo al registrar la Cotizacion COD:'+datos.resp, 5000)
+                                }
+                            }
+                        })
+                    }else{
+                        Materialize.toast('Seleccione el nombre dirigido de la Atencion', 6000)
                     }
-                    if(datos.resp == "false"){
-                        Materialize.toast('Hubo un fallo al registrar la Cotizacion. Vuelva a Intentarlo', 5000)
-                    }
-                    if(datos.resp != "true" && datos.resp != "false"){
-                        Materialize.toast('Hubo un fallo al registrar la Cotizacion COD:'+datos.resp, 5000)
-                    }
+                }else{
+                    Materialize.toast('Seleccione el nombre dirigido de la Empresa', 6000)
                 }
-            })
+            }else{
+                Materialize.toast('Seleccione una Sucursal', 6000)
+            }
         }
     </script>
 </body>
