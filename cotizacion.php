@@ -289,15 +289,14 @@ session_start();
             listaCarrito(cboxSucursal)
             totalPagar(cboxSucursal)
             var parametros = {
-                "action" : "listaInventarioVenta",
-                "codigo" : cboxSucursal
+                "action" : "listaInventarioCotizaciones"
             };
             table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Sucursales.php"
+                    "url": "app/controladores/Cotizaciones.php"
                 },
                 "columns": [
                     {"render": function (data, type, JsonResultRow, meta) {
@@ -594,9 +593,15 @@ session_start();
                             }
                         })
                     }else{
+                        var textbox = document.getElementById("atencion");
+                        textbox.focus();
+                        textbox.scrollIntoView();
                         Materialize.toast('Seleccione el nombre dirigido de la Atencion', 6000)
                     }
                 }else{
+                    var textbox = document.getElementById("empresa");
+                    textbox.focus();
+                    textbox.scrollIntoView();
                     Materialize.toast('Seleccione el nombre dirigido de la Empresa', 6000)
                 }
             }else{

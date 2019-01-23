@@ -180,7 +180,23 @@ session_start();
             var cboxA = document.getElementById("cboxA").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            window.open("reportes/reporte-traspaso.php?sucde="+cboxDe+"&suca="+cboxA+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+            if(cboxDe != ""){
+                if(cboxA != ""){
+                    if(cboxAño != ""){
+                        if(cboxMes != ""){
+                            window.open("reportes/reporte-traspaso.php?sucde="+cboxDe+"&suca="+cboxA+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+                        }else{
+                            Materialize.toast('Seleccione un Mes', 6000)
+                        }
+                    }else{
+                        Materialize.toast('Seleccione un Año', 6000)
+                    }
+                }else{
+                    Materialize.toast('Seleccione una opcion de Destino', 6000)
+                }
+            }else{
+                Materialize.toast('Seleccione una opcion de Origen', 6000)
+            }
         }
         
     </script>

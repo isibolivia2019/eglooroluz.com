@@ -30,6 +30,9 @@ if (isset($_POST['action'])) {
         case 'agregarCotizacion' :
             agregarCotizacion();
             break;
+        case 'listaInventarioCotizaciones' :
+            listaInventarioCotizaciones();
+            break;
             
     }
 }
@@ -37,6 +40,20 @@ if (isset($_POST['action'])) {
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function listaInventarioCotizaciones(){
+    $data = array();
+    $datos = array();
+    $modelo = modelo('Inventario');
+    $lista = $modelo->listaInventarioCotizaciones($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
+        $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
+        $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
+    }
+    $data = ['data' => $lista];
+    echo json_encode($data);
 }
 
 function agregarCotizacion(){

@@ -5,7 +5,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="apple-touch-icon.png" rel="apple-touch-icon">
 <link rel="icon" href="public/imagenes/sistema/favicon.jpg" sizes="32x32">
-<meta name="author" content="">
+<meta name="author" content="isibolivia">
 
 <link href="public/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
 <link href="public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
