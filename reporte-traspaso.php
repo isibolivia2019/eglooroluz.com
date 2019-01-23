@@ -32,10 +32,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Reportes de Compra de productos</h5>
+                                    <h5 class="breadcrumbs-title">Reportes de Transferencias de productos</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Compra de Productos</li>
+                                        <li class="active">Transferencia de Productos</li>
                                     </ol>
                                 </div>
                             </div>
