@@ -155,6 +155,7 @@ function agregarCarrito(){
     $cod_inventario = $_POST['cod_inventario'];
     $cantidad = $_POST['cantidad'];
     $precio = $_POST['precio'];
+    $sucursal = $_POST['sucursal'];
 
     $datos = array($cod_inventario);
     $modelo = modelo('Inventario');
@@ -163,7 +164,7 @@ function agregarCarrito(){
     $diferencia = $lista[0]["precio_sugerido_venta"] - $precio;
     $descuento = round(($diferencia*100)/$lista[0]["precio_sugerido_venta"], 2);
     $descuento = $descuento * -1;
-    $datos = array($cod_inventario, $cantidad, $descuento, $precio, $lista[0]["cod_almacenamiento"]);
+    $datos = array($cod_inventario, $cantidad, $descuento, $precio, $sucursal);
     $modelo = modelo('Cotizacion');
     $resp = $modelo->agregarCarrito($datos);
 

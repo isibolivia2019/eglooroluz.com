@@ -381,18 +381,21 @@ session_start();
 
         function actualizarCarrito(cod_inventario, sucursal, cant, precio, table, tableRemove){
             verificarAcceso("Permiso_Venta");
-            
+            var cboxSucursal = document.getElementById("cboxSucursal").value;
             var parametros = {
                 "action" : "agregarCarrito",
                 "cod_inventario" : cod_inventario,
                 "cantidad" : cant,
-                "precio" : precio
+                "precio" : precio,
+                "sucursal" : cboxSucursal
             };
+            console.log("parametros:", parametros)
             $.ajax({
               type:'POST',
               data: parametros,
               url:'app/controladores/Cotizaciones.php',
               success:function(data){
+                  console.log("data:", data)
                   datos = JSON.parse(data);
                   if(datos.resp == "true"){
                       table.row(tableRemove).remove().draw(false);
