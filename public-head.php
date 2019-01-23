@@ -4,10 +4,8 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link href="apple-touch-icon.png" rel="apple-touch-icon">
-<link href="favicon.png" rel="icon">
+<link rel="icon" href="public/imagenes/sistema/favicon.jpg" sizes="32x32">
 <meta name="author" content="">
-<meta name="keywords" content="">
-<meta name="description" content="">
 
 <link href="public/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
 <link href="public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">

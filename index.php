@@ -1,47 +1,57 @@
+<?php
+function modelo($modelo){
+  require_once 'app/modelos/'.$modelo.'.php';
+  return new $modelo();
+}
+
+$datos = array();
+$modelo = modelo('Producto');
+$lista = $modelo->listaProductos($datos);
+$datos = array();
+$modelo = modelo('Categoria');
+$listaCategoria = $modelo->listaCategorias($datos);
+$datos = array();
+$modelo = modelo('DescuentoProducto');
+$listaDescuento = $modelo->listaDescuentoProducto($datos);
+?>
 <!DOCTYPE html>
   <html lang="es">
     <head>
       <?php require("public-head.php");?>
+      <meta name="keywords" content="La Paz Bolivia, Lamparas La Paz, Lamparas Bolivia, Lamparas La Paz Bolivia, Focos La Paz, Focos Bolivia, Focos La Paz Bolivia, iluminacion La Paz, iluminacion Bolivia, Iluminacion La Paz Bolivia, Iluminacion, Focos, Lamparas, Eglo La Paz, Eglo Bolivia, Eglo La Paz Bolivia, Eglo Oro Luz, Importadora Oro Luz, Eglo, ciudad La paz, venta lamparas, venta focos, venta iluminacion, eglo iluminacion, productos eglo la paz bolivia, productos iluminacion, eglo ciudad la paz, lamparas ciudad la paz">
+      <meta name="description" content="La Paz Bolivia, Lamparas La Paz, Lamparas Bolivia, Lamparas La Paz Bolivia, Focos La Paz, Focos Bolivia, Focos La Paz Bolivia, iluminacion La Paz, iluminacion Bolivia, Iluminacion La Paz Bolivia, Iluminacion, Focos, Lamparas, Eglo La Paz, Eglo Bolivia, Eglo La Paz Bolivia, Eglo Oro Luz, Importadora Oro Luz, Eglo, ciudad La paz, venta lamparas, venta focos, venta iluminacion, eglo iluminacion, productos eglo la paz bolivia, productos iluminacion, eglo ciudad la paz, lamparas ciudad la paz">
       <title>Importadora ORO LUZ</title><link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CLibre+Baskerville:400,700" rel="stylesheet">
     </head>
     
     <body>
       <div class="header--sidebar"></div>
       <?php require("public-header.php");?>
-    <div class="ps-slider--banner owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="9000" data-owl-gap="0" data-owl-nav="false" data-owl-dots="true" data-owl-item="1" data-owl-item-xs="1" data-owl-item-sm="1" data-owl-item-md="1" data-owl-item-lg="1" data-owl-duration="1000" data-owl-mousedrag="on">
-      <div class="ps-product--banner">
-        <div class="ps-product__thumbnail"><a width="150px" href="#"><img src="public/imagenes/paginaweb/ban1.jpg" alt=""></a></div>
-        <div class="ps-product__content">
-          <h3>PASTERI MESA 1L</h3>
-              <select class="ps-rating">
-                <option value="1">1</option>
-                <option value="1">2</option>
-                <option value="1">3</option>
-                <option value="1">4</option>
-                <option value="2">5</option>
-              </select>
-          <p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p>
-          <h4><del> Producto </del> EN STOCK</h4>
-          <div class="ps-product__actions"><a class="ps-btn" href="cart.html">MAS INFORMACION</a></div>
+      <div class='ps-slider--banner owl-slider' data-owl-auto='true' data-owl-loop='true' data-owl-speed='2000' data-owl-gap='0' data-owl-nav='false' data-owl-dots='true' data-owl-item='1' data-owl-item-xs='1' data-owl-item-sm='1' data-owl-item-md='1' data-owl-item-lg='1' data-owl-duration='1000' data-owl-mousedrag='on'>
+        <?php $i = 0; while($i < 10){
+          $num = rand(0, (sizeof($lista)-1));
+          if($lista[$num]['imagen_producto'] != "sin_imagen_producto.jpg"){?>
+        <div class='ps-product--banner'>
+          <div class='ps-product__thumbnail'>
+            <a href=''><img src=<?php echo 'public/imagenes/productos/'.$lista[$num]['imagen_producto'];?> alt=''></a>
+          </div>
+          <div class='ps-product__content'>
+            <h3><?php echo strtoupper ($lista[$num]['nombre_producto']);?></h3>
+            <h4><?php echo "#".$lista[$num]['cod_item_producto'];?></h4>
+            <select class='ps-rating'>
+              <option value='1'>1</option>
+              <option value='1'>2</option>
+              <option value='1'>3</option>
+              <option value='1'>4</option>
+              <option value='1'>5</option>
+            </select>
+            <p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p>
+            <h4>STOCK Disponible</h4>
+            <div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div>
+          </div>
         </div>
+        <?php $i=$i+1;}}?>
       </div>
-      <div class="ps-product--banner">
-        <div class="ps-product__thumbnail"><a href="#"><img src="public/imagenes/paginaweb/ban2.jpg" alt=""></a></div>
-        <div class="ps-product__content">
-          <h3>NEWTOWN</h3>
-              <select class="ps-rating">
-                <option value="1">1</option>
-                <option value="1">2</option>
-                <option value="1">3</option>
-                <option value="1">4</option>
-                <option value="2">5</option>
-              </select>
-          <p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p>
-          <h4><del> Producto </del> EN STOCK</h4>
-          <div class="ps-product__actions"><a class="ps-btn" href="cart.html">MAS INFORMACION</a></div>
-        </div>
-      </div>
-    </div>
+
     <?php /*<div class="ps-home-features-2">
       <div class="container">
         <div class="row">
@@ -79,205 +89,41 @@
           <h3 class="ps-section__title">Nuestras Promociones</h3><span class="ps-section__line"></span>
         </div>
         <div class="ps-section__content masonry-root">
-          <ul class="ps-masonry-filter">
-            <li class="current"><a href="#" data-filter="*">All</a></li>
-            <li><a href="#" data-filter=".livingroom">Living Room</a></li>
-            <li><a href="#" data-filter=".bedroom">Bedroom</a></li>
-            <li><a href="#" data-filter=".mubroom">Entry & Mudroom</a></li>
-            <li><a href="#" data-filter=".officeroom">Office Room</a></li>
-            <li><a href="#" data-filter=".lightting">Lighting</a></li>
-          </ul>
           <div class="masonry-wrapper" data-col-lg="4" data-col-md="3" data-col-sm="2" data-col-xs="1" data-gap="30" data-radio="100%">
             <div class="ps-masonry filter">
               <div class="grid-sizer"></div>
-              <div class="grid-item livingroom">
+              <?php $i = 0; while($i < 4){
+                $num = rand(0, (sizeof($listaDescuento)-1));?>
+              <div class="grid-item">
                 <div class="grid-item__content-wrapper">
                       <div class="ps-product">
                         <div class="ps-product__thumbnail">
-                          <div class="ps-badge"><span>New</span></div>
-                          <div class="ps-badge ps-badge--sale"><span>-35%</span></div><a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src="public/images/product/Item-1.jpg" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
+                          <div class="ps-badge"><span><?php echo strtoupper ($listaDescuento[$num]['observacion_descuento_producto']);?></span></div>
+                          <div class="ps-badge ps-badge--sale"><span><?php echo strtoupper ("-".$listaDescuento[$num]['porcenta_descuento_producto']." %");?></span></div>
+                          <a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src=<?php echo 'public/imagenes/productos/'.$listaDescuento[$num]['imagen_producto'];?> alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
                           <div class="ps-product__content full">
-                            <div class="ps-product__variants">
-                              <div class="item"><img src="public/images/product/variants/variant-1.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                            </div>
-                                <select class="ps-rating">
-                                  <option value="1">1</option>
-                                  <option value="1">2</option>
-                                  <option value="1">3</option>
-                                  <option value="1">4</option>
-                                  <option value="2">5</option>
-                                </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                            <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
+                              <a class="ps-product__title" href="product-detail-2.html"><?php echo strtoupper ($listaDescuento[$num]['nombre_producto']);?></a>
+                            <div class="ps-product__categories"><a href="product-listing.html"><?php echo strtoupper ($listaDescuento[$num]['descripcion_producto']);?></a></div>
+                            <div class="ps-product__categories"><a href="product-listing.html"><?php echo strtoupper ($listaDescuento[$num]['color_producto']);?></a></div>
                             <p class="ps-product__price">
-                              <del>£220</del>£120
-                            </p><a class="ps-btn ps-btn--sm" href="product-detail-2.html">Add to cart</a>
-                            <p class="ps-product__feature"><i class="furniture-delivery-truck-2"></i>Free Shipping in 24 hours</p>
+                            EN STOCK
+                            </p><a class="ps-btn ps-btn--sm" href="product-detail-2.html">Mas informacion</a>
+                            <p class="ps-product__feature"><i class="furniture-delivery-truck-2"></i><?php echo strtoupper ("EN: ".$listaDescuento[$i]['nombre_sucursal']);?></p>
                           </div>
                         </div>
-                        <div class="ps-product__content">
-                              <select class="ps-rating">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="2">5</option>
-                              </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                          <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
+                        <div class="ps-product__content"><a class="ps-product__title" href="product-detail-2.html"><?php echo strtoupper ($listaDescuento[$num]['nombre_producto']);?></a>
+                          <div class="ps-product__categories"><a href="product-listing.html"><?php echo strtoupper ($listaDescuento[$num]['descripcion_producto']);?></a></div>
                           <p class="ps-product__price">
-                            <del>£220</del>£120
+                            EN STOCK
                           </p>
                         </div>
                       </div>
                 </div>
               </div>
-              <div class="grid-item bedroom mubroom">
-                <div class="grid-item__content-wrapper">
-                      <div class="ps-product">
-                        <div class="ps-product__thumbnail"><a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src="public/images/product/Item-2.jpg" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
-                          <div class="ps-product__content full">
-                            <div class="ps-product__variants">
-                              <div class="item"><img src="public/images/product/variants/variant-1.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                            </div>
-                                <select class="ps-rating">
-                                  <option value="1">1</option>
-                                  <option value="1">2</option>
-                                  <option value="1">3</option>
-                                  <option value="1">4</option>
-                                  <option value="2">5</option>
-                                </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                            <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
-                            <p class="ps-product__price">
-                              <del>£220</del>£120
-                            </p><a class="ps-btn ps-btn--sm" href="product-detail-2.html">Add to cart</a>
-                            <p class="ps-product__feature"><i class="furniture-delivery-truck-2"></i>Free Shipping in 24 hours</p>
-                          </div>
-                        </div>
-                        <div class="ps-product__content">
-                              <select class="ps-rating">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="2">5</option>
-                              </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                          <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
-                          <p class="ps-product__price">
-                            <del>£220</del>£120
-                          </p>
-                        </div>
-                      </div>
-                </div>
-              </div>
-              <div class="grid-item officeroom">
-                <div class="grid-item__content-wrapper">
-                      <div class="ps-product">
-                        <div class="ps-product__thumbnail">
-                          <div class="ps-badge ps-badge--sale"><span>-35%</span></div><a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src="public/images/product/Item-3.jpg" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
-                          <div class="ps-product__content full">
-                            <div class="ps-product__variants">
-                              <div class="item"><img src="public/images/product/variants/variant-1.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                            </div>
-                                <select class="ps-rating">
-                                  <option value="1">1</option>
-                                  <option value="1">2</option>
-                                  <option value="1">3</option>
-                                  <option value="1">4</option>
-                                  <option value="2">5</option>
-                                </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                            <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
-                            <p class="ps-product__price">
-                              <del>£220</del>£120
-                            </p><a class="ps-btn ps-btn--sm" href="product-detail-2.html">Add to cart</a>
-                            <p class="ps-product__feature"><i class="furniture-delivery-truck-2"></i>Free Shipping in 24 hours</p>
-                          </div>
-                        </div>
-                        <div class="ps-product__content">
-                              <select class="ps-rating">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="2">5</option>
-                              </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                          <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
-                          <p class="ps-product__price">
-                            <del>£220</del>£120
-                          </p>
-                        </div>
-                      </div>
-                </div>
-              </div>
-              <div class="grid-item lightting">
-                <div class="grid-item__content-wrapper">
-                      <div class="ps-product">
-                        <div class="ps-product__thumbnail">
-                          <div class="ps-badge"><span>New</span></div>
-                          <div class="ps-badge ps-badge--sale"><span>-35%</span></div><a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src="public/images/product/Item-4.jpg" alt=""><a class="ps-product__overlay" href="product-detail.html"></a>
-                          <div class="ps-product__content full">
-                            <div class="ps-product__variants">
-                              <div class="item"><img src="public/images/product/variants/variant-1.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-2.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-3.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-4.jpg" alt=""></div>
-                              <div class="item"><img src="public/images/product/variants/variant-5.jpg" alt=""></div>
-                            </div>
-                                <select class="ps-rating">
-                                  <option value="1">1</option>
-                                  <option value="1">2</option>
-                                  <option value="1">3</option>
-                                  <option value="1">4</option>
-                                  <option value="2">5</option>
-                                </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                            <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
-                            <p class="ps-product__price">
-                              <del>£220</del>£120
-                            </p><a class="ps-btn ps-btn--sm" href="product-detail-2.html">Add to cart</a>
-                            <p class="ps-product__feature"><i class="furniture-delivery-truck-2"></i>Free Shipping in 24 hours</p>
-                          </div>
-                        </div>
-                        <div class="ps-product__content">
-                              <select class="ps-rating">
-                                <option value="1">1</option>
-                                <option value="1">2</option>
-                                <option value="1">3</option>
-                                <option value="1">4</option>
-                                <option value="2">5</option>
-                              </select><a class="ps-product__title" href="product-detail-2.html">VEDBO Version 2018</a>
-                          <div class="ps-product__categories"><a href="product-listing.html">Armchair</a></div>
-                          <p class="ps-product__price">
-                            <del>£220</del>£120
-                          </p>
-                        </div>
-                      </div>
-                </div>
-              </div>
+              <?php $i++;}?>
             </div>
           </div>
-          <div class="text-center"><a class="ps-btn ps-btn--blue" href="#">Load more</a></div>
+          <div class="text-center"><a class="ps-btn ps-btn--blue" href="#">Mas Descuentos</a></div>
         </div>
       </div>
     </div>
@@ -290,24 +136,13 @@
     <div class="ps-partners">
       <div class="ps-container">
         <div class="ps-slider--partners owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="1000" data-owl-gap="50" data-owl-nav="false" data-owl-dots="false" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="3" data-owl-item-md="4" data-owl-item-lg="5" data-owl-duration="1000" data-owl-mousedrag="on">
-          <img src="public/imagenes/paginaweb/p-img00.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img01.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img02.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img03.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img04.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img05.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img06.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img07.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img08.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img09.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img10.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img11.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img12.jpg" alt="">
-          <img src="public/imagenes/paginaweb/p-img13.jpg" alt="">
+          <?php for($i = 0; $i < sizeof($listaCategoria) ; $i++){?>
+            <a href=''><img src=<?php echo "public/imagenes/categorias/".$listaCategoria[$i]['imagen_categoria'];?> alt=''></a>
+          <?php }?>
           </div>
       </div>
     </div>
-    <div class="ps-home-product-list">
+    <?php /*<div class="ps-home-product-list">
       <div class="ps-container">
         <div class="row">
               <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
@@ -337,7 +172,7 @@
                           <option value="2">5</option>
                         </select><a class="ps-btn" href="product-detail.html">Add to cart</a>
                   </div>
-                </div>
+                </div>  
                 <div class="ps-product--horizontal">
                   <div class="ps-product__thumbnail"><a class="ps-product__overlay" href="product-detail.html"></a><img src="public/images/product/Item-3.jpg" alt=""></div>
                   <div class="ps-product__content"><a class="ps-product__title" href="#">VEDBO Version 2018</a>
@@ -353,7 +188,7 @@
                 </div>
               </div>
               <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
-                <h4 class="ps-heading">BEST SELLER</h4>
+                <h4 class="ps-heading">MEJOR VENDIDO</h4>
                 <div class="ps-product--horizontal">
                   <div class="ps-product__thumbnail"><a class="ps-product__overlay" href="product-detail.html"></a><img src="public/images/product/Item-4.jpg" alt=""></div>
                   <div class="ps-product__content"><a class="ps-product__title" href="#">VEDBO Version 2018</a>
@@ -395,7 +230,7 @@
                 </div>
               </div>
               <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 ">
-                <h4 class="ps-heading">NEW ITEM</h4>
+                <h4 class="ps-heading">NUEVOS PRODUCTOS</h4>
                 <div class="ps-product--horizontal">
                   <div class="ps-product__thumbnail"><a class="ps-product__overlay" href="product-detail.html"></a><img src="public/images/product/Item-7.jpg" alt=""></div>
                   <div class="ps-product__content"><a class="ps-product__title" href="#">VEDBO Version 2018</a>
@@ -439,7 +274,7 @@
         </div>
         <div class="ps-section__footer pt-50"><a href="#"><img src="public/imagenes/paginaweb/img4.jpg" alt=""></a></div>
       </div>
-    </div>
+    </div> */?>
     <?php /*<div class="ps-section ps-home-blog second">
       <div class="ps-container">
         <div class="ps-section__header text-center">
@@ -576,9 +411,43 @@
                 document.getElementById("idListaCategoria").innerHTML = contenido;
               }
             })
+            /*parametros = {
+                "action" : "listaProductos",
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Productos.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                datos = datos.data;
+              let contenido = ""
+                let i = 0;
+                while(i<2){
+                      num = Math.random() * (datos.length - 0) + 0;
+                      num = Math.trunc(num)
+                      console.log("num", num)
+                      if(datos[num].imagen_producto != "sin_imagen_producto.jpg"){
+                        console.log("data:", datos[num].imagen_producto);
+                        contenido = contenido +
+                        "<div class='ps-product--banner'>" +
+                          "<div class='ps-product__thumbnail'><a href=''><img src='public/imagenes/productos/"+datos[num].imagen_producto+"' alt=''></a></div>" +
+                          "<div class='ps-product__content'>"+
+                            "<h3>"+(datos[num].nombre_producto).toUpperCase()+"</h3>"+
+                            "<select class='ps-rating'><option value='1'>1</option><option value='1'>2</option><option value='1'>3</option><option value='1'>4</option><option value='1'>5</option></select>"+
+                            "<p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p>"+
+                            "<h4>STOCK Disponible</h4>"+
+                            "<div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div>"+
+                          "</div>"+
+                        "</div>";
+                        i++;
+                  }
+                }
+let con = "<div id='slider-baner' class='ps-slider--banner owl-slider' data-owl-auto='true' data-owl-loop='true' data-owl-speed='2000' data-owl-gap='0' data-owl-nav='false' data-owl-dots='true' data-owl-item='1' data-owl-item-xs='1' data-owl-item-sm='1' data-owl-item-md='1' data-owl-item-lg='1' data-owl-duration='1000' data-owl-mousedrag='on'><div class='ps-product--banner'><div class='ps-product__thumbnail'><a href=''><img src='public/imagenes/productos/+datos[num].imagen_producto+' alt=''></a></div><div class='ps-product__content'><h3>+(datos[num].nombre_producto).toUpperCase()</h3><select class='ps-rating'><option value='1'>1</option><option value='1'>2</option><option value='1'>3</option><option value='1'>4</option><option value='1'>5</option></select><p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p><h4>STOCK Disponible</h4><div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div></div></div><div class='ps-product--banner'><div class='ps-product__thumbnail'><a href=''><img src='public/imagenes/productos/' alt=''></a></div><div class='ps-product__content'><h3>+(datos[num].nombre_producto).toUpperCase()</h3><select class='ps-rating'><option value='1'>1</option><option value='1'>2</option><option value='1'>3</option><option value='1'>4</option><option value='1'>5</option></select><p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p><h4>STOCK Disponible</h4><div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div></div></div></div>"
+              document.getElementById("slider-baner").innerHTML = con;
+              }
+            })*/
         });
     </script>
   </body>
-
-
 </html>

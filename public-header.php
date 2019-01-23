@@ -12,7 +12,7 @@
         </div>
     </div>
     <nav class="navigation">
-        <div class="ps-container"><a class="ps-logo" href="index-2.html"><img src="public/imagenes/sistema/oroluz.gif" alt=""></a>
+        <div class="ps-container"><a class="ps-logo" href="index-2.html"><img src="public/imagenes/sistema/eglo.png" alt=""></a>
             <ul class="main-menu menu">
                 <li class="current-menu-item menu-item-has-children"><a href="index.php">Inicio</a></li>
                 <li class="menu-item-has-children has-mega-menu"><a href="#">Catalogo</a>
