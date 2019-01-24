@@ -74,7 +74,7 @@ function agregarTransferencia(){
         $modelo = modelo('Inventario');
         $resp = $modelo->actualizarCantidadInventario($datos);
     }else{
-        $datos = array($cboxAlmacenamiento, $cod_producto, $cantidad, $costo, $precio);
+        $datos = array($destino, $codProducto, $cantidad, $costo, $precio);
         $modelo = modelo('Inventario');
         $resp = $modelo->agregarInventario($datos);
     }
