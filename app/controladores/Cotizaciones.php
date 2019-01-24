@@ -33,6 +33,12 @@ if (isset($_POST['action'])) {
         case 'listaInventarioCotizaciones' :
             listaInventarioCotizaciones();
             break;
+        case 'conversionMonedaProductoSugerido' :
+            conversionMonedaProductoSugerido();
+            break;
+        case 'conversionMonedaCarritoSugerido' :
+            conversionMonedaCarritoSugerido();
+            break;
             
     }
 }
@@ -78,7 +84,7 @@ function agregarCotizacion(){
     $resp = "";
 
     for($i = 0 ; $i < sizeof($lista) ; $i++){
-        $datos = array($sucursal, $lista[$i]['cod_inventario'], $lista[$i]['cantidad'], $lista[$i]['descuento'], $lista[$i]['total'], ($listaUltimo[0]['nro_orden'] + 1), $empresa, $atencion, $fecha, $hora, $usuario);
+        $datos = array($sucursal, $lista[$i]['cod_inventario'], $lista[$i]['cantidad'], $lista[$i]['sugerido'], $lista[$i]['descuento'], $lista[$i]['total'], ($listaUltimo[0]['nro_orden'] + 1), $empresa, $atencion, $fecha, $hora, $usuario);
         $modelo = modelo('Cotizacion');
         $resp = $modelo->agregarCotizacion($datos);
     }
@@ -90,6 +96,58 @@ function agregarCotizacion(){
     $data = array();
     $data = ['resp' => $resp,
     'nro' => ($listaUltimo[0]['nro_orden'] + 1)];
+    echo json_encode($data);
+}
+
+function conversionMonedaProductoSugerido(){
+    $codInventario = $_POST['codInventario'];
+    $sugerido = $_POST['sugerido'];
+
+    $datos = array();
+    $modelo = modelo('TipoCambio');
+    $cambioMoneda = $modelo->TipoCambio($datos);
+    $datos = array($codInventario);
+    $modelo = modelo('Inventario');
+    $lista = $modelo->listaInventarioEspecifico($datos);
+
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
+        $lista[$i]["cant_producto"] = $lista[$i]["cant_producto"].' Unidades.';
+        $resultado = round($lista[$i]["compra_unit_producto"] * $cambioMoneda[0]['dolar'],2);
+        $lista[$i]["compra_unit_producto"] = 'Bs. '.$resultado;
+        $resultado = round($sugerido * $cambioMoneda[0]['dolar'],2);
+        $lista[$i]["precio_sugerido_venta"] = 'Bs. '.$resultado;
+    }
+
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
+function conversionMonedaCarritoSugerido(){
+    $codCarrito = $_POST['codCarrito'];
+    $sugerido = $_POST['sugerido'];
+
+    $datos = array();
+    $modelo = modelo('TipoCambio');
+    $cambioMoneda = $modelo->TipoCambio($datos);
+    $datos = array($codCarrito);
+    $modelo = modelo('Cotizacion');
+    $lista = $modelo->listaCarritoEspecifico($datos);
+
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $resultado = round(((0.01 * $lista[$i]["descuento"]) * $sugerido),2);
+        $resultado = round($resultado * $cambioMoneda[0]['dolar'] ,2);
+        $resultado = $lista[$i]["descuento"].'% (Bs. '.$resultado.')';
+        $lista[$i]["descuento"] = $resultado;
+        $resultado = round($lista[$i]["total"] * $cambioMoneda[0]['dolar'],2);
+        $lista[$i]["total"] = $resultado;
+        $resultado = round($sugerido * $cambioMoneda[0]['dolar'],2);
+        $lista[$i]["precio_sugerido_venta"] = $resultado;
+    }
+
+    $data = array();
+    $data = ['data' => $lista];
     echo json_encode($data);
 }
 
@@ -156,16 +214,17 @@ function agregarCarrito(){
     $cod_inventario = $_POST['cod_inventario'];
     $cantidad = $_POST['cantidad'];
     $precio = $_POST['precio'];
+    $sugerido = $_POST['sugerido'];
     $sucursal = $_POST['sucursal'];
 
     $datos = array($cod_inventario);
     $modelo = modelo('Inventario');
     $lista = $modelo->listaInventarioEspecifico($datos);
 
-    $diferencia = $lista[0]["precio_sugerido_venta"] - $precio;
-    $descuento = round(($diferencia*100)/$lista[0]["precio_sugerido_venta"], 2);
+    $diferencia = $sugerido - $precio;
+    $descuento = round(($diferencia*100)/$sugerido, 2);
     $descuento = $descuento * -1;
-    $datos = array($cod_inventario, $cantidad, $descuento, $precio, $sucursal);
+    $datos = array($cod_inventario, $cantidad, $descuento, $precio, $sugerido, $sucursal);
     $modelo = modelo('Cotizacion');
     $resp = $modelo->agregarCarrito($datos);
 
@@ -182,12 +241,10 @@ function listaCarrito(){
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
         $lista[$i]["cantidad"] = $lista[$i]["cantidad"].' Uds.';
-        $lista[$i]["descuento"] = $lista[$i]["descuento"].'%($us. '.round(((0.01 * $lista[$i]["descuento"]) * $lista[$i]["precio_sugerido_venta"]),2).')';
-        $lista[$i]["precio_sugerido_venta"] = '$us. '.$lista[$i]["precio_sugerido_venta"];
+        $lista[$i]["descuento"] = $lista[$i]["descuento"].'%($us. '.round(((0.01 * $lista[$i]["descuento"]) * $lista[$i]["sugerido"]),2).')';
+        $lista[$i]["sugerido"] = '$us. '.$lista[$i]["sugerido"];
         $lista[$i]["total"] = '$us. '.$lista[$i]["total"];
         $lista[$i]["subTotal"] = '$us. '.$lista[$i]["subTotal"];
-        
-        
     }
     $data = array();
     $data = ['data' => $lista];
@@ -197,6 +254,7 @@ function listaCarrito(){
 function actualizarCarrito(){
     $codCarrito = $_POST['codCarrito'];
     $precio = $_POST['precio'];
+    $sugerido = $_POST['sugerido'];
     $cantidad = $_POST['cantidad'];
     $cod_inventario = $_POST['cod_inventario'];
 
@@ -204,13 +262,13 @@ function actualizarCarrito(){
     $modelo = modelo('Inventario');
     $lista = $modelo->listaInventarioEspecifico($datos);
 
-    $diferencia = $lista[0]["precio_sugerido_venta"] - $precio;
-    $descuento = round(($diferencia*100)/$lista[0]["precio_sugerido_venta"], 2);
+    $diferencia = $sugerido - $precio;
+    $descuento = round(($diferencia*100)/$sugerido, 2);
     $descuento = $descuento * -1;
 
     $data = array();
 
-    $datos = array($cantidad, $descuento, $precio, $codCarrito);
+    $datos = array($cantidad, $descuento, $precio, $sugerido, $codCarrito);
     $modelo = modelo('Cotizacion');
     $resp = $modelo->actualizarCarrito($datos);
 

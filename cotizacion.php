@@ -40,6 +40,12 @@ session_start();
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
+                        <input placeholder="" id="modalSugerido" type="number" step="0.01">
+                        <label for="modalPrecio">Precio Sugerido de Venta</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
                         <input placeholder="" id="modalPrecio" type="number" step="0.01">
                         <label for="modalPrecio">Precio de Venta</label>
                     </div>
@@ -101,7 +107,7 @@ session_start();
                                                     <th>Precio Sugerido</th>
                                                     <th>Cantidad</th>
                                                     <th>Precio de_Venta</th>
-                                                    <th>Bolivianos</th>
+                                                    <th>Convertir</th>
                                                     <th>AGREGAR</th>
                                                 </tr>
                                             </thead>
@@ -113,7 +119,7 @@ session_start();
                                                     <th>Precio Sugerido</th>
                                                     <th>Cantidad</th>
                                                     <th>Precio de_Venta</th>
-                                                    <th>Bolivianos</th>
+                                                    <th>Convertir</th>
                                                     <th>AGREGAR</th>
                                                 </tr>
                                             </tfoot>
@@ -136,7 +142,7 @@ session_start();
                                                     <th>Descuento</th>
                                                     <th>Precio de_Venta</th>
                                                     <th>SubTotal</th>
-                                                    <th>Bolivianos</th>
+                                                    <th>Convertir</th>
                                                     <th>Editar</th>
                                                     <th>Eliminar</th>
                                                 </tr>
@@ -150,7 +156,7 @@ session_start();
                                                     <th>Descuento</th>
                                                     <th>Precio de_Venta</th>
                                                     <th>SubTotal</th>
-                                                    <th>Bolivianos</th>
+                                                    <th>Convertir</th>
                                                     <th>Editar</th>
                                                     <th>Eliminar</th>
                                                 </tr>
@@ -204,6 +210,7 @@ session_start();
             var modalInventario = document.getElementById("modalInventario").value;
             var modalCantidad = document.getElementById("modalCantidad").value;
             var modalPrecio = document.getElementById("modalPrecio").value;
+            var modalSugerido = document.getElementById("modalSugerido").value;
 
             if(modalCantidad != ""){
                 if(modalPrecio != ""){
@@ -212,8 +219,10 @@ session_start();
                            "action" : "actualizarCarrito",
                            "codCarrito" : modalCarrito,      
                            "precio" : modalPrecio,        
-                           "cantidad" : modalCantidad,        
-                           "cod_inventario" : modalInventario        
+                           "cantidad" : modalCantidad,
+                           "sugerido" : modalSugerido,       
+                           "cod_inventario" : modalInventario
+                           
                         };
                         $.ajax({
                           type:'POST',
@@ -305,7 +314,11 @@ session_start();
                     },
                     {"data" : "cod_item_producto"},
                     {"data" : "nombre_producto"},
-                    {"data" : "precio_sugerido_venta"},
+                    {"render": function (data, type, JsonResultRow, meta) {
+                            res = JsonResultRow.precio_sugerido_venta.replace("$us ", "");
+                            return "<div class='row'><div class='col s3' style='padding-top:10px'>$us</div><div class='col s9'><input type='number' step='0.01' id='sugerido' class='sugerido' name='row-1-position' value='"+Number(res)+"'></div></div>";
+                        }
+                    },
                     {"defaultContent" : "<input type='number' id='cant' class='cant' name='row-1-position' value=''>"},
                     {"defaultContent" : "<input type='number' step='0.01' id='precio' class='precio' name='row-1-position' value=''>"},
                     {"defaultContent" : "<button id='conversion1' class='conversion1 btn waves-effect cyan' type='button' name='editar'><i class='mdi-image-transform'></i></button>"},
@@ -322,14 +335,16 @@ session_start();
         var btn_conversion1 = function(tbody, table){
             $(tbody).on("click", "button.conversion1", function(){
                     var data = table.row( $(this).parents("tr") ).data();
+                    var sugerido = $(this).parents("tr").find('#sugerido').val();
                     var parametros = {
-                       "action" : "conversionMonedaProducto",
+                       "action" : "conversionMonedaProductoSugerido",
                        "codInventario" : data.cod_inventario,
+                       "sugerido" : sugerido,
                     };
                     $.ajax({
                       type:'POST',
                       data: parametros,
-                      url:'app/controladores/Sucursales.php',
+                      url:'app/controladores/Cotizaciones.php',
                       success:function(data){
                             datos = JSON.parse(data);
                             datos = datos.data
@@ -351,11 +366,11 @@ session_start();
                 var tableRemove = $(this).parents("tr");
                 var cant = $(this).parents("tr").find('#cant').val();
                 var precio = $(this).parents("tr").find('#precio').val();
-
+                var sugerido = $(this).parents("tr").find('#sugerido').val();
                 if(cant != ""){
                     if(precio != ""){
                         if(Number(cant) > 0){
-                            actualizarCarrito(data.cod_inventario, data.cod_almacenamiento, cant, precio, table, tableRemove);
+                            actualizarCarrito(data.cod_inventario, data.cod_almacenamiento, cant, precio, sugerido, table, tableRemove);
                         }else{
                             $.alert({
                                 title: 'STOCK NO DISPONIBLE',
@@ -380,7 +395,7 @@ session_start();
             })
         }
 
-        function actualizarCarrito(cod_inventario, sucursal, cant, precio, table, tableRemove){
+        function actualizarCarrito(cod_inventario, sucursal, cant, precio, sugerido, table, tableRemove){
             verificarAcceso("Permiso_Venta");
             var cboxSucursal = document.getElementById("cboxSucursal").value;
             var parametros = {
@@ -388,6 +403,7 @@ session_start();
                 "cod_inventario" : cod_inventario,
                 "cantidad" : cant,
                 "precio" : precio,
+                "sugerido" : sugerido,
                 "sucursal" : cboxSucursal
             };
             console.log("parametros:", parametros)
@@ -430,7 +446,7 @@ session_start();
                     {"data" : "cod_item_producto"},
                     {"data" : "nombre_producto"},
                     {"data" : "cantidad"},
-                    {"data" : "precio_sugerido_venta"},
+                    {"data" : "sugerido"},
                     {"data" : "descuento"},
                     {"data" : "total"},
                     {"data" : "subTotal"},
@@ -495,6 +511,7 @@ session_start();
                             document.getElementById('modalInventario').value = datos[0].cod_inventario;
                             document.getElementById('modalCantidad').value = datos[0].cantidad;
                             document.getElementById('modalPrecio').value = datos[0].total;
+                            document.getElementById('modalSugerido').value = datos[0].sugerido;
                             $('#myModalForm').openModal();
                       }
                     })
@@ -504,9 +521,11 @@ session_start();
         var btn_conversion = function(tbody, table){
             $(tbody).on("click", "button.conversion", function(){
                 var data = table.row( $(this).parents("tr") ).data();
+                console.log("data.sugerido", data.sugerido.replace("$us. ", ""))
                 var parametros = {
-                   "action" : "conversionMonedaProducto",
+                   "action" : "conversionMonedaCarritoSugerido",
                    "codCarrito" : data.codigo,
+                   "sugerido" : data.sugerido.replace("$us. ", "")
                 };
                 $.ajax({
                   type:'POST',

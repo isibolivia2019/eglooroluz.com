@@ -96,7 +96,7 @@ $totalConDescuento = 0;
 
 for($i=0;$i<sizeof($lista);$i++){
 	$pdf -> SetFont('Arial','', 10);
-	$totalSinDescuento = $totalSinDescuento + ($lista[$i]['precio_sugerido_venta'] * $lista[$i]['cant_producto']);
+	$totalSinDescuento = $totalSinDescuento + ($lista[$i]['sugerido'] * $lista[$i]['cant_producto']);
 	$totalConDescuento = $totalConDescuento + round(($lista[$i]['total_unitario'] * $lista[$i]['cant_producto']),2);
 
 	$pdf->Row(array(
@@ -104,8 +104,8 @@ for($i=0;$i<sizeof($lista);$i++){
 		utf8_decode('#'.$lista[$i]['cod_item_producto']),
 		utf8_decode($lista[$i]['nombre_producto']." ".$lista[$i]['descripcion_producto'].', color: '.$lista[$i]['color_producto']), 
 		utf8_decode('PIEZA'), utf8_decode($lista[$i]['cant_producto']),
-		utf8_decode('$us '.round($lista[$i]['precio_sugerido_venta'],2)),
-		utf8_decode('$us '.round(($lista[$i]['precio_sugerido_venta'] * $lista[$i]['cant_producto']),2)),
+		utf8_decode('$us '.round($lista[$i]['sugerido'],2)),
+		utf8_decode('$us '.round(($lista[$i]['sugerido'] * $lista[$i]['cant_producto']),2)),
 		utf8_decode($lista[$i]['descuento_porcentaje_venta_producto']." %"),
 		utf8_decode('$us '.round($lista[$i]['total_unitario'],2)),
 		utf8_decode('$us '.round(($lista[$i]['total_unitario'] * $lista[$i]['cant_producto']),2))
