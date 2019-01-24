@@ -291,17 +291,7 @@ session_start();
             var parametros = {
                 "action" : "listaInventarioCotizaciones"
             };
-            $.ajax({
-              type:'POST',
-              data: parametros,
-              url:'app/controladores/Cotizaciones.php',
-              success:function(data){
-                console.log("data", data)
-                let datos = JSON.parse(data);
-                datos = datos.data
-                }
-            })
-            /*table = $('#table-simple').DataTable({
+            table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -324,11 +314,11 @@ session_start();
                 "language": {
                     "url": "public/Spanish.lang"
                 }
-            });*/
+            });
             btn_conversion1("#table-simple tbody", table);
             btn_carrito("#table-simple tbody", table);
         }
-
+        
         var btn_conversion1 = function(tbody, table){
             $(tbody).on("click", "button.conversion1", function(){
                     var data = table.row( $(this).parents("tr") ).data();

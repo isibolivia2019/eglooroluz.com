@@ -42,6 +42,7 @@ function modelo($modelo){
     return new $modelo();
 }
 
+
 function listaInventarioCotizaciones(){
     $data = array();
     $datos = array();
