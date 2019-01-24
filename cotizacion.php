@@ -318,6 +318,7 @@ session_start();
             btn_conversion1("#table-simple tbody", table);
             btn_carrito("#table-simple tbody", table);
         }
+        
         var btn_conversion1 = function(tbody, table){
             $(tbody).on("click", "button.conversion1", function(){
                     var data = table.row( $(this).parents("tr") ).data();
