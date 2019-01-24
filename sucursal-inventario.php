@@ -158,8 +158,8 @@ session_start();
         var btn_historial = function(tbody, table){
                 $(tbody).on("click", "button.historial", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("sucursal", data.cod_inventario);
-                    location.href = "sucursal-historial.php";
+                    localStorage.setItem("inventario", data.cod_inventario);
+                    location.href = "historial.php";
                 })
         }
         var btn_conversion = function(tbody, table){

@@ -41,6 +41,11 @@ class Producto{
 		return $this->db->select($sql, $datos);
 	}
 
+	public function compraProductosEspecifico($datos){
+		$sql = "SELECT cod_compra_producto, cod_item_producto, nombre_producto, imagen_producto, cantidad_compra_producto, precio_unit_compra_producto, precio_sugerido_venta, observacion_compra_producto, fecha_compra_producto, hora_compra_producto, cod_almacenamiento, CONCAT(cod_almacenamiento) as 'nombre_almacenamiento', CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal' FROM compra_producto, producto, usuario WHERE compra_producto.cod_producto = producto.cod_producto and compra_producto.cod_usuario = usuario.cod_usuario and compra_producto.cod_producto = ? and precio_unit_compra_producto = ? and precio_sugerido_venta = ? and cod_almacenamiento = ?;";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function ultimaCompraProducto($datos){
 		$sql = "SELECT * FROM compra_producto WHERE cod_producto = ? ORDER BY cod_compra_producto desc limit 1";
 		return $this->db->select($sql, $datos);

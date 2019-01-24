@@ -51,6 +51,11 @@ class Venta{
 		return $this->db->select($sql, $datos);
 	}
 
+	public function listaVentaEspecifica($datos){
+		$sql = "SELECT venta_producto.cod_sucursal, inventario.cod_inventario, producto.cod_item_producto, producto.nombre_producto, cant_venta_producto, descuento_porcentaje_venta_producto, nro_factura_venta_producto, total_venta_producto, CONCAT(total_venta_producto) as 'precio_unitario', fecha_venta_producto, hora_venta_producto, cod_nit, cod_cliente, CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal', codigo_control FROM venta_producto, inventario, producto, usuario WHERE venta_producto.cod_inventario = inventario.cod_inventario and inventario.cod_producto = producto.cod_producto and venta_producto.cod_usuario = usuario.cod_usuario and venta_producto.cod_inventario = ?;";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function reporteListaVentas($datos){
 		$sql = "SELECT venta_producto.cod_sucursal, sucursal.nombre_sucursal, inventario.cod_inventario, inventario.compra_unit_producto, producto.cod_item_producto, producto.nombre_producto, cant_venta_producto, descuento_porcentaje_venta_producto, nro_factura_venta_producto, total_venta_producto, CONCAT(total_venta_producto) as 'precio_unitario', fecha_venta_producto, hora_venta_producto, cod_nit, cod_cliente, CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal', codigo_control FROM venta_producto, inventario, producto, usuario, sucursal WHERE venta_producto.cod_inventario = inventario.cod_inventario and venta_producto.cod_sucursal = sucursal.cod_sucursal and inventario.cod_producto = producto.cod_producto and venta_producto.cod_usuario = usuario.cod_usuario and venta_producto.cod_sucursal = ? and MONTH(fecha_venta_producto) = ? and YEAR(fecha_venta_producto) = ?;";
 		return $this->db->select($sql, $datos);
