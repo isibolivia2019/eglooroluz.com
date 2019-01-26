@@ -14,7 +14,7 @@ $c = 0;
 for($i=0 ; $i<sizeof($listaProducto) ; $i++){
  
         $c++;
-        $datos = array($listaProducto[$i]['cod_producto'], $listaProducto[$i]['cod_almacenamiento_a']);
+        $datos = array($listaProducto[$i]['cod_producto'], $listaProducto[$i]['cod_almacenamiento_de']);
         $modelo = modelo('Inventario');
         $listaInventario = $modelo->listaInventarioCodigoAlmacenamiento($datos);
 
