@@ -63,9 +63,9 @@ function listaHistorial(){
         $j++;
     }
     
-    $datos = array($producto[0]['cod_producto'], $producto[0]['compra_unit_producto'], $producto[0]['precio_sugerido_venta'], $producto[0]['cod_almacenamiento']);
+    $datos = array($codInventario);
     $modelo = modelo('Producto');
-    $listaCompra = $modelo->compraProductosEspecifico($datos);
+    $listaCompra = $modelo->compraProductosEspecificoCodInventario($datos);
     $j = 0;
     While ($j < sizeof($listaCompra)){
         $lista[$i]['fecha_hora'] = date("d/m/Y", strtotime($listaCompra[$j]["fecha_compra_producto"]))." ".$listaCompra[$j]["hora_compra_producto"];
@@ -80,9 +80,9 @@ function listaHistorial(){
         $j++;
     }
 
-    $datos = array($producto[0]['cod_almacenamiento'], $producto[0]['cod_producto'], $producto[0]['compra_unit_producto'], $producto[0]['precio_sugerido_venta']);
+    $datos = array($codInventario);
     $modelo = modelo('Transferencia');
-    $listaTransferenciaOrigen = $modelo->listaTransferenciaEspecificoOrigen($datos);
+    $listaTransferenciaOrigen = $modelo->listaTransferenciaInventarioEspecificoOrigen($datos);
     $j = 0;
     While ($j < sizeof($listaTransferenciaOrigen)){
         for($l = 0 ; $l < sizeof($listaSucursales) ; $l++){
@@ -107,9 +107,9 @@ function listaHistorial(){
         $j++;
     }
 
-    $datos = array($producto[0]['cod_almacenamiento'], $producto[0]['cod_producto'], $producto[0]['compra_unit_producto'], $producto[0]['precio_sugerido_venta']);
+    $datos = array($codInventario);
     $modelo = modelo('Transferencia');
-    $listaTransferenciaDestino = $modelo->listaTransferenciaEspecificoDestino($datos);
+    $listaTransferenciaDestino = $modelo->listaTransferenciaInventarioEspecificoDestino($datos);
     $j = 0;
     While ($j < sizeof($listaTransferenciaDestino)){
         for($l = 0 ; $l < sizeof($listaSucursales) ; $l++){
