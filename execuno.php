@@ -99,9 +99,7 @@ for($a=0 ; $a<sizeof($lista); $a++){
     $ListaActualizarCantidad = $modelo->listaHistorialCantidadInventario($datos);
     $j = 0;
     While ($j < sizeof($ListaActualizarCantidad)){
-        echo "operacion: ".$total."-(".$total."-".$ListaActualizarCantidad[$j]['cantidad'].")</br>";
         $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
-        echo "res=".$total."</br>";
         $j++;
     }
 
