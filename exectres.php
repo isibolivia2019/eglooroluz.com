@@ -18,7 +18,7 @@ for($i=0 ; $i<sizeof($listaProducto) ; $i++){
         $modelo = modelo('Inventario');
         $listaInventario = $modelo->listaInventarioCodigoAlmacenamiento($datos);
 
-        if(sizeof($listaInventario) == 0){
+        if(sizeof($listaInventario) == 1){
             $datos = array($listaInventario[0]['cod_inventario'], $listaProducto[$i]['cod_traspaso_producto']);
             $modelo = modelo('Transferencia');
             $res = $modelo->actualizaCodInventarioA($datos);
