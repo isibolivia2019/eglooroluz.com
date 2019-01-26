@@ -34,9 +34,6 @@ session_start();
         <div class="container">
           <div class="section">
 
-          <p class="caption">Verificando las DNS, IPv4, IPv6 de la Seccion del Sitio WEB [GOOGLE CLOUD PLATFORM]</p>
-            <div class="divider"></div>
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
           </div>
         </div>
         <!--end container-->
