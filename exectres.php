@@ -14,14 +14,14 @@ $c = 0;
 for($i=0 ; $i<sizeof($listaProducto) ; $i++){
  
         $c++;
-        $datos = array($listaProducto[$i]['cod_producto'], $listaProducto[$i]['cod_almacenamiento_de']);
+        $datos = array($listaProducto[$i]['cod_producto'], $listaProducto[$i]['cod_almacenamiento_a']);
         $modelo = modelo('Inventario');
         $listaInventario = $modelo->listaInventarioCodigoAlmacenamiento($datos);
 
         if(sizeof($listaInventario) == 0){
             $datos = array($listaInventario[0]['cod_inventario'], $listaProducto[$i]['cod_traspaso_producto']);
             $modelo = modelo('Transferencia');
-            $res = $modelo->actualizaCodInventarioDe($datos);
+            $res = $modelo->actualizaCodInventarioA($datos);
         }
 
 }
