@@ -10,6 +10,11 @@ class Transferencia{
 		return $this->db->select($sql, $datos);
 	}
 
+	public function listaTransOrigenNull($datos){
+		$sql = "SELECT * FROM traspaso_producto WHERE cod_inventario_de IS NULL;";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function actualizaCodInventarioDe($datos){
 		$sql = "UPDATE traspaso_producto SET cod_inventario_de = ? WHERE cod_traspaso_producto = ? ";
 		return $this->db->update($sql, $datos);
