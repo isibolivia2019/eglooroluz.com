@@ -73,5 +73,6 @@ function registrarEntradaSalida(){
             $listaHorario = $modelo->registroEntrada($datos);
         }
     }
+    echo 'funciona';
 }
 ?>
