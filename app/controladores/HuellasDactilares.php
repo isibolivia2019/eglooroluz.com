@@ -33,6 +33,9 @@ function listaRegistroHorario(){
     $datos = array($mes, $año);
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorario($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+    }
     $data = array();
     $data = ['data' => $lista];
     echo json_encode($data);
