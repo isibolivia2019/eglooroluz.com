@@ -15,12 +15,27 @@ if (isset($_POST['action'])) {
         case 'registrarFinSoftware' :
             registrarFinSoftware();
             break;
+        case 'listaRegistroHorario' :
+            listaRegistroHorario();
+            break;
     }
 }
 
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function listaRegistroHorario(){
+    $mes = $_POST['mes'];
+    $año = $_POST['año'];
+
+    $datos = array($mes, $año);
+    $modelo = modelo('HuellaDactilar');
+    $lista = $modelo->listaRegistroHorario($datos);
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
 }
 
 function registrarInicioSoftware(){
