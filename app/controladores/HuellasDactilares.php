@@ -56,13 +56,14 @@ function registrarEntradaSalida(){
     date_default_timezone_set('America/La_Paz');
     $hora = date("H:i:s");
     $fecha = date("Y-m-d");
-
+    $verificaHora = date("H");
     if(sizeof($listaHorario) > 0 && $fecha == $listaHorario[0]['fecha_reg_hr']){
-        $datos = array($hora, "salida", $listaHorario[0]['cod_reg_hr']);
-        $modelo = modelo('HuellaDactilar');
-        $listaHorario = $modelo->actualizaRegistroSalida($datos);
+        if($verificaHora >= 12){
+            $datos = array($hora, "salida", $listaHorario[0]['cod_reg_hr']);
+            $modelo = modelo('HuellaDactilar');
+            $listaHorario = $modelo->actualizaRegistroSalida($datos);
+        }
     }else{
-        $verificaHora = date("H");
         if($verificaHora >= 12){
             $datos = array($usuario[0]['cod_usuario'], $fecha, $hora, "1", "salida");
             $modelo = modelo('HuellaDactilar');
