@@ -49,7 +49,7 @@
                                 <li><a href="horario.php">Lista de Horarios</a></li>
                                 <li><a href="horario-agregar.php">Agregar Nuevo Horario</a></li>
                                 <li><a href="horario-asignar.php">Asignar Horarios</a></li>
-                                <li><a href="horario-registro.php">Registro de Horarios</a></li>
+                                <li><a href="registro-horario.php">Registro de Horarios</a></li>
                             </ul>
                         </div>
                     </li>
