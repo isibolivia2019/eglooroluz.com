@@ -37,12 +37,12 @@ class HuellaDactilar{
 	}
 
 	public function registroEntrada($datos){
-		$sql = "INSERT INTO registro_horario(cod_usuario, fecha_reg_hr, entrada_horario_reg_hr, conteo_horario_reg_hr, estado_actual_reg_hr) VALUES (?,?,?,?,?)";
+		$sql = "INSERT INTO registro_horario(cod_usuario, fecha_reg_hr, entrada_horario_reg_hr, conteo_horario_reg_hr, estado_actual_reg_hr, cadena) VALUES (?,?,?,?,?,?)";
 		return $this->db->insert($sql, $datos);
 	}
 
 	public function registroSalida($datos){
-		$sql = "INSERT INTO registro_horario(cod_usuario, fecha_reg_hr, salida_horario_reg_hr, conteo_horario_reg_hr, estado_actual_reg_hr) VALUES (?,?,?,?,?)";
+		$sql = "INSERT INTO registro_horario(cod_usuario, fecha_reg_hr, salida_horario_reg_hr, conteo_horario_reg_hr, estado_actual_reg_hr, cadena) VALUES (?,?,?,?,?,?)";
 		return $this->db->insert($sql, $datos);
 	}
 

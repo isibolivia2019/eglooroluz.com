@@ -103,7 +103,7 @@ function registrarFinSoftware(){
 function registrarEntradaSalida(){
     $biometrico = $_POST['biometrico'];
     $dedohuella = $_POST['dedohuella'];
-
+    $cadena = $_POST['cadena'];
     $datos = array($dedohuella, $biometrico);
     $modelo = modelo('HuellaDactilar');
     $usuario = $modelo->listaUsuarioHuellaDactilarEspecifico($datos);
@@ -124,11 +124,11 @@ function registrarEntradaSalida(){
         }
     }else{
         if($verificaHora >= 12){
-            $datos = array($usuario[0]['cod_usuario'], $fecha, $hora, "1", "salida");
+            $datos = array($usuario[0]['cod_usuario'], $fecha, $hora, "1", "salida", $cadena);
             $modelo = modelo('HuellaDactilar');
             $listaHorario = $modelo->registroSalida($datos);
         }else{
-            $datos = array($usuario[0]['cod_usuario'], $fecha, $hora, "1", "entrada");
+            $datos = array($usuario[0]['cod_usuario'], $fecha, $hora, "1", "entrada", $cadena);
             $modelo = modelo('HuellaDactilar');
             $listaHorario = $modelo->registroEntrada($datos);
         }
