@@ -156,7 +156,7 @@ session_start();
                     {"data" : "fecha_reg_hr"},
                     {"data" : "entrada_horario_reg_hr"},
                     {"data" : "salida_horario_reg_hr"},
-                    {"data" : "personal"}
+                    {"data" : "personal"},
                 ],
                 "columnDefs": [
    		        	{ "type": "date-euro", "targets": 0 }

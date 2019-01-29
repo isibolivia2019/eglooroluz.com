@@ -21,12 +21,34 @@ if (isset($_POST['action'])) {
         case 'listaRegistroHorarioEspecifico' :
             listaRegistroHorarioEspecifico();
             break;
+        case 'agregarObservacion' :
+            agregarObservacion();
+            break;
     }
 }
 
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function agregarObservacion(){
+    $modal = $_POST['modal'];
+    $observacion = $_POST['observacion'];
+    $codigo = $_POST['codigo'];
+    $resp = "";
+    if($modal == "entrada"){
+        $datos = array($observacion, $codigo);
+        $modelo = modelo('HuellaDactilar');
+        $resp = $modelo->agregarObservacionEntrada($datos);
+    }
+    if($modal == "salida"){
+        $datos = array($observacion, $codigo);
+        $modelo = modelo('HuellaDactilar');
+        $resp = $modelo->agregarObservacionSalida($datos);
+    }
+    $data = ['resp' => $resp];
+    echo json_encode($data);
 }
 
 function listaRegistroHorario(){
