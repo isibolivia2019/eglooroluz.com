@@ -220,6 +220,7 @@
                         </div>
                     </li>
                 <?php }?>
+                <li class="bold"><a href="mis-horarios.php" class="waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Mis Horarios</a></li>
                 <li class="bold"><a href="logout.php" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Cerrar Sesion</a></li>
             </ul>
         </li>

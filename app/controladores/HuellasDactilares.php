@@ -18,6 +18,9 @@ if (isset($_POST['action'])) {
         case 'listaRegistroHorario' :
             listaRegistroHorario();
             break;
+        case 'listaRegistroHorarioEspecifico' :
+            listaRegistroHorarioEspecifico();
+            break;
     }
 }
 
@@ -33,6 +36,22 @@ function listaRegistroHorario(){
     $datos = array($mes, $año);
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorario($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+    }
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
+function listaRegistroHorarioEspecifico(){
+    $usuario = $_SESSION['codigo'];
+    date_default_timezone_set('America/La_Paz');
+    $mes = date("m");
+    $año = date("Y");
+    $datos = array($usuario, $mes, $año);
+    $modelo = modelo('HuellaDactilar');
+    $lista = $modelo->listaRegistroHorarioEspecifico($datos);
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
     }

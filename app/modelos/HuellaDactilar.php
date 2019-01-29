@@ -11,8 +11,13 @@ class HuellaDactilar{
 		return $this->db->select($sql, $datos);
 	}
 
+	public function listaRegistroHorarioEspecifico($datos){
+		$sql = "SELECT fecha_reg_hr, entrada_horario_reg_hr, salida_horario_reg_hr, CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal', observacion_entrada, observacion_salida FROM registro_horario, usuario WHERE registro_horario.cod_usuario = usuario.cod_usuario and registro_horario.cod_usuario = ? and MONTH(fecha_reg_hr) = ? and YEAR(fecha_reg_hr) = ?;";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function listaRegistroHorario($datos){
-		$sql = "SELECT fecha_reg_hr, entrada_horario_reg_hr, salida_horario_reg_hr, CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal' FROM registro_horario, usuario WHERE registro_horario.cod_usuario = usuario.cod_usuario and MONTH(fecha_reg_hr) = ? and YEAR(fecha_reg_hr) = ?;";
+		$sql = "SELECT fecha_reg_hr, entrada_horario_reg_hr, salida_horario_reg_hr, CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal', observacion_entrada, observacion_salida FROM registro_horario, usuario WHERE registro_horario.cod_usuario = usuario.cod_usuario and MONTH(fecha_reg_hr) = ? and YEAR(fecha_reg_hr) = ?;";
 		return $this->db->select($sql, $datos);
 	}
 
