@@ -5,6 +5,16 @@ class HuellaDactilar{
 	public function __construct(){
 		$this->db = new Base;
 	}
+
+	public function listaUsuarioHuellaDactilarEspecifico($datos){
+		$sql = "SELECT * FROM huelladactilar WHERE cod_dedohuella = ? and cod_biometrico = ?";
+		return $this->db->select($sql, $datos);
+	}
+
+	public function ultimoRegistroHuella($datos){
+		$sql = "SELECT * FROM registro_horario WHERE cod_usuario = ? ORDER BY cod_reg_hr desc LIMIT 1";
+		return $this->db->select($sql, $datos);
+	}
     
     public function inicioSoftware($datos){
 		$sql = "INSERT INTO inicio_biometrico(fecha, hora, computadora) VALUES(?,?,?)";
@@ -14,6 +24,21 @@ class HuellaDactilar{
 	public function finSoftware($datos){
 		$sql = "INSERT INTO final_biometrico(fecha, hora, computadora) VALUES(?,?,?)";
 		return $this->db->insert($sql, $datos);
+	}
+
+	public function registroEntrada($datos){
+		$sql = "INSERT INTO registro_horario(cod_usuario, fecha_reg_hr, entrada_horario_reg_hr, conteo_horario_reg_hr, estado_actual_reg_hr) VALUES (?,?,?,?,?)";
+		return $this->db->insert($sql, $datos);
+	}
+
+	public function registroSalida($datos){
+		$sql = "INSERT INTO registro_horario(cod_usuario, fecha_reg_hr, salida_horario_reg_hr, conteo_horario_reg_hr, estado_actual_reg_hr) VALUES (?,?,?,?,?)";
+		return $this->db->insert($sql, $datos);
+	}
+
+	public function actualizaRegistroSalida($datos){
+		$sql = "UPDATE registro_horario SET salida_horario_reg_hr = ?, estado_actual_reg_hr = ? WHERE cod_reg_hr = ?";
+		return $this->db->update($sql, $datos);
 	}
 }
 ?>
