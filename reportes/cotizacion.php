@@ -86,7 +86,23 @@ $pdf -> SetTextColor(0, 0, 0);
 $pdf -> SetFont('Arial','B', 11);
 $pdf->SetWidths(array(100, 145));
 $pdf->SetAligns(array('L','C'));
-$pdf->Row(array("FECHA :",  utf8_decode(date("d/m/Y", strtotime($lista[0]["fecha"])))));
+
+$fec = date("d/m/Y", strtotime($lista[0]["fecha"]));
+$fec = explode("/", $fec);
+$nombreMes = "";
+if($fec[1] == 1){$nombreMes = "Enero";}
+if($fec[1] == 2){$nombreMes = "Febrero";}
+if($fec[1] == 3){$nombreMes = "Marzo";}
+if($fec[1] == 4){$nombreMes = "Abril";}
+if($fec[1] == 5){$nombreMes = "Mayo";}
+if($fec[1] == 6){$nombreMes = "Junio";}
+if($fec[1] == 7){$nombreMes = "Julio";}
+if($fec[1] == 8){$nombreMes = "Agosto";}
+if($fec[1] == 9){$nombreMes = "Septiembre";}
+if($fec[1] == 10){$nombreMes = "Octubre";}
+if($fec[1] == 11){$nombreMes = "Novimebre";}
+if($fec[1] == 12){$nombreMes = "Diciembre";}
+$pdf->Row(array("FECHA :",  utf8_decode($fec[0]." de ".$nombreMes." de ".$fec[2] )));
 $pdf->Row(array( utf8_decode("EMPRESA / INSTITUCIÓN :"), utf8_decode($lista[0]['empresa'])));
 $pdf->Row(array( utf8_decode("ATENCIÓN :"),  utf8_decode($lista[0]['personal'])));
 $pdf->Ln(10);
