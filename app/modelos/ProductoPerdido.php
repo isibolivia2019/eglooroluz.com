@@ -47,7 +47,7 @@ class ProductoPerdido{
 	}
 
 	public function listaInventarioPerdidos($datos){
-		$sql = "SELECT cod_producto_perdido, cod_inventario, cod_almacenamiento, cod_item_producto, nombre_producto, imagen_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido FROM producto_perdido, producto WHERE producto_perdido.cod_producto = producto.cod_producto";
+		$sql = "SELECT cod_producto_perdido, cod_inventario, cod_almacenamiento, CONCAT(cod_almacenamiento) as 'nombre_almacenamiento', cod_item_producto, nombre_producto, imagen_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido FROM producto_perdido, producto WHERE producto_perdido.cod_producto = producto.cod_producto";
 		return $this->db->select($sql, $datos);
 	}
 

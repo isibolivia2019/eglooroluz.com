@@ -94,12 +94,12 @@ function listaRegistrosProductosPerdidos(){
         }
         for($j = 0 ; $j < sizeof($listaSucursales) ; $j++){
             if($listaSucursales[$j]["cod_sucursal"] == $lista[$i]["cod_almacenamiento"]){
-                $lista[$i]["cod_almacenamiento"] = $listaSucursales[$j]["nombre_sucursal"];
+                $lista[$i]["nombre_almacenamiento"] = $listaSucursales[$j]["nombre_sucursal"];
             }
         }
         for($k = 0 ; $k < sizeof($listaAlmacenes) ; $k++){
             if($listaAlmacenes[$k]["cod_almacen"] == $lista[$i]["cod_almacenamiento"]){
-                $lista[$i]["cod_almacenamiento"] = $listaAlmacenes[$k]["nombre_almacen"];
+                $lista[$i]["nombre_almacenamiento"] = $listaAlmacenes[$k]["nombre_almacen"];
             }
         }
     }
