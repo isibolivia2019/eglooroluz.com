@@ -181,8 +181,5 @@ $pdf->SetWidths(array(10,25,30,30,30,17,25,25,40,30));
 $empty = array("","", "", "", "", $cant." Uds.", "", "", "", "");
 $pdf->FancyRow($empty, $border, $align, $style);
 
-$pdf -> SetFont('Arial','', 10);
-$pdf -> Cell(260, 10, utf8_decode('Esta cotización es válida por 10 días a partir de la fecha de emisión.'), 0, 1, 'R');
-
 $pdf -> Output();
 ?>

@@ -122,6 +122,10 @@ $style = array("","","", "", "", "", "B", "", "", "B");
 $pdf->SetWidths(array(10,25,45,18,23,25,25,25,25,25));
 $empty = array("","","", "", "", "", '$us '.round($totalSinDescuento,2), "", "", '$us '.round($totalConDescuento,2));
 $pdf->FancyRow($empty, $border, $align, $style);
+
+$pdf -> SetFont('Arial','', 10);
+$pdf -> Cell(260, 10, utf8_decode('Esta cotización es válida por 10 días a partir de la fecha de emisión.'), 0, 1, 'R');
+
 	
 $pdf->Image("../public/imagenes/sistema/eglo.png", 10 ,10, 76 , 26,'PNG', 'http://www.eglooroluz.com');
 $pdf -> Output();
