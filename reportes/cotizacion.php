@@ -63,6 +63,10 @@ $pdf -> Cell(180, 10, "", 0, 0, 'C');
 $empty = array($listaSucursal[0]['direccion_sucursal']);
 $pdf->FancyRow($empty, $border, $align, $style);
 
+$pdf -> Cell(180, 10, "", 0, 0, 'C');
+$empty = array($listaSucursal[0]['telefono']);
+$pdf->FancyRow($empty, $border, $align, $style);
+
 $pdf -> SetTextColor(33, 152, 158);
 $pdf->SetWidths(array(60));
 $style = array('B');
