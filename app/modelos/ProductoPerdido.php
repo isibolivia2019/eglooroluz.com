@@ -38,7 +38,7 @@ class ProductoPerdido{
 
 	public function actualizarCantidadProductoPerdidos($datos){
 		$sql = "UPDATE producto_perdido SET cant_producto = ? WHERE cod_producto_perdido = ?";
-		return $this->db->select($sql, $datos);
+		return $this->db->update($sql, $datos);
 	}
 
 	public function buscarProductoPerdidos($datos){
