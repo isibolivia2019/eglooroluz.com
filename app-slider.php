@@ -133,9 +133,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Productos Perdidos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Inventario</a></li>
-                                <li><a href="verificacion-1.php">Agregar</a></li>
-                                <li><a href="verificacion-1.php">Registros</a></li>
+                                <li><a href="producto-perdido.php">Inventario</a></li>
+                                <li><a href="producto-perdido-agregar.php">Agregar</a></li>
+                                <li><a href="producto-perdido-registro.php">Registros</a></li>
                             </ul>
                         </div>
                     </li>

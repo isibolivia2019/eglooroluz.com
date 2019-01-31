@@ -107,7 +107,7 @@ function registrarEntradaSalida(){
     $datos = array($dedohuella, $biometrico);
     $modelo = modelo('HuellaDactilar');
     $usuario = $modelo->listaUsuarioHuellaDactilarEspecifico($datos);
-
+    
     $datos = array($usuario[0]['cod_usuario']);
     $modelo = modelo('HuellaDactilar');
     $listaHorario = $modelo->ultimoRegistroHuella($datos);

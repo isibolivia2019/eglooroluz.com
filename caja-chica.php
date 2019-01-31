@@ -32,10 +32,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Lista de Ventas</h5>
+                                    <h5 class="breadcrumbs-title">Caja Chica</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Lista de Ventas</li>
+                                        <li class="active">Caja Chica</li>
                                     </ol>
                                 </div>
                             </div>
@@ -44,7 +44,7 @@ session_start();
 
                     <div class="container">
                         <div class="section">
-                            <p class="caption">Lista de Ventas registradas.</p>
+                            <p class="caption">Lista de Gastos Registrados.</p>
                             <div class="divider"></div>
                             <div class="row">
                                 <form class="col s12">
@@ -75,7 +75,7 @@ session_start();
                                             </select>
                                         </div>
                                         <div class="col s12 m12 l4">
-                                            <label>Sucursak</label>
+                                            <label>Sucursal</label>
                                             <select class="browser-default" id="cboxSucursal">
                                                 <option value="" disabled selected>Seleccione la Sucursal</option>
                                             </select>
@@ -83,7 +83,7 @@ session_start();
                                         <div class="row">
                                             <div class="input-field col s12 submitBtn">
                                                 <div class="input-field col s12 right ">
-                                                  <a class="btn waves-effect waves-light col s12" onclick="listaCajaChica()">Buscar Ventas</a>
+                                                  <a class="btn waves-effect waves-light col s12" onclick="listaCajaChica()">Buscar Registros</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -93,7 +93,7 @@ session_start();
                             <br>
                             <div class="divider"></div> 
                             <div id="table-datatables">
-                                <h4 class="header">Ventas Registradas</h4>
+                                <h4 class="header">Registros</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
