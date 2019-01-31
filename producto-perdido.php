@@ -132,12 +132,13 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
+        var table = ""
         $(document).ready(function() {
             verificarAcceso("Permiso_ProductoPerdido");
             var parametros = {
                 "action" : "listaInventarioPerdidos"
             };
-            var table = $('#table-simple').DataTable({
+            table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -198,7 +199,10 @@ session_start();
                 success:function(data){
                     datos = JSON.parse(data);
                     if(datos.resp == "true"){
+                        $('#myModalForm').closeModal();
+                        table.ajax.reload();
                         Materialize.toast('Producto fue agregado con exito', 5000)
+                        
                     }
                     if(datos.resp == "false"){
                         Materialize.toast('Hubo un fallo al reponer el Producto. Vuelva a Intentarlo', 5000)

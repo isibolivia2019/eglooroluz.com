@@ -127,6 +127,10 @@ session_start();
                     {"data" : "estado"},
                     {"data" : "personal"}
                 ],
+                "columnDefs": [
+   		        	{ "type": "date-euro", "targets": 0 }
+                ],
+                "order": [[ 0, "desc" ]],
                 "language": {
                     "url": "public/Spanish.lang"
                 }
