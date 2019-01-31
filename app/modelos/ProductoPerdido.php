@@ -26,6 +26,26 @@ class ProductoPerdido{
 		return $this->db->update($sql, $datos);
 	}
 
+	public function agregarProductoPerdidoRegistro($datos){
+		$sql = "INSERT INTO producto_perdido_reg(cod_almacenamiento, cod_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido, fecha_producto_perdido, hora_producto_perdido, estado, cod_usuario, cod_inventario) VALUES(?,?,?,?,?,?,?,?,?,?,?);";
+		return $this->db->insert($sql, $datos);
+	}
+
+	public function agregarProductoPerdidos($datos){
+		$sql = "INSERT INTO producto_perdido(cod_almacenamiento, cod_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido, cod_inventario) VALUES(?,?,?,?,?,?,?);";
+		return $this->db->insert($sql, $datos);
+	}
+
+	public function actualizarCantidadProductoPerdidos($datos){
+		$sql = "UPDATE producto_perdido SET cant_producto = ? WHERE cod_producto_perdido = ?";
+		return $this->db->select($sql, $datos);
+	}
+
+	public function buscarProductoPerdidos($datos){
+		$sql = "SELECT * FROM producto_perdido WHERE cod_inventario = ? and observacion_producto_perdido = ?";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function listaInventarioPerdidos($datos){
 		$sql = "SELECT cod_almacenamiento, cod_item_producto, nombre_producto, imagen_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido FROM producto_perdido, producto WHERE producto_perdido.cod_producto = producto.cod_producto";
 		return $this->db->select($sql, $datos);

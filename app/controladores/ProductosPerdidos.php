@@ -21,25 +21,26 @@ function modelo($modelo){
 }
 
 function agregarProductoPerdido(){
-    $origen = $_POST['origen'];
-    $destino = $_POST['destino'];
+    $almacenamiento = $_POST['almacenamiento'];
     $codProducto = $_POST['codProducto'];
     $cantidad = $_POST['cantidad'];
     $costo = $_POST['costo'];
     $precio = $_POST['precio'];
     $observacion = $_POST['observacion'];
+    $cod_inventario = $_POST['cod_inventario'];
+    
     $usuario = $_SESSION['codigo'];
     date_default_timezone_set('America/La_Paz');
     $hora = date("H:i:s");
     $fecha = date("Y-m-d");
 
-    $datos = array($origen, $destino, $codProducto, $cantidad, $costo, $precio, $observacion, $fecha, $hora, $usuario);
-    $modelo = modelo('Transferencia');
-    $resp = $modelo->agregarTransferencia($datos);
+    $datos = array($almacenamiento, $codProducto, $cantidad, $costo, $precio, $observacion, $fecha, $hora, "1", $usuario, $cod_inventario);
+    $modelo = modelo('ProductoPerdido');
+    $resp = $modelo->agregarProductoPerdidoRegistro($datos);
 
-    $datos = array($codProducto, $origen);
+    $datos = array($cod_inventario);
     $modelo = modelo('Inventario');
-    $lista = $modelo->listaInventarioCodigoAlmanenamiento($datos);
+    $lista = $modelo->listaInventarioCodInventario($datos);
 
     $cant = $lista[0]['cant_producto'] - $cantidad;
     $datos = array($cant, $lista[0]['cod_inventario']);
@@ -47,20 +48,23 @@ function agregarProductoPerdido(){
     $resp = $modelo->actualizarCantidadInventario($datos);
 
 
-    $datos = array($codProducto, $destino);
-    $modelo = modelo('Inventario');
-    $lista = $modelo->listaInventarioCodigoAlmanenamiento($datos);
+    $datos = array($cod_inventario, $observacion);
+    $modelo = modelo('ProductoPerdido');
+    $lista = $modelo->buscarProductoPerdidos($datos);
+    $d = "";
     if(sizeof($lista) > 0){
         $cant = $lista[0]['cant_producto'] + $cantidad;
-        $datos = array($cant, $lista[0]['cod_inventario']);
-        $modelo = modelo('Inventario');
-        $resp = $modelo->actualizarCantidadInventario($datos);
+        $datos = array($cant, $lista[0]['cod_producto_perdido']);
+        $modelo = modelo('ProductoPerdido');
+        $resp1 = $modelo->actualizarCantidadProductoPerdidos($datos);
+        $d = ['resp' => $resp1, 'action' => 'actualizar'];
     }else{
-        $datos = array($destino, $codProducto, $cantidad, $costo, $precio);
-        $modelo = modelo('Inventario');
-        $resp = $modelo->agregarInventario($datos);
+        $datos = array($almacenamiento, $codProducto, $cantidad, $costo, $precio, $observacion, $cod_inventario);
+        $modelo = modelo('ProductoPerdido');
+        $resp1 = $modelo->agregarProductoPerdidos($datos);
+        $d = ['resp' => $resp1, 'action' => 'agregar'];
     }
-    $data = ['resp' => $resp];
+    $data = ['producto' => $resp, 'inventario' => $d];
     echo json_encode($data);
 }
 

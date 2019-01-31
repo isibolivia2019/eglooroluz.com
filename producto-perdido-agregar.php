@@ -228,31 +228,56 @@ session_start();
                     if(cboxOrigen != ""){
                                 if(Number(cant) <= Number(data.cant_producto) && Number(cant) > 0){
                                     var parametros = {
-                                       "action" : "agregarTransferencia",
-                                       "origen" : cboxOrigen,
-                                       "destino" : cboxDestino,
+                                       "action" : "agregarProductoPerdido",
+                                       "almacenamiento" : cboxOrigen,
                                        "codProducto" : data.cod_producto,
                                        "cantidad" : cant,
                                        "costo" : compra_unit_producto,
                                        "precio" : precio_sugerido_venta,
-                                       "observacion" : observacion
+                                       "observacion" : observacion,
+                                       "cod_inventario" : cod_inventario
                                     };
                                     $.ajax({
                                       type:'POST',
                                       data: parametros,
-                                      url:'app/controladores/Transferencias.php',
+                                      url:'app/controladores/ProductosPerdidos.php',
                                       success:function(data){
                                           console.log("data", data)
                                           datos = JSON.parse(data);
-                                          if(datos.resp == "true"){
-                                              Materialize.toast('Transferencia realizada con exito', 5000)
-                                          }
-                                          if(datos.resp == "false"){
-                                              Materialize.toast('Hubo un fallo al registrar la Transferencia. Vuelva a Intentarlo', 5000)
-                                          }
-                                          if(datos.resp != "true" && datos.resp != "false"){
-                                              Materialize.toast('Hubo un fallo al registrar la Transferencia COD:'+datos.resp, 5000)
-                                          }
+                                            if(datos.producto == "true"){
+                                                Materialize.toast('Producto Perdido Registrado con exito', 5000)
+                                            }
+                                            if(datos.producto == "false"){
+                                                Materialize.toast('Hubo un fallo al registrar el producto perdido. Vuelva a Intentarlo', 5000)
+                                            }
+                                            if(datos.producto != "true" && datos.resp != "false"){
+                                                Materialize.toast('Hubo un fallo al registrar el producto perdido COD:'+datos.resp, 5000)
+                                            }
+                                        
+                                        
+                                            if(datos.inventario.action == "actualizar"){
+                                                if(datos.inventario.resp == "true"){
+                                                    Materialize.toast('La cantidad del Inventario de Productos Perdidos fue Actualizado exitosamente', 6000)
+                                                }
+                                                if(datos.inventario.resp == "false"){
+                                                    Materialize.toast('Hubo un fallo al actualizar el inventario de Productos Perdidos. Vuelva a Intentarlo', 6000)
+                                                }
+                                                if(datos.inventario.resp != "true" && datos.resp != "false"){
+                                                    Materialize.toast('Hubo un fallo al actualizar el inventario de Productos Perdidos COD:'+datos.resp, 6000)
+                                                }
+                                            }
+                                        
+                                            if(datos.inventario.action == "agregar"){
+                                                if(datos.inventario.resp == "true"){
+                                                    Materialize.toast('Un nuevo producto perdido fue agregado al Inventario', 6000)
+                                                }
+                                                if(datos.inventario.resp == "false"){
+                                                    Materialize.toast('Hubo un fallo al registrar el producto perdido en el inventario. Vuelva a Intentarlo', 6000)
+                                                }
+                                                if(datos.inventario.resp != "true" && datos.resp != "false"){
+                                                    Materialize.toast('Hubo un fallo al registrar el producto perdido en el inventario COD:'+datos.resp, 6000)
+                                                }
+                                            }
                                       }
                                     })
                                 }else{
