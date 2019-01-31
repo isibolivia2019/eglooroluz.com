@@ -12,6 +12,9 @@ if (isset($_POST['action'])) {
         case 'listaRegistrosProductosPerdidos' :
             listaRegistrosProductosPerdidos();
             break;
+        case 'reponerProductoPerdido' :
+            reponerProductoPerdido();
+            break;
         case 'agregarProductoPerdido' :
             agregarProductoPerdido();
             break;
@@ -21,6 +24,47 @@ if (isset($_POST['action'])) {
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function reponerProductoPerdido(){
+    $codProductoPerdido = $_POST['codProductoPerdido'];
+    $codInventario = $_POST['codInventario'];
+    $almacenamiento = $_POST['almacenamiento'];
+    $cantidad = $_POST['cantidad'];
+    $observacion = $_POST['observacion'];
+
+    $usuario = $_SESSION['codigo'];
+    date_default_timezone_set('America/La_Paz');
+    $hora = date("H:i:s");
+    $fecha = date("Y-m-d");
+
+    $datos = array($codInventario);
+    $modelo = modelo('Inventario');
+    $listaInventario = $modelo->listaInventarioCodInventario($datos);
+
+
+    $datos = array($almacenamiento, $listaInventario[0]['cod_producto'], $cantidad, $listaInventario[0]['compra_unit_producto'], $listaInventario[0]['precio_sugerido_venta'], $observacion, $fecha, $hora, "0", $usuario, $codInventario);
+    $modelo = modelo('ProductoPerdido');
+    $resp = $modelo->agregarProductoPerdidoRegistro($datos);
+
+    
+    $cant = $listaInventario[0]['cant_producto'] + $cantidad;
+    $datos = array($cant, $listaInventario[0]['cod_inventario']);
+    $modelo = modelo('Inventario');
+    $resp = $modelo->actualizarCantidadInventario($datos);
+
+
+    $datos = array($codProductoPerdido);
+    $modelo = modelo('ProductoPerdido');
+    $listaPerdido = $modelo->buscarProductoPerdidosCodigo($datos);
+
+    $cant = $listaPerdido[0]['cant_producto'] - $cantidad;
+    $datos = array($cant, $listaPerdido[0]['cod_producto_perdido']);
+    $modelo = modelo('ProductoPerdido');
+    $resp = $modelo->actualizarCantidadProductoPerdidos($datos);
+
+    $data = ['resp' => $resp];
+    echo json_encode($data);
 }
 
 function agregarProductoPerdido(){

@@ -44,7 +44,13 @@ session_start();
                     </div>
                     <div class="input-field col s12">
                         <input placeholder="" id="cantidad" type="number" >
-                        <label for="modalPrecio">Ingrese la Cantidad</label>
+                        <label for="cantidad">Ingrese la Cantidad</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="" id="observacion" type="text" >
+                        <label for="observacion">Nota / Observacion</label>
                     </div>
                 </div>
                 <div class="row">
@@ -171,16 +177,37 @@ session_start();
 
         function reponer(){
             verificarAcceso("Permiso_ProductoPerdido");
-            var cboxSucursal = document.getElementById("cboxSucursal").value;
-            var cboxAño = document.getElementById("cboxAño").value;
-            var cboxMes = document.getElementById("cboxMes").value;
-            
+            var codProductoPerdido = document.getElementById("codProductoPerdido").value;
+            var codInventario = document.getElementById("codInventario").value;
+            var almacenamiento = document.getElementById("almacenamiento").value;
+            var cantidad = document.getElementById("cantidad").value;
+            var observacion = document.getElementById("observacion").value;
             var parametros = {
-                "action" : "listaCajaChica",
-                "sucursal" : cboxSucursal,
-                "año" : cboxAño,
-                "mes" : cboxMes
+                "action" : "reponerProductoPerdido",
+                "codProductoPerdido" : codProductoPerdido,
+                "codInventario" : codInventario,
+                "almacenamiento" : almacenamiento,
+                "cantidad" : cantidad,
+                "observacion" : observacion
             };
+
+            $.ajax({
+                type:'POST',
+                data: parametros,
+                url:'app/controladores/ProductoPerdido.php',
+                success:function(data){
+                    datos = JSON.parse(data);
+                    if(datos.resp == "true"){
+                        Materialize.toast('Producto fue agregado con exito', 5000)
+                    }
+                    if(datos.resp == "false"){
+                        Materialize.toast('Hubo un fallo al reponer el Producto. Vuelva a Intentarlo', 5000)
+                    }
+                    if(datos.resp != "true" && datos.resp != "false"){
+                        Materialize.toast('Hubo un fallo al reponer el Producto COD:'+datos.resp, 5000)
+                    }
+                }
+            })
             
         }
 
