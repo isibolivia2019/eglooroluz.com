@@ -24,6 +24,37 @@ session_start();
         <?php require("app-header.php");?>
         
         <div id="main">
+        <div id="myModal" class="modal">
+                <div id="modalText" class="modal-content teal white-text"></div>
+                <div class="modal-footer  teal lighten-4">
+                    <a class="waves-effect waves-red btn-flat modal-action modal-close">Cerrar</a>
+                </div>
+            </div>
+            <div id="myModalForm" class="modal">
+                <div id="modalTextForm" class="modal-content teal white-text"></div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="codProductoPerdido" type="text" value="" style="display:none">
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="codInventario" type="text" value="" style="display:none">
+                    </div>
+                    <div class="input-field col s12">
+                        <input id="almacenamiento" type="text" value="" style="display:none">
+                    </div>
+                    <div class="input-field col s12">
+                        <input placeholder="" id="cantidad" type="number" >
+                        <label for="modalPrecio">Ingrese la Cantidad</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <div class="input-field col s6 right">
+                          <a class="btn waves-effect waves-light col s12" onclick="reponer()">Reponer Producto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="wrapper">
                 <?php require("app-slider.php");?>
                 
@@ -108,7 +139,7 @@ session_start();
                     "url": "app/controladores/ProductosPerdidos.php"
                 },
                 "columns": [
-                    {"data" : "cod_almacenamiento"},
+                    {"data" : "nombre_almacenamiento"},
                     {"render": function (data, type, JsonResultRow, meta) {
                             return "<img width='150'src=public/imagenes/productos/"+JsonResultRow.imagen_producto+">";
                         }
@@ -119,13 +150,40 @@ session_start();
                     {"data" : "compra_unit_producto"},
                     {"data" : "precio_sugerido_venta"},
                     {"data" : "observacion_producto_perdido"},
-                    {"defaultContent" : "<button id='historial' class='historial btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-insert-drive-file'></i></button>"}
+                    {"defaultContent" : "<button id='reponer' class='reponer btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-insert-drive-file'></i></button>"}
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
                 }
             });
+            btn_reponer("#table-simple tbody", table);
         });
+
+        var btn_reponer = function(tbody, table){
+            $(tbody).on("click", "button.reponer", function(){
+                var data = table.row( $(this).parents("tr") ).data();
+                document.getElementById('codProductoPerdido').value = data.cod_producto_perdido;
+                document.getElementById('codInventario').value = data.cod_inventario;
+                document.getElementById('almacenamiento').value = data.cod_almacenamiento;
+                $('#myModalForm').openModal();
+            })
+        }
+
+        function reponer(){
+            verificarAcceso("Permiso_ProductoPerdido");
+            var cboxSucursal = document.getElementById("cboxSucursal").value;
+            var cboxAño = document.getElementById("cboxAño").value;
+            var cboxMes = document.getElementById("cboxMes").value;
+            
+            var parametros = {
+                "action" : "listaCajaChica",
+                "sucursal" : cboxSucursal,
+                "año" : cboxAño,
+                "mes" : cboxMes
+            };
+            
+        }
+
     </script>
 </body>
 </html>
