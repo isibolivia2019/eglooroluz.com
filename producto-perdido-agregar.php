@@ -235,7 +235,7 @@ session_start();
                                        "costo" : compra_unit_producto,
                                        "precio" : precio_sugerido_venta,
                                        "observacion" : observacion,
-                                       "cod_inventario" : cod_inventario
+                                       "cod_inventario" : data.cod_inventario
                                     };
                                     $.ajax({
                                       type:'POST',
