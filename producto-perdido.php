@@ -194,7 +194,7 @@ session_start();
             $.ajax({
                 type:'POST',
                 data: parametros,
-                url:'app/controladores/ProductoPerdido.php',
+                url:'app/controladores/ProductosPerdidos.php',
                 success:function(data){
                     datos = JSON.parse(data);
                     if(datos.resp == "true"){
