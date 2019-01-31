@@ -9,6 +9,9 @@ if (isset($_POST['action'])) {
         case 'listaInventarioPerdidos' :
             listaInventarioPerdidos();
             break;
+        case 'listaRegistrosProductosPerdidos' :
+            listaRegistrosProductosPerdidos();
+            break;
         case 'agregarProductoPerdido' :
             agregarProductoPerdido();
             break;
@@ -65,6 +68,43 @@ function agregarProductoPerdido(){
         $d = ['resp' => $resp1, 'action' => 'agregar'];
     }
     $data = ['producto' => $resp, 'inventario' => $d];
+    echo json_encode($data);
+}
+
+function listaRegistrosProductosPerdidos(){
+    $datos = array();
+    $modelo = modelo('Sucursal');
+    $listaSucursales = $modelo->listaSucursales($datos);
+    $modelo = modelo('Almacen');
+    $listaAlmacenes = $modelo->listaAlmacenes($datos);
+
+    $datos = array();
+    $usuarioModelo = modelo('ProductoPerdido');
+    $lista = $usuarioModelo->listaRegistrosProductosPerdidos($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["fecha_producto_perdido"] = date("d/m/Y", strtotime($lista[$i]["fecha_producto_perdido"]))." ".$lista[$i]["hora_producto_perdido"];
+        $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
+        $lista[$i]["cant_producto"] = $lista[$i]["cant_producto"].' Uds.';
+        $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
+        $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
+        if($lista[$i]["estado"] == "1"){
+            $lista[$i]["estado"] = "El producto fue agregado a Productos Perdidos";
+        }else{
+            $lista[$i]["estado"] = "El productos fue reponido al Inventario ";
+        }
+        for($j = 0 ; $j < sizeof($listaSucursales) ; $j++){
+            if($listaSucursales[$j]["cod_sucursal"] == $lista[$i]["cod_almacenamiento"]){
+                $lista[$i]["cod_almacenamiento"] = $listaSucursales[$j]["nombre_sucursal"];
+            }
+        }
+        for($k = 0 ; $k < sizeof($listaAlmacenes) ; $k++){
+            if($listaAlmacenes[$k]["cod_almacen"] == $lista[$i]["cod_almacenamiento"]){
+                $lista[$i]["cod_almacenamiento"] = $listaAlmacenes[$k]["nombre_almacen"];
+            }
+        }
+    }
+    $data = array();
+    $data = ['data' => $lista];
     echo json_encode($data);
 }
 

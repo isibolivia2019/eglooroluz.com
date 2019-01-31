@@ -50,6 +50,11 @@ class ProductoPerdido{
 		$sql = "SELECT cod_almacenamiento, cod_item_producto, nombre_producto, imagen_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido FROM producto_perdido, producto WHERE producto_perdido.cod_producto = producto.cod_producto";
 		return $this->db->select($sql, $datos);
 	}
+
+	public function listaRegistrosProductosPerdidos($datos){
+		$sql = "SELECT cod_almacenamiento, imagen_producto, cod_item_producto, nombre_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido, fecha_producto_perdido, hora_producto_perdido, estado, CONCAT(nombre_usuario, ' ',appat_usuario, ' ',apmat_usuario) as 'personal' FROM producto_perdido_reg, producto, usuario WHERE producto_perdido_reg.cod_producto = producto.cod_producto and producto_perdido_reg.cod_usuario = usuario.cod_usuario";
+		return $this->db->select($sql, $datos);
+	}
     
     public function listaPerdidos($datos){
 		$sql = "SELECT cod_almacenamiento, cod_item_producto, nombre_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, observacion_producto_perdido, fecha_producto_perdido, hora_producto_perdido, estado, CONCAT(nombre_usuario, ' ',appat_usuario, ' ',apmat_usuario) as 'personal' FROM producto_perdido_reg, producto, usuario WHERE producto_perdido_reg.cod_producto = producto.cod_producto and producto_perdido_reg.cod_usuario = usuario.cod_usuario and estado = 1 and producto_perdido_reg.cod_producto = ? and compra_unit_producto = ? and precio_sugerido_venta = ? and cod_almacenamiento = ?";
