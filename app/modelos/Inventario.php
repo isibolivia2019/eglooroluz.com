@@ -41,6 +41,11 @@ class Inventario{
 		return $this->db->select($sql, $datos);
 	}
 
+	public function buscaListaInventarioPrecio($datos){
+		$sql = "SELECT * FROM inventario WHERE cod_producto = ? and compra_unit_producto = ? and precio_sugerido_venta = ?";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function listaInventarioEspecifico($datos){
 		$sql = "SELECT cod_inventario, producto.cod_producto, cod_almacenamiento, cod_item_producto, imagen_producto, nombre_producto, cant_producto, compra_unit_producto, precio_sugerido_venta FROM inventario, producto WHERE inventario.cod_producto = producto.cod_producto and cod_inventario = ?";
 		return $this->db->select($sql, $datos);

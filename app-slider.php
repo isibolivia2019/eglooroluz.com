@@ -215,7 +215,7 @@
                                 <li><a href="verificacion-1.php">Prueba Certificacion</a></li>
                                 <li><a href="verificacion-1.php">Eliminar Compra</a></li>
                                 <li><a href="verificacion-1.php">Actualizar Cant Inven</a></li>
-                                <li><a href="verificacion-1.php">Editar precios</a></li>
+                                <li><a href="editar-precio.php">Editar precios</a></li>
                             </ul>
                         </div>
                     </li>
