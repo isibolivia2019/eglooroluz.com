@@ -134,9 +134,10 @@ function listaHistorial(){
         $j++;
     }
 
-    $datos = array($producto[0]['cod_producto'], $producto[0]['compra_unit_producto'], $producto[0]['precio_sugerido_venta'], $producto[0]['cod_almacenamiento']);
+    $datos = array('1', $codInventario);
     $modelo = modelo('ProductoPerdido');
     $listaProductoPerdido = $modelo->listaPerdidos($datos);
+
     $j = 0;
     While ($j < sizeof($listaProductoPerdido)){
         for($l = 0 ; $l < sizeof($listaSucursales) ; $l++){
@@ -161,9 +162,10 @@ function listaHistorial(){
         $j++;
     }
 
-    $datos = array($producto[0]['cod_producto'], $producto[0]['compra_unit_producto'], $producto[0]['precio_sugerido_venta'], $producto[0]['cod_almacenamiento']);
+    $datos = array('0', $codInventario);
     $modelo = modelo('ProductoPerdido');
     $listaProductoRecuperado = $modelo->listaPerdidosReponido($datos);
+    
     $j = 0;
     While ($j < sizeof($listaProductoRecuperado)){
         for($l = 0 ; $l < sizeof($listaSucursales) ; $l++){
