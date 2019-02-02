@@ -165,7 +165,7 @@ function listaHistorial(){
     $datos = array('0', $codInventario);
     $modelo = modelo('ProductoPerdido');
     $listaProductoRecuperado = $modelo->listaPerdidosReponido($datos);
-    
+
     $j = 0;
     While ($j < sizeof($listaProductoRecuperado)){
         for($l = 0 ; $l < sizeof($listaSucursales) ; $l++){
@@ -239,6 +239,9 @@ function listaHistorial(){
         $lista[$i]['total'] = $total;
         $i++;
         $j++;
+    }
+    if(sizeof($lista) == 0){
+        $lista[$i]['total'] = $total;
     }
     
     $data = array();
