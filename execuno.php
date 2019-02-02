@@ -8,7 +8,7 @@ function modelo($modelo){
     return new $modelo();
 }
 
-$datos = array('SUC-001');
+$datos = array('SUC-002');
 $modelo = modelo('Inventario');
 $lista = $modelo->listaInventarioActual($datos);
 $csi=0;
