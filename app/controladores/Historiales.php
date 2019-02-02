@@ -241,7 +241,13 @@ function listaHistorial(){
         $j++;
     }
     if(sizeof($lista) == 0){
-        $lista[$i]['total'] = $total;
+        $lista[0]['total'] = $total;
+        $lista[0]['fecha_hora'] = "-";
+        $lista[0]['personal'] = "-";
+        $lista[0]['cantidad'] = "-";
+        $lista[0]['observacion'] = "-";
+        $lista[0]['evento'] = "SIN DATOS";
+        $lista[0]['cod_item_producto'] = "-";
     }
     
     $data = array();
