@@ -148,110 +148,11 @@ function listaInventarioActual(){
     $datos = array($codigo);
     $modelo = modelo('Inventario');
     $lista = $modelo->listaInventarioActual($datos);
-
-    $csi=0;
-    $cno=0;
-    $c =0;
-
-    for($a = 0 ; $a < sizeof($lista) ; $a++){
-        $c++;
-        $codInventario = $lista[$a]['cod_inventario'];
-
-        $datos = array($codInventario);
-        $modelo = modelo('Venta');
-        $listaVenta = $modelo->listaVentaEspecifica($datos);
-        $j = 0;
-        $total = 0;
-        While ($j < sizeof($listaVenta)){
-            $total = $total - $listaVenta[$j]['cant_venta_producto'];
-            $j++;
-        }
-
-        $datos = array($codInventario);
-        $modelo = modelo('Producto');
-        $listaCompra = $modelo->compraProductosEspecificoCodInventario($datos);
-        $j = 0;
-        While ($j < sizeof($listaCompra)){
-            $total = $total + $listaCompra[$j]['cantidad_compra_producto'];
-            $j++;
-        }
-
-        $datos = array($codInventario);
-        $modelo = modelo('Transferencia');
-        $listaTransferenciaOrigen = $modelo->listaTransferenciaInventarioEspecificoOrigen($datos);
-        $j = 0;
-        While ($j < sizeof($listaTransferenciaOrigen)){
-            $total = $total - $listaTransferenciaOrigen[$j]['cantidad_producto'];
-            $j++;
-        }
-
-        $datos = array($codInventario);
-        $modelo = modelo('Transferencia');
-        $listaTransferenciaDestino = $modelo->listaTransferenciaInventarioEspecificoDestino($datos);
-        $j = 0;
-        While ($j < sizeof($listaTransferenciaDestino)){
-            $total = $total + $listaTransferenciaDestino[$j]['cantidad_producto'];
-            $j++;
-        }
-
-        $datos = array('1', $codInventario);
-        $modelo = modelo('ProductoPerdido');
-        $listaProductoPerdido = $modelo->listaPerdidos($datos);
-        $j = 0;
-        While ($j < sizeof($listaProductoPerdido)){
-            $total = $total - $listaProductoPerdido[$j]['cant_producto'];
-            $j++;
-        }
-
-        $datos = array('0', $codInventario);
-        $modelo = modelo('ProductoPerdido');
-        $listaProductoRecuperado = $modelo->listaPerdidosReponido($datos);
-        $j = 0;
-        While ($j < sizeof($listaProductoRecuperado)){
-            $total = $total + $listaProductoRecuperado[$j]['cant_producto'];
-            $j++;
-        }
-
-        $datos = array($codInventario);
-        $modelo = modelo('CompraEliminada');
-        $ListaEliminada = $modelo->listaHistorialCompraEliminada($datos);
-        $j = 0;
-        While ($j < sizeof($ListaEliminada)){
-            $total = $total - $ListaEliminada[$j]['cantidad'];
-            $j++;
-        }
-
-        $datos = array($codInventario);
-        $modelo = modelo('ActualizarCantidad');
-        $ListaActualizarCantidad = $modelo->listaHistorialCantidadInventario($datos);
-        $j = 0;
-        While ($j < sizeof($ListaActualizarCantidad)){
-            $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
-            $j++;
-        }
-
-        $datos = array($codInventario);
-        $modelo = modelo('ActualizarPrecio');
-        $ListaActualizarCantidad = $modelo->listaHistorialEditarPrecioInventario($datos);
-        $j = 0;
-        While ($j < sizeof($ListaActualizarCantidad)){
-            //$total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
-            $j++;
-        }
-
-        if($total == $lista[$a]['cant_producto']){
-            $csi++;
-        }else{
-            $cno++;
-        }
-
-        $lista[$a]["cod_item_producto"] = '#'.$lista[$a]["cod_item_producto"];
-        $lista[$a]["cant_producto"] = $lista[$a]["cant_producto"].' Uds.';
-        $lista[$a]["compra_unit_producto"] = '$us '.$lista[$a]["compra_unit_producto"];
-        $lista[$a]["precio_sugerido_venta"] = '$us '.$lista[$a]["precio_sugerido_venta"];
-        $lista[$a]["total_respuesta"] = $c;
-        $lista[$a]["total_correcto"] = $csi;
-        $lista[$a]["total_incorrecto"] = $cno;
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["cod_item_producto"] = '#'.$lista[$i]["cod_item_producto"];
+        $lista[$i]["cant_producto"] = $lista[$i]["cant_producto"].' Uds.';
+        $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
+        $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
     }
     $data = ['data' => $lista];
     echo json_encode($data);
