@@ -57,7 +57,7 @@ class Transferencia{
 	}
     
     public function agregarTransferencia($datos){
-		$sql = "INSERT INTO traspaso_producto(cod_almacenamiento_de, cod_almacenamiento_a, cod_producto, cantidad_producto, compra_unit_producto, precio_sugerido_venta, observacion_traspaso_producto, fecha_traspaso_producto, hora_traspaso_producto, cod_usuario) VALUES(?,?,?,?,?,?,?,?,?,?);";
+		$sql = "INSERT INTO traspaso_producto(cod_almacenamiento_de, cod_almacenamiento_a, cod_inventario_de, cod_inventario_a, cod_producto, cantidad_producto, compra_unit_producto, precio_sugerido_venta, observacion_traspaso_producto, fecha_traspaso_producto, hora_traspaso_producto, cod_usuario) VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
 		return $this->db->insert($sql, $datos);
 	}
 

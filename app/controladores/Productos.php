@@ -78,11 +78,8 @@ function agregarCompra(){
     date_default_timezone_set('America/La_Paz');
     $hora = date("H:i:s");
     $fecha = date("Y-m-d");
-    $datos = array($cod_producto, $cantidad, $costo, $precio, $observacion, $fecha, $hora, $cboxAlmacenamiento, $usuario);
-    $modelo = modelo('Producto');
-    $resp = $modelo->agregarCompra($datos);
     
-    $datos = array($cod_producto, $cboxAlmacenamiento);
+    $datos = array($cod_producto, $cboxAlmacenamiento, $costo, $precio);
     $modelo = modelo('Inventario');
     $lista = $modelo->listaInventarioCodigoAlmanenamiento($datos);
     if(sizeof($lista) > 0){
@@ -90,11 +87,25 @@ function agregarCompra(){
         $datos = array($cant, $lista[0]['cod_inventario']);
         $modelo = modelo('Inventario');
         $resp1 = $modelo->actualizarCantidadInventario($datos);
+
+        $datos = array($cod_producto, $cantidad, $costo, $precio, $observacion, $fecha, $hora, $cboxAlmacenamiento, $usuario, $lista[0]['cod_inventario']);
+        $modelo = modelo('Producto');
+        $resp = $modelo->agregarCompra($datos);
+
         $d = ['resp' => $resp1, 'action' => 'actualizar'];
     }else{
         $datos = array($cboxAlmacenamiento, $cod_producto, $cantidad, $costo, $precio);
         $modelo = modelo('Inventario');
         $resp1 = $modelo->agregarInventario($datos);
+
+        $datos = array($cod_producto, $cboxAlmacenamiento, $costo, $precio);
+        $modelo = modelo('Inventario');
+        $listaNuevo = $modelo->listaInventarioCodigoAlmanenamiento($datos);
+
+        $datos = array($cod_producto, $cantidad, $costo, $precio, $observacion, $fecha, $hora, $cboxAlmacenamiento, $usuario, $listaNuevo[0]['cod_inventario']);
+        $modelo = modelo('Producto');
+        $resp = $modelo->agregarCompra($datos);
+
         $d = ['resp' => $resp1, 'action' => 'agregar'];
     }
     $data = ['producto' => $resp, 'inventario' => $d];

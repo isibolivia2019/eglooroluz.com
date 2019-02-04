@@ -12,7 +12,7 @@ class Producto{
 	}
 
 	public function agregarCompra($datos){
-		$sql = "INSERT INTO compra_producto(cod_producto, cantidad_compra_producto, precio_unit_compra_producto, precio_sugerido_venta, observacion_compra_producto, fecha_compra_producto, hora_compra_producto, cod_almacenamiento, cod_usuario) VALUES(?,?,?,?,?,?,?,?,?);";
+		$sql = "INSERT INTO compra_producto(cod_producto, cantidad_compra_producto, precio_unit_compra_producto, precio_sugerido_venta, observacion_compra_producto, fecha_compra_producto, hora_compra_producto, cod_almacenamiento, cod_usuario, cod_inventario) VALUES(?,?,?,?,?,?,?,?,?,?);";
 		return $this->db->insert($sql, $datos);
 	}
 

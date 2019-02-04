@@ -90,6 +90,7 @@ session_start();
                                         </table>
                                     </div>
                                 </div>
+                                <div class="row" id="lblResp"></div>
                             </div> 
                             <br>
                             <div class="divider"></div> 
@@ -114,7 +115,13 @@ session_start();
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Almacenes.php"
+                    "url": "app/controladores/Almacenes.php",
+                    "dataSrc": function ( json ) {
+                        console.log("dataSrc", json.data[json.data.length -1])
+                        document.getElementById("lblResp").innerHTML = "<h4 class='header'>Total: "+ "</h4>";
+                        
+                        return json.data;
+                    }
                 },
                 "columns": [
                     {"render": function (data, type, JsonResultRow, meta) {

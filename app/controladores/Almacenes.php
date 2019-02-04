@@ -46,6 +46,14 @@ function listaInventarioVenta(){
         $lista[$i]["compra_unit_producto"] = '$us '.$lista[$i]["compra_unit_producto"];
         $lista[$i]["precio_sugerido_venta"] = '$us '.$lista[$i]["precio_sugerido_venta"];
     }
+
+
+
+    
+
+
+
+
     $data = ['data' => $lista];
     echo json_encode($data);
 }
