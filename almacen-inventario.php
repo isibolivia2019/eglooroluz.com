@@ -117,9 +117,7 @@ session_start();
                     "data":  parametros,
                     "url": "app/controladores/Almacenes.php",
                     "dataSrc": function ( json ) {
-                        console.log("dataSrc", json.data[json.data.length -1])
-                        document.getElementById("lblResp").innerHTML = "<h4 class='header'>Total: "+ "</h4>";
-                        
+                        console.log("resp", "total:" + json.data[json.data.length -1].total_respuesta + ",correctos:" + json.data[json.data.length -1].total_correcto + ",incorrectos:"+json.data[json.data.length -1].total_incorrecto)
                         return json.data;
                     }
                 },

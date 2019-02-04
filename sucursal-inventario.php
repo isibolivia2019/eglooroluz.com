@@ -109,12 +109,24 @@ session_start();
                 "action" : "listaInventarioActual",
                 "codigo" : localStorage.getItem("sucursal")
             };
+            /*$.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Sucursales.php',
+              success:function(data){
+                console.log("data:",data)
+              }
+            })*/
             var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Sucursales.php"
+                    "url": "app/controladores/Sucursales.php",
+                    "dataSrc": function ( json ) {
+                        console.log("resp", "total:" + json.data[json.data.length -1].total_respuesta + ",correctos:" + json.data[json.data.length -1].total_correcto + ",incorrectos:"+json.data[json.data.length -1].total_incorrecto)
+                        return json.data;
+                    }
                 },
                 "columns": [
                     {"render": function (data, type, JsonResultRow, meta) {

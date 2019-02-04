@@ -23,13 +23,6 @@ for($a=0 ; $a<sizeof($lista); $a++){
     echo 'nro:'.$c.'->cod_inventario:'.$lista[$a]['cod_inventario'].'->cod_producto:'.$lista[$a]['cod_producto'].'->#'.$lista[$a]['cod_item_producto'].'->cantidad:'.$lista[$a]['cant_producto'];
 
 
-
-
-
-    $datos = array($codInventario);
-    $modelo = modelo('Inventario');
-    $producto = $modelo->listaInventarioEspecifico($datos);
-    
     $datos = array($codInventario);
     $modelo = modelo('Venta');
     $listaVenta = $modelo->listaVentaEspecifica($datos);
