@@ -124,7 +124,6 @@ session_start();
                     "data":  parametros,
                     "url": "app/controladores/Sucursales.php",
                     "dataSrc": function ( json ) {
-                        console.log("resp", "total:" + json.data[json.data.length -1].total_respuesta + ",correctos:" + json.data[json.data.length -1].total_correcto + ",incorrectos:"+json.data[json.data.length -1].total_incorrecto)
                         return json.data;
                     }
                 },
