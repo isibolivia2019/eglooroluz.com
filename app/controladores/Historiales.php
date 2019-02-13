@@ -218,7 +218,11 @@ function listaHistorial(){
         $lista[$i]['observacion'] = $ListaActualizarCantidad[$j]['observacion'];
         $lista[$i]['evento'] = 'ACTUALIZACION DE CANTIDAD';
         $lista[$i]['cod_item_producto'] = '#'.$ListaActualizarCantidad[$j]['cod_item_producto'];
-        $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
+        if($total == $ListaActualizarCantidad[$j]['cantidad']){
+            $total = $total - $ListaActualizarCantidad[$j]['cantidad'];
+        }else{
+            $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
+        }
         $lista[$i]['total'] = $total;
         $i++;
         $j++;
