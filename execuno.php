@@ -95,9 +95,6 @@ for($a=0 ; $a<sizeof($lista); $a++){
         echo "</br>";
         echo "*****";
         echo " total=".$total."</br>";
-        echo $total." - (".$total." - ".$ListaActualizarCantidad[$j]['cantidad'].")</br>";
-        $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
-        echo "nuevo total=".$total."</br>";
         if($total == $ListaActualizarCantidad[$j]['cantidad']){
             echo $total." - ".$ListaActualizarCantidad[$j]['cantidad']."</br>";
             $total = $total - $ListaActualizarCantidad[$j]['cantidad'];
