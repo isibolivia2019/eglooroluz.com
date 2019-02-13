@@ -98,6 +98,14 @@ for($a=0 ; $a<sizeof($lista); $a++){
         echo $total." - (".$total." - ".$ListaActualizarCantidad[$j]['cantidad'].")</br>";
         $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
         echo "nuevo total=".$total."</br>";
+        if($total == $ListaActualizarCantidad[$j]['cantidad']){
+            echo $total." - ".$ListaActualizarCantidad[$j]['cantidad']."</br>";
+            $total = $total - $ListaActualizarCantidad[$j]['cantidad'];
+        }else{
+            echo $total." - (".$total." - ".$ListaActualizarCantidad[$j]['cantidad'].")</br>";
+            $total = $total - ($total - $ListaActualizarCantidad[$j]['cantidad']);
+        }
+        echo "nuevo total=".$total."</br>";
         $j++;
     }
 
