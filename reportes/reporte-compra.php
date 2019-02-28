@@ -112,7 +112,7 @@ $pdf->SetWidths(array(100));
 $style = array('B');
 $pdf -> SetFont('Arial','B', 20);
 $pdf -> Cell(80, 15, "", 0, 0, 'C');
-$empty = array(utf8_decode("REPORTE DE CAJA CHICA"));
+$empty = array(utf8_decode("REPORTE DE COMPRAS"));
 $pdf->FancyRow($empty, $border, $align, $style);
 $pdf->Ln(5);
 
@@ -120,7 +120,7 @@ $pdf -> SetDrawColor(33, 152, 158);
 $pdf -> SetTextColor(0, 0, 0);
 
 $pdf -> SetFont('Arial','B', 11);
-$pdf -> Cell(260, 10, utf8_decode('CAJA CHICA DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
+$pdf -> Cell(260, 10, utf8_decode('COMPRAS DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
 $pdf -> SetFont('Arial','B', 11);
 $pdf->SetWidths(array(10,30,35,25,15,30,40,35,40,30));
 $pdf->SetAligns(array('C','C','C','C','C','C','C','C','C'));
