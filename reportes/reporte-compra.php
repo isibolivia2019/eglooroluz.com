@@ -130,14 +130,14 @@ $cant = 0;
 $total = 0;
 for($i=0;$i<sizeof($lista);$i++){
 	$pdf -> SetFont('Arial','', 11);
-	$total = $total + $lista[$i]['precio_unit_compra_producto'];
+	$total = $total + ($lista[$i]['precio_unit_compra_producto'] * $lista[$i]['cantidad_compra_producto']);
 	$cant = $cant + $lista[$i]['cantidad_compra_producto'];
 	$pdf->Row(array(($i + 1),
 		utf8_decode($lista[$i]['fecha_compra_producto']),
 		utf8_decode($lista[$i]['cod_item_producto']),
 		utf8_decode($lista[$i]['nombre_producto']),
 		utf8_decode($lista[$i]['cantidad_compra_producto']." Uds."),
-		utf8_decode('$us '.$lista[$i]["precio_unit_compra_producto"]),
+		utf8_decode('$us '.($lista[$i]['precio_unit_compra_producto'] * $lista[$i]['cantidad_compra_producto'])),
 		utf8_decode($lista[$i]['nombre_almacenamiento']),
 		utf8_decode($lista[$i]['observacion_compra_producto']),
 		utf8_decode($lista[$i]['personal'])

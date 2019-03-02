@@ -26,10 +26,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Lista de Productos en Categoria</h5>
+                                    <h5 class="breadcrumbs-title">Datos del Cargo</h5>
                                     <ol class="breadcrumb">
-                                        <li><a href="categoria.php">Categorias</a></li>
-                                        <li class="active">Productos en Categoria</li>
+                                        <li><a href="cargo.php">Cargos</a></li>
+                                        <li class="active">Datos de Cargo</li>
                                     </ol>
                                 </div>
                             </div>
@@ -62,17 +62,17 @@ session_start();
                                                 <table id="table-simple" class="responsive-table display" cellspacing="0">
                                                     <thead>
                                                         <tr>
-                                                            <th>Imagen</th>
-                                                            <th>Codigo</th>
                                                             <th>Nombre</th>
+                                                            <th>Ap. Paterno</th>
+                                                            <th>Ap. Materno</th>
                                                             <th>Eliminar</th>
                                                         </tr>
                                                     </thead>
                                                     <tfoot>
                                                         <tr>
-                                                            <th>Imagen</th>
-                                                            <th>Codigo</th>
                                                             <th>Nombre</th>
+                                                            <th>Ap. Paterno</th>
+                                                            <th>Ap. Materno</th>
                                                             <th>Eliminar</th>
                                                         </tr>
                                                     </tfoot>
@@ -93,91 +93,87 @@ session_start();
         <?php require("app-footer.php");?>
         <?php require("app-foot.php");?>
 
-        <script>
+    <script>
 
-$(document).ready(function() {
-    verificarAcceso("Permiso_Categoria");
-    actualizarLista();
-});
+        $(document).ready(function() {
+            verificarAcceso("Permiso_Cargo");
+            actualizarLista();
+        });
 
-function actualizarLista(){
-    var table
-    var parametros = {
-        "action" : "listaCategoriaProductos",
-        "cod_categoria" : localStorage.getItem("categoria")
-    };
-    $.ajax({
-      type:'POST',
-      data: parametros,
-      url:'app/controladores/Categorias.php',
-      success:function(data){
-        let datos = JSON.parse(data);
-        datos = datos.data;
-        if(datos.length > 0){
-            document.getElementById("lblDatos1").innerHTML = 
-            "<i class='mdi-file-folder circle'></i>"+
-            "<span class='title'>Categoria: "+datos[0].nombre_categoria+"</span>";
-
-            table = $('#table-simple').DataTable({
-                "destroy":true,
-                "data": datos,
-                "columns": [
-                    {"render": function (data, type, JsonResultRow, meta) {
-                            return "<img width='150'src=public/imagenes/productos/"+JsonResultRow.imagen_producto+">";
-                        }
-                    },
-                    {"data" : "cod_item_producto"},
-                    {"data" : "nombre_producto"},
-                    {"defaultContent" : "<button id='eliminar' class='eliminar btn waves-effect red' type='submit' name='eliminar'><i class='mdi-action-delete'></i></button>"}
-                ],
-                "language": {
-                    "url": "public/Spanish.lang"
-                }
-            });
-            btn_eliminar("#table-simple tbody", table);
-        }else{
-            document.getElementById("lblDatos1").innerHTML = 
-            "<i class='mdi-file-folder circle'></i>"+
-            "<span class='title'>No se encontraron Resultados  </span>"+
-            "</p>";
-        }
-        
-      }
-    })
-    
-}
-var btn_eliminar = function(tbody, table){
-        $(tbody).on("click", "button.eliminar", function(){
-            verificarAcceso("Permiso_Categoria");
-            var data = table.row( $(this).parents("tr") ).data();
-            var tableRemove = $(this).parents("tr");
-            
+        function actualizarLista(){
+            var table
             var parametros = {
-               "action" : "eliminarProductoCategoria",
-               "cod_producto" : data.cod_producto,
-               "cod_categoria" : data.cod_categoria
+                "action" : "listaCargoUsuarios",
+                "cargo" : localStorage.getItem("cargo")
             };
             $.ajax({
               type:'POST',
               data: parametros,
-              url:'app/controladores/Categorias.php',
+              url:'app/controladores/Cargos.php',
               success:function(data){
-                console.log("data",data)
-                  datos = JSON.parse(data);
-                  if(datos.resp == "true"){
-                      Materialize.toast('El Producto fue eliminado de la categoria Satisfactoriamene', 5000);
-                      table.row(tableRemove).remove().draw(false);
-                  }
-                  if(datos.resp == "false"){
-                      Materialize.toast('Hubo un fallo al eliminar al Producto de la categoria. Vuelva a Intentarlo', 5000)
-                  }
-                  if(datos.resp != "true" && datos.resp != "false"){
-                      Materialize.toast('Hubo un fallo al eliminar al Producto de la categoria COD:'+datos.resp, 5000)
-                  }
+                let datos = JSON.parse(data);
+                datos = datos.data;
+                if(datos.length > 0){
+                    document.getElementById("lblDatos1").innerHTML = 
+                    "<i class='mdi-file-folder circle'></i>"+
+                    "<span class='title'>Cargo: "+datos[0].nombre_cargo+"</span>";
+
+                    table = $('#table-simple').DataTable({
+                        "destroy":true,
+                        "data": datos,
+                        "columns": [
+                            {"data" : "nombre_usuario"},
+                            {"data" : "appat_usuario"},
+                            {"data" : "apmat_usuario"},
+                            {"defaultContent" : "<button id='eliminar' class='eliminar btn waves-effect red' type='submit' name='eliminar'><i class='mdi-action-delete'></i></button>"}
+                        ],
+                        "language": {
+                            "url": "public/Spanish.lang"
+                        }
+                    });
+                    btn_eliminar("#table-simple tbody", table);
+                }else{
+                    document.getElementById("lblDatos1").innerHTML = 
+                    "<i class='mdi-file-folder circle'></i>"+
+                    "<span class='title'>No se encontraron Resultados  </span>"+
+                    "</p>";
+                }
+                
               }
             })
-        })
-}
-</script>
+            
+        }
+        var btn_eliminar = function(tbody, table){
+                $(tbody).on("click", "button.eliminar", function(){
+                    verificarAcceso("Permiso_Cargo");
+                    var data = table.row( $(this).parents("tr") ).data();
+                    var tableRemove = $(this).parents("tr");
+                    
+                    var parametros = {
+                       "action" : "eliminarUsuarioCargo",
+                       "cod_usuario" : data.cod_usuario
+                    };
+                    $.ajax({
+                      type:'POST',
+                      data: parametros,
+                      url:'app/controladores/Cargos.php',
+                      success:function(data){
+                        console.log("data",data)
+                          datos = JSON.parse(data);
+                          if(datos.resp == "true"){
+                              Materialize.toast('El Personal fue eliminado del Cargo Satisfactoriamene', 5000);
+                              table.row(tableRemove).remove().draw(false);
+                          }
+                          if(datos.resp == "false"){
+                              Materialize.toast('Hubo un fallo al eliminar al Personal del Cargo. Vuelva a Intentarlo', 5000)
+                          }
+                          if(datos.resp != "true" && datos.resp != "false"){
+                              Materialize.toast('Hubo un fallo al eliminar al Personal del Cargo COD:'+datos.resp, 5000)
+                          }
+                      }
+                    })
+                })
+        }
+    </script>
 </body>
 </html>

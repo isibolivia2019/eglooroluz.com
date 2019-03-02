@@ -79,13 +79,13 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
-
+var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Cargo");
             var parametros = {
                 "action" : "listaCargos"
             };
-            var table = $('#table-simple').DataTable({
+            table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -95,9 +95,9 @@ session_start();
                 "columns": [
                     {"data" : "nombre_cargo"},
                     {"data" : "descripcion_cargo"},
-                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-content-send'></i></button>"}
+                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-file-folder-open'></i></button>"},
+                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-border-color'></i></button>"},
+                    {"defaultContent" : "<button id='eliminar' class='eliminar btn waves-effect red' type='submit' name='action'><i class='mdi-action-delete'></i></button>"}
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
@@ -105,6 +105,7 @@ session_start();
             });
             btn_editar("#table-simple tbody", table);
             btn_ver_datos("#table-simple tbody", table);
+            btn_eliminar("#table-simple tbody", table);
         });
 
         
@@ -121,6 +122,36 @@ session_start();
                     var data = table.row( $(this).parents("tr") ).data();
                     localStorage.setItem("cargo", data.cod_cargo);
                     location.href = "cargo-datos.php";
+                })
+        }
+        var btn_eliminar = function(tbody, table){
+                $(tbody).on("click", "button.eliminar", function(){
+                    verificarAcceso("Permiso_Cargo");
+                    var data = table.row( $(this).parents("tr") ).data();
+                    var tableRemove = $(this).parents("tr");
+                    var parametros = {
+                       "action" : "eliminarCargo",
+                       "cod_cargo" : data.cod_cargo
+                    };
+                    $.ajax({
+                      type:'POST',
+                      data: parametros,
+                      url:'app/controladores/Cargos.php',
+                      success:function(data){
+                          console.log(data)
+                          datos = JSON.parse(data);
+                          if(datos.resp == "true"){
+                              Materialize.toast('El Cargo fue eliminado Satisfactoriamene', 5000)
+                              table.row(tableRemove).remove().draw(false);
+                          }
+                          if(datos.resp == "false"){
+                              Materialize.toast('Hubo un fallo al eliminar el Cargo. Vuelva a Intentarlo', 5000)
+                          }
+                          if(datos.resp != "true" && datos.resp != "false"){
+                              Materialize.toast('Hubo un fallo al eliminar el Cargo COD:'+datos.resp, 5000)
+                          }
+                      }
+                    })
                 })
         }
     </script>

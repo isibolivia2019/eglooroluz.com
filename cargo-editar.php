@@ -59,7 +59,7 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Actualizar
+                                                <button class="btn cyan waves-effect waves-light right" type="button" name="action" onclick="actualizarCargo()">Actualizar
                                                     <i class="mdi-content-send right"></i>
                                                 </button>
                                             </div>
@@ -78,11 +78,53 @@ session_start();
         <?php require("app-footer.php");?>
         <?php require("app-foot.php");?>
 
-    <script>
-
+        <script>
         $(document).ready(function() {
             verificarAcceso("Permiso_Cargo");
+            var parametros = {
+                "action" : "cargoEspecifico",
+                "cod_cargo" : localStorage.getItem("cargo")
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Cargos.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                document.getElementById('nombre').value = datos[0].nombre_cargo;
+                document.getElementById('descripcion').value = datos[0].descripcion_cargo;
+              }
+            })
         });
+
+        function actualizarCargo(){
+        verificarAcceso("Permiso_Cargo");
+          var nombre = document.getElementById('nombre').value;
+          var descripcion = document.getElementById('descripcion').value;
+          var parametros = {
+             "action" : "actualizarCargo",
+             "codigo" : localStorage.getItem("cargo"),
+             "nombre" : nombre,
+             "descripcion" : descripcion
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Cargos.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Cargo Actualizado con exito', 5000)
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Cargo. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al actualizar el Cargo COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

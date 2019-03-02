@@ -102,7 +102,7 @@ session_start();
 
     <script>
         $(document).ready(function() {
-            verificarAcceso("Permiso_Venta");
+            verificarAcceso("Permiso_Reporte");
             var cboxSucursal = document.getElementById("cboxSucursal");
             var cboxAño = document.getElementById("cboxAño");
             var parametros = {

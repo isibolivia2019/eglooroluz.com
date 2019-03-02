@@ -103,7 +103,7 @@ session_start();
 
     <script>
         $(document).ready(function() {
-            verificarAcceso("Permiso_Venta");
+            verificarAcceso("Permiso_Reporte");
             var cboxAlmacenamiento = document.getElementById("cboxAlmacenamiento");
             var cboxAño = document.getElementById("cboxAño");
             var parametros = {

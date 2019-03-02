@@ -44,18 +44,16 @@ session_start();
                                 <form class="col s12">
                                     <div class="row">
                                     <div class="input-field col s12">
-                                            <select id="cargo">
+                                            <select class="browser-default" id="cboxCargo">
                                                 <option value="" disabled selected>Seleccione el Cargo</option>
                                             </select>
-                                            <label>Cargo</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s12">
-                                            <select id="usuario">
+                                            <select class="browser-default" id="cboxUsuario">
                                                 <option value="" disabled selected>Seleccione al Personal</option>
                                             </select>
-                                            <label>Personal</label>
                                         </div>
 
                                     </div>
@@ -64,7 +62,7 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Asignar Cargo
+                                                <button class="btn cyan waves-effect waves-light right" type="button" name="action" onclick="asignarUsuarioCargo()">Asignar Cargo
                                                     <i class="mdi-content-send right"></i>
                                                 </button>
                                             </div>
@@ -83,11 +81,82 @@ session_start();
         <?php require("app-footer.php");?>
         <?php require("app-foot.php");?>
 
-    <script>
-
+        <script>
         $(document).ready(function() {
             verificarAcceso("Permiso_Cargo");
+            listaUsuarios();
+            var cboxCargo = document.getElementById("cboxCargo");
+            var parametros = {
+             "action" : "listaCargos"        
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Cargos.php',
+            success:function(data){
+                console.log("data", data)
+                datos = JSON.parse(data);
+                datos = datos.data
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_cargo);
+                    tag.innerHTML = datos[i].nombre_cargo;
+                    cboxCargo.appendChild(tag);
+                }
+            }
+          })
         });
+
+        function listaUsuarios(){
+            verificarAcceso("Permiso_Cargo");
+            var cboxUsuario = document.getElementById("cboxUsuario");
+            var parametros = {
+             "action" : "listaUsuarioSinCargo"        
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Usuarios.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                for(let i=0 ; i<datos.length ; i++){
+                    var tag = document.createElement('option');
+                    tag.setAttribute('value', datos[i].cod_usuario);
+                    tag.innerHTML = datos[i].nombre_usuario+" "+datos[i].appat_usuario+" "+datos[i].apmat_usuario;
+                    cboxUsuario.appendChild(tag);
+                }
+            }
+          })
+        }
+
+        function asignarUsuarioCargo(){
+            //$('body').addClass('loaded');
+            verificarAcceso("Permiso_Cargo");
+            var cboxUsuario = document.getElementById("cboxUsuario").value;
+            var cboxCargo = document.getElementById("cboxCargo").value;
+            var parametros = {
+                "action" : "asignarUsuarioCargo",
+                "usuario" : cboxUsuario,
+                "cargo" : cboxCargo
+            };
+            $.ajax({
+                type:'POST',
+                data: parametros,
+                url:'app/controladores/Cargos.php',
+                success:function(data){
+                    datos = JSON.parse(data);
+                    if(datos.resp == "true"){
+                        Materialize.toast('El Usuario fue asignado correctamente al Cargo', 7000)
+                    }
+                    if(datos.resp == "false"){
+                        Materialize.toast('El Usuario ya se encuentra asignado a este Cargo', 7000)
+                    }
+                    if(datos.resp != "true" && datos.resp != "false"){
+                        Materialize.toast('Hubo un fallo al asignar al Usuario en el Cargo COD:'+datos.resp, 7000)
+                    }      
+                }
+            })
+        }
     </script>
 </body>
 </html>

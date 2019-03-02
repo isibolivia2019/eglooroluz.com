@@ -41,7 +41,7 @@ session_start();
                             <p class="caption">Categorias registrados para publicar en la pagina principal.</p>
                             <div class="divider"></div>
                             <div id="table-datatables">
-                                <h4 class="header">Cargos</h4>
+                                <h4 class="header">Categoria</h4>
                                 <div class="row">
                                     <div class="col s12">
                                         <table id="table-simple" class="responsive-table display" cellspacing="0">
@@ -95,12 +95,15 @@ session_start();
                     "url": "app/controladores/Categorias.php"
                 },
                 "columns": [
-                    {"data" : "nombre_categoria"},
+                    {"render": function (data, type, JsonResultRow, meta) {
+                            return "<img width='150'src=public/imagenes/categorias/"+JsonResultRow.imagen_categoria+">";
+                        }
+                    },
                     {"data" : "nombre_categoria"},
                     {"data" : "descripcion_categoria"},
-                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-content-send'></i></button>"},
-                    {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-content-send'></i></button>"}
+                    {"defaultContent" : "<button id='datos' class='datos btn waves-effect light-green' type='submit' name='action'><i class='mdi-file-folder-open'></i></button>"},
+                    {"defaultContent" : "<button id='editar' class='editar btn waves-effect blue' type='button' name='editar'><i class='mdi-editor-border-color'></i></button>"},
+                    {"defaultContent" : "<button id='eliminar' class='eliminar btn waves-effect red' type='submit' name='action'><i class='mdi-action-delete'></i></button>"}
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
@@ -108,6 +111,7 @@ session_start();
             });
             btn_editar("#table-simple tbody", table);
             btn_ver_datos("#table-simple tbody", table);
+            btn_eliminar("#table-simple tbody", table);
         });
 
         
@@ -115,15 +119,46 @@ session_start();
         var btn_editar = function(tbody, table){
                 $(tbody).on("click", "button.editar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("cargo", data.cod_cargo);
+                    localStorage.setItem("categoria", data.cod_categoria);
                     location.href = "categoria-editar.php";
                 })
         }
         var btn_ver_datos = function(tbody, table){
                 $(tbody).on("click", "button.datos", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("cargo", data.cod_cargo);
+                    localStorage.setItem("categoria", data.cod_categoria);
                     location.href = "categoria-datos.php";
+                })
+        }
+
+        var btn_eliminar = function(tbody, table){
+                $(tbody).on("click", "button.eliminar", function(){
+                    verificarAcceso("Permiso_Categoria");
+                    var data = table.row( $(this).parents("tr") ).data();
+                    var tableRemove = $(this).parents("tr");
+                    var parametros = {
+                       "action" : "eliminarCategoria",
+                       "cod_categoria" : data.cod_categoria
+                    };
+                    $.ajax({
+                      type:'POST',
+                      data: parametros,
+                      url:'app/controladores/Categorias.php',
+                      success:function(data){
+                          console.log(data)
+                          datos = JSON.parse(data);
+                          if(datos.resp == "true"){
+                              Materialize.toast('La Categoria fue eliminado Satisfactoriamene', 5000)
+                              table.row(tableRemove).remove().draw(false);
+                          }
+                          if(datos.resp == "false"){
+                              Materialize.toast('Hubo un fallo al eliminar la Categoria. Vuelva a Intentarlo', 5000)
+                          }
+                          if(datos.resp != "true" && datos.resp != "false"){
+                              Materialize.toast('Hubo un fallo al eliminar la Categoria COD:'+datos.resp, 5000)
+                          }
+                      }
+                    })
                 })
         }
     </script>

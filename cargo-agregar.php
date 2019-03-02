@@ -59,7 +59,7 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12">
-                                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Registrar
+                                                <button class="btn cyan waves-effect waves-light right" type="button" name="action" onclick="agregarCargo()">Registrar
                                                     <i class="mdi-content-send right"></i>
                                                 </button>
                                             </div>
@@ -78,11 +78,41 @@ session_start();
         <?php require("app-footer.php");?>
         <?php require("app-foot.php");?>
 
-    <script>
-
+        <script>
         $(document).ready(function() {
             verificarAcceso("Permiso_Cargo");
         });
+
+        function agregarCargo(){
+            verificarAcceso("Permiso_Cargo");
+          var nombre = document.getElementById('nombre').value;
+          var descripcion = document.getElementById('descripcion').value;
+
+          var parametros = {
+             "action" : "agregarCargo",
+             "nombre" : nombre,
+             "descripcion" : descripcion
+          };
+          $.ajax({
+            type:'POST',
+            data: parametros,
+            url:'app/controladores/Cargos.php',
+            success:function(data){
+                datos = JSON.parse(data);
+                if(datos.resp == "true"){
+                    Materialize.toast('Cargo Registrado con exito', 5000)
+                    document.getElementById('nombre').value = "";
+                    document.getElementById('descripcion').value = "";
+                }
+                if(datos.resp == "false"){
+                    Materialize.toast('Hubo un fallo al registrar el Cargo. Vuelva a Intentarlo', 5000)
+                }
+                if(datos.resp != "true" && datos.resp != "false"){
+                    Materialize.toast('Hubo un fallo al registrar el Cargo COD:'+datos.resp, 5000)
+                }
+            }
+          })
+        }
     </script>
 </body>
 </html>

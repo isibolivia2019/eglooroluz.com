@@ -35,9 +35,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Cargos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Lista de Cargos</a></li>
-                                <li><a href="verificacion-1.php">Agregar Nuevo Cargo</a></li>
-                                <li><a href="verificacion-1.php">Asignar Cargos</a></li>
+                                <li><a href="cargo.php">Lista de Cargos</a></li>
+                                <li><a href="cargo-agregar.php">Agregar Nuevo Cargo</a></li>
+                                <li><a href="cargo-asignar.php">Asignar Cargos</a></li>
                             </ul>
                         </div>
                     </li>
@@ -100,9 +100,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Categorias</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Lista de Categorias</a></li>
-                                <li><a href="verificacion-1.php">Agregar Categoria</a></li>
-                                <li><a href="verificacion-1.php">Asignar Categorias</a></li>
+                                <li><a href="categoria.php">Lista de Categorias</a></li>
+                                <li><a href="categoria-agregar.php">Agregar Categoria</a></li>
+                                <li><a href="categoria-asignar.php">Asignar Categorias</a></li>
                             </ul>
                         </div>
                     </li>
