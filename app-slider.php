@@ -111,10 +111,9 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Descuentos</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Actuales Descuentos</a></li>
-                                <li><a href="verificacion-1.php">Lista Total Descuentos</a></li>
-                                <li><a href="verificacion-1.php">Agregar Descuentos</a></li>
-                                <li><a href="verificacion-1.php">Agregar Varios </a></li>
+                                <li><a href="descuento.php">Actuales Descuentos</a></li>
+                                <li><a href="descuento-total.php">Lista Total Descuentos</a></li>
+                                <li><a href="descuento-agregar.php">Agregar Descuentos</a></li>
                             </ul>
                         </div>
                     </li>
@@ -173,6 +172,16 @@
                         </div>
                     </li>
                 <?php }?>
+                <?php if($_SESSION['Permiso_CajaChica'] == 1){?>
+                    <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Caja Chica</a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a href="caja-chica.php">Lista de gastos</a></li>
+                                <li><a href="caja-chica-agregar.php">Agregar gastos</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                <?php }?>
                 <?php if($_SESSION['Permiso_Acceso'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Accesos</a>
                         <div class="collapsible-body">
@@ -185,17 +194,7 @@
                         </div>
                     </li>
                 <?php }?>
-                <?php if($_SESSION['Permiso_CajaChica'] == 1){?>
-                    <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Caja Chica</a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li><a href="caja-chica.php">Lista de gastos</a></li>
-                                <li><a href="caja-chica-agregar.php">Agregar gastos</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                <?php }?>
-                <?php if($_SESSION['Permiso_Cliente'] == 1){?>
+                <?php /*if($_SESSION['Permiso_Cliente'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Clientes</a>
                         <div class="collapsible-body">
                             <ul>
@@ -204,7 +203,7 @@
                             </ul>
                         </div>
                     </li>
-                <?php }?>
+                <?php }*/?>
                 <?php if($_SESSION['Permiso_Configuracion'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Configuraciones</a>
                         <div class="collapsible-body">

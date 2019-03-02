@@ -87,8 +87,10 @@ session_start();
         $(document).ready(function() {
             verificarAcceso("Permiso_Descuento");
             var parametros = {
-                "action" : "listaDescuentos"
+                "action" : "listaDescuentosActivos"
             };
+
+
             var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
@@ -97,28 +99,51 @@ session_start();
                     "url": "app/controladores/Descuentos.php"
                 },
                 "columns": [
-                    {"data" : "cod_inventario"},
-                    {"data" : "porcenta_descuento_producto"},
-                    {"data" : "cod_inventario"},
+                    {"data" : "nombre_almacenamiento"},
+                    {"data" : "cod_item_producto"},
                     {"data" : "porcenta_descuento_producto"},
                     {"data" : "descuento_interno"},
+                    {"data" : "fecha_inicio_descuento_producto"},
                     {"data" : "observacion_descuento_producto"},
-                    {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-content-send'></i></button>"}
+                    {"defaultContent" : "<button id='eliminar' class='eliminar btn waves-effect red' type='submit' name='action'><i class='mdi-action-delete'></i></button>"}
                 ],
                 "language": {
                     "url": "public/Spanish.lang"
                 }
             });
-            btn_editar("#table-simple tbody", table);
+            btn_eliminar("#table-simple tbody", table);
         });
 
         
 
-        var btn_editar = function(tbody, table){
-                $(tbody).on("click", "button.editar", function(){
+        var btn_eliminar = function(tbody, table){
+                $(tbody).on("click", "button.eliminar", function(){
+                    verificarAcceso("Permiso_Descuento");
                     var data = table.row( $(this).parents("tr") ).data();
-                    localStorage.setItem("cargo", data.cod_cargo);
-                    location.href = "cargo-editar.php";
+                    var tableRemove = $(this).parents("tr");
+                    var parametros = {
+                       "action" : "eliminarDescuento",
+                       "cod_descuento_producto" : data.cod_descuento_producto
+                    };
+                    $.ajax({
+                      type:'POST',
+                      data: parametros,
+                      url:'app/controladores/Descuentos.php',
+                      success:function(data){
+                          console.log(data)
+                          datos = JSON.parse(data);
+                          if(datos.resp == "true"){
+                              Materialize.toast('El Descuento fue cancelado correctamente', 5000)
+                              table.row(tableRemove).remove().draw(false);
+                          }
+                          if(datos.resp == "false"){
+                              Materialize.toast('Hubo un fallo al cancelar el Descuento. Vuelva a Intentarlo', 5000)
+                          }
+                          if(datos.resp != "true" && datos.resp != "false"){
+                              Materialize.toast('Hubo un fallo al cancelar el Descuento COD:'+datos.resp, 5000)
+                          }
+                      }
+                    })
                 })
         }
 
