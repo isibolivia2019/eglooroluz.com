@@ -60,5 +60,10 @@ class Categoria{
 		$sql = "DELETE FROM categoria_producto WHERE cod_categoria = ? and cod_producto = ?;";
 		return $this->db->update($sql, $datos);
 	}
+
+	public function listaCategoriaProductosPagina($datos){
+		$sql = "SELECT cod_item_producto, nombre_producto, descripcion_producto, imagen_producto, producto.cod_producto, categoria.cod_categoria, nombre_categoria, descripcion_categoria FROM categoria_producto, categoria, producto WHERE categoria_producto.cod_producto = producto.cod_producto and categoria_producto.cod_categoria = categoria.cod_categoria and categoria_producto.cod_categoria = ?";
+		return $this->db->select($sql, $datos);
+	}
 }
 ?>

@@ -33,6 +33,10 @@ if (isset($_POST['action'])) {
         case 'asignarProductoCategoria' :
             asignarProductoCategoria();
             break;
+        case 'listaCategoriaProductosPagina' :
+            listaCategoriaProductosPagina();
+            break;
+            
     }
 }
 
@@ -181,6 +185,16 @@ function eliminarProductoCategoria(){
     $resp = $modelo->eliminarProductoCategoria($datos);
     $data = array();
     $data = ['resp' => $resp];
+    echo json_encode($data);
+}
+
+function listaCategoriaProductosPagina(){
+    $cod_categoria = $_POST['codigo'];
+    $datos = array($cod_categoria);
+    $modelo = modelo('Categoria');
+    $lista = $modelo->listaCategoriaProductosPagina($datos);
+    $data = array();
+    $data = ['data' => $lista];
     echo json_encode($data);
 }
 

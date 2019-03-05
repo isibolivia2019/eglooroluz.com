@@ -391,7 +391,7 @@ $listaDescuento = $modelo->listaDescuentoProducto($datos);
 </div>
     </div>
     <?php require("public-foot.php");?>
-
+    
     <script>
         $(document).ready(function() {
             var parametros = {
@@ -406,48 +406,17 @@ $listaDescuento = $modelo->listaDescuentoProducto($datos);
                 datos = datos.data;
                 let contenido = ""
                 for(i = 0 ; i < datos.length ; i++){
-                    contenido = contenido + "<li><a href='verificacion.php'>" + datos[i].nombre_categoria + "</a></li>";
+                    contenido = contenido + "<li><a onclick='prueba("+datos[i].cod_categoria+")'>" + datos[i].nombre_categoria + "</a></li>";
                 }
                 document.getElementById("idListaCategoria").innerHTML = contenido;
               }
             })
-            /*parametros = {
-                "action" : "listaProductos",
-            };
-            $.ajax({
-              type:'POST',
-              data: parametros,
-              url:'app/controladores/Productos.php',
-              success:function(data){
-                datos = JSON.parse(data);
-                datos = datos.data;
-              let contenido = ""
-                let i = 0;
-                while(i<2){
-                      num = Math.random() * (datos.length - 0) + 0;
-                      num = Math.trunc(num)
-                      console.log("num", num)
-                      if(datos[num].imagen_producto != "sin_imagen_producto.jpg"){
-                        console.log("data:", datos[num].imagen_producto);
-                        contenido = contenido +
-                        "<div class='ps-product--banner'>" +
-                          "<div class='ps-product__thumbnail'><a href=''><img src='public/imagenes/productos/"+datos[num].imagen_producto+"' alt=''></a></div>" +
-                          "<div class='ps-product__content'>"+
-                            "<h3>"+(datos[num].nombre_producto).toUpperCase()+"</h3>"+
-                            "<select class='ps-rating'><option value='1'>1</option><option value='1'>2</option><option value='1'>3</option><option value='1'>4</option><option value='1'>5</option></select>"+
-                            "<p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p>"+
-                            "<h4>STOCK Disponible</h4>"+
-                            "<div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div>"+
-                          "</div>"+
-                        "</div>";
-                        i++;
-                  }
-                }
-let con = "<div id='slider-baner' class='ps-slider--banner owl-slider' data-owl-auto='true' data-owl-loop='true' data-owl-speed='2000' data-owl-gap='0' data-owl-nav='false' data-owl-dots='true' data-owl-item='1' data-owl-item-xs='1' data-owl-item-sm='1' data-owl-item-md='1' data-owl-item-lg='1' data-owl-duration='1000' data-owl-mousedrag='on'><div class='ps-product--banner'><div class='ps-product__thumbnail'><a href=''><img src='public/imagenes/productos/+datos[num].imagen_producto+' alt=''></a></div><div class='ps-product__content'><h3>+(datos[num].nombre_producto).toUpperCase()</h3><select class='ps-rating'><option value='1'>1</option><option value='1'>2</option><option value='1'>3</option><option value='1'>4</option><option value='1'>5</option></select><p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p><h4>STOCK Disponible</h4><div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div></div></div><div class='ps-product--banner'><div class='ps-product__thumbnail'><a href=''><img src='public/imagenes/productos/' alt=''></a></div><div class='ps-product__content'><h3>+(datos[num].nombre_producto).toUpperCase()</h3><select class='ps-rating'><option value='1'>1</option><option value='1'>2</option><option value='1'>3</option><option value='1'>4</option><option value='1'>5</option></select><p>Con nuestra amplia variedad de Lámparas Colgantes de EGLO, podrás decorar los distintos espacios en el hogar, ideal para Living, Comedor, Dormitorio, Sala de Estar, Cocinas entre otros. Descubre los exclusivos diseños colgantes con iluminación LED que sólo IMPORTADORA ORO LUZ puede ofrecer.</p><h4>STOCK Disponible</h4><div class='ps-product__actions'><a class='ps-btn' href='cart.html'>MAS INFORMACION</a></div></div></div></div>"
-              document.getElementById("slider-baner").innerHTML = con;
-              }
-            })*/
         });
+
+        function prueba(codigo){
+          localStorage.setItem("cat", codigo);
+          location.href = "mis-productos.php?c="+codigo;
+        }
     </script>
   </body>
 </html>
