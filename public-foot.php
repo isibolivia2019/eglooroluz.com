@@ -16,4 +16,3 @@
 <script type="text/javascript" src="public/js/plugins/data-tables/data-tables-script.js"></script>
 <!-- Custom scripts-->
 <script src="public/js/main.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsUcTjt43mTheN9ruCsQVgBE-wgN6_AfY&amp;region=GB"></script>

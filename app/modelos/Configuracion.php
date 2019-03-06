@@ -6,6 +6,11 @@ class Configuracion{
 		$this->db = new Base;
 	}
 
+	public function ingresarEmail($datos){
+		$sql = "INSERT INTO email_cliente(email) VALUES(?)";
+		return $this->db->insert($sql, $datos);
+	}
+
 	public function agregarRegistroEditarPrecio($datos){
 		$sql = "INSERT INTO registro_producto_editar_precio(cod_inventario, cod_almacenamiento, cantidad, observacion, fecha, hora, cod_usuario) VALUES(?,?,?,?,?,?,?)";
 		return $this->db->insert($sql, $datos);

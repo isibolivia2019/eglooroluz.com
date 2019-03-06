@@ -12,7 +12,7 @@
         </div>
     </div>
     <nav class="navigation">
-        <div class="ps-container"><a class="ps-logo" href="index-2.html"><img src="public/imagenes/sistema/eglo.png" alt=""></a>
+        <div class="ps-container"><a class="ps-logo" href="index.php"><img src="public/imagenes/sistema/eglo.png" alt=""></a>
             <ul class="main-menu menu">
                 <li class="current-menu-item menu-item-has-children"><a href="index.php">Inicio</a></li>
                 <li class="menu-item-has-children has-mega-menu"><a href="#">Catalogo</a>
@@ -26,16 +26,16 @@
                         </div>
                     </div>
                 </li>
-                <li class="menu-item-has-children"><a href="#">Ofertas</a>
-                    <ul class="sub-menu">
-                        <li class="menu-item-has-children"><a href="verificacion.php">Nuestras Ofertas</a>
-                            <ul class="sub-menu">
-
-                            </ul>
+                <li class="menu-item-has-children"><a href="mis-productos-descuentos.php">Ofertas</a>
+                </li>
+                <li class="menu-item-has-children"><a href="#">Contactos</a>
+                      <ul class="sub-menu">
+                        <li class="menu-item-has-children"><a href="contactos-central.php">Ubicacion Central</a>
+                        </li>
+                        <li class="menu-item-has-children"><a href="contactos-sur.php">Ubicacion San Miguel</a>
                         </li>
                     </ul>
                 </li>
-                <li><a href="verificacion.php">Contactos</a></li>
             </ul>
             <div class="menu-toggle"><span></span></div>
             <form class="ps-form--search" action="" method="post"><i class="furniture-search"></i>

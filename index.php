@@ -137,7 +137,7 @@ $listaDescuento = $modelo->listaDescuentoProducto($datos);
       <div class="ps-container">
         <div class="ps-slider--partners owl-slider" data-owl-auto="true" data-owl-loop="true" data-owl-speed="1000" data-owl-gap="50" data-owl-nav="false" data-owl-dots="false" data-owl-item="5" data-owl-item-xs="2" data-owl-item-sm="3" data-owl-item-md="4" data-owl-item-lg="5" data-owl-duration="1000" data-owl-mousedrag="on">
           <?php for($i = 0; $i < sizeof($listaCategoria) ; $i++){?>
-            <a href=''><img src=<?php echo "public/imagenes/categorias/".$listaCategoria[$i]['imagen_categoria'];?> alt=''></a>
+            <a href=<?php echo "mis-productos.php?c=".$listaCategoria[$i]['cod_categoria'];?>><img src=<?php echo "public/imagenes/categorias/".$listaCategoria[$i]['imagen_categoria'];?> alt=''></a>
           <?php }?>
           </div>
       </div>
@@ -374,9 +374,9 @@ $listaDescuento = $modelo->listaDescuentoProducto($datos);
           <h3>INGRESE SU CORRE ELECTRONICO</h3>
           <p>Para hacerle llegar acerca de nuestras <span> PROMOCIONES y PRODUCTOS</span></p>
         </div>
-        <form class="ps-form--subscribe" action="http://warethemes.com/html/flourish/do_action" method="post">
-          <input class="form-control" type="text" placeholder="ingrese su Correo Electronico...">
-          <button>ENVIAR</button>
+        <form class="ps-form--subscribe">
+          <input class="form-control" type="text" id="txtEmail" placeholder="ingrese su Correo Electronico...">
+          <button type="button" onclick="ingresarEmail()">ENVIAR</button>
         </form>
         <div class="ps-section__content"><img src="public/imagenes/paginaweb/subscribirse.png" alt=""></div>
       </div>
@@ -406,16 +406,28 @@ $listaDescuento = $modelo->listaDescuentoProducto($datos);
                 datos = datos.data;
                 let contenido = ""
                 for(i = 0 ; i < datos.length ; i++){
-                    contenido = contenido + "<li><a onclick='prueba("+datos[i].cod_categoria+")'>" + datos[i].nombre_categoria + "</a></li>";
+                    contenido = contenido + "<li><a href='mis-productos.php?c="+datos[i].cod_categoria+"'>" + datos[i].nombre_categoria + "</a></li>";
                 }
                 document.getElementById("idListaCategoria").innerHTML = contenido;
               }
             })
         });
 
-        function prueba(codigo){
-          localStorage.setItem("cat", codigo);
-          location.href = "mis-productos.php?c="+codigo;
+        function ingresarEmail(){
+          var txtEmail = document.getElementById('txtEmail').value;
+          var parametros = {
+                "action" : "ingresarEmail",
+                "email": txtEmail
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Configuraciones.php',
+              success:function(data){
+                alert("Gracias por Suscribirse con nosotros");
+                document.getElementById('txtEmail').value = ""
+              }
+            })
         }
     </script>
   </body>

@@ -17,7 +17,7 @@ class Descuento{
 	}
     
   public function listaDescuentosActivos($datos){
-		$sql = "SELECT cod_descuento_producto, inventario.cod_inventario, inventario.cod_almacenamiento, producto.cod_producto, producto.cod_item_producto, producto.nombre_producto, porcenta_descuento_producto, descuento_interno, observacion_descuento_producto, fecha_inicio_descuento_producto, fecha_final_descuento_producto, estado_descuento_producto, cod_usuario FROM descuento_producto, inventario, producto WHERE descuento_producto.cod_inventario = inventario.cod_inventario and producto.cod_producto = inventario.cod_producto and estado_descuento_producto = ?;";
+		$sql = "SELECT cod_descuento_producto, inventario.cod_inventario, inventario.cod_almacenamiento, producto.cod_producto, producto.cod_item_producto, producto.nombre_producto, producto.descripcion_producto, producto.imagen_producto, porcenta_descuento_producto, descuento_interno, observacion_descuento_producto, fecha_inicio_descuento_producto, fecha_final_descuento_producto, estado_descuento_producto, cod_usuario FROM descuento_producto, inventario, producto WHERE descuento_producto.cod_inventario = inventario.cod_inventario and producto.cod_producto = inventario.cod_producto and estado_descuento_producto = ?;";
 		return $this->db->select($sql, $datos);
 	}
 

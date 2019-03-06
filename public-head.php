@@ -7,6 +7,9 @@
 <link rel="icon" href="public/imagenes/sistema/favicon.jpg" sizes="32x32">
 <meta name="author" content="isibolivia">
 
+<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+
 <link href="public/css/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
 <link href="public/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
 <link href="public/js/plugins/data-tables/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet" media="screen,projection">

@@ -4,14 +4,28 @@ function modelo($modelo){
   return new $modelo();
 }
 
-$codigo = $_GET['c'];
+$datos = array();
+    $modelo = modelo('Sucursal');
+    $listaSucursales = $modelo->listaSucursales($datos);
+    $modelo = modelo('Almacen');
+    $listaAlmacenes = $modelo->listaAlmacenes($datos);
 
-$datos = array($codigo);
-$modelo = modelo('Categoria');
-$categoria = $modelo->categoriaEspecifico($datos);
+$datos = array("1");
+$modelo = modelo('Descuento');
+$listaProducto = $modelo->listaDescuentosActivos($datos);
 
-$datos = array($codigo);
-$listaProducto = $modelo->listaCategoriaProductosPagina($datos);
+for($i = 0 ; $i < sizeof($listaProducto) ; $i++){
+  for($j = 0 ; $j < sizeof($listaSucursales) ; $j++){
+      if($listaSucursales[$j]["cod_sucursal"] == $listaProducto[$i]["cod_almacenamiento"]){
+          $listaProducto[$i]["nombre_almacenamiento"] = $listaSucursales[$j]["nombre_sucursal"];
+      }
+  }
+  for($k = 0 ; $k < sizeof($listaAlmacenes) ; $k++){
+      if($listaAlmacenes[$k]["cod_almacen"] == $listaProducto[$i]["cod_almacenamiento"]){
+          $listaProducto[$i]["nombre_almacenamiento"] = $listaAlmacenes[$k]["nombre_almacen"];
+      }
+  }
+}
 ?>
 <!DOCTYPE html>
 <!--[if IE 7]><html class="ie ie7"><![endif]-->
@@ -35,11 +49,11 @@ $listaProducto = $modelo->listaCategoriaProductosPagina($datos);
     <?php require("public-header.php");?>
     <div class="ps-hero bg--cover" data-background="public/imagenes/paginaweb/subscribirse.png">
       <div class="ps-container">
-        <h3><?php echo $categoria[0]['nombre_categoria'];?></h3>
+        <h3>Productos en Oferta</h3>
         <div class="ps-breadcrumb">
           <ol class="breadcrumb">
             <li><a href="index.php">Inicio</a></li>
-            <li class="active"><?php echo $categoria[0]['nombre_categoria'];?></li>
+            <li class="active">Productos en Oferta</li>
           </ol>
         </div>
       </div>
@@ -53,18 +67,19 @@ $listaProducto = $modelo->listaCategoriaProductosPagina($datos);
         for($i = 0; $i < sizeof($listaProducto) ; $i++){?>
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
                 <div class="ps-product">
-                  <div class="ps-product__thumbnail"><a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src=<?php echo "public/imagenes/productos/".$listaProducto[$i]['imagen_producto'];?> alt="" ><a class="ps-product__overlay" href="#"></a>
-                    <div class="ps-product__content full">
-
+                  <div class="ps-product__thumbnail"><a class="ps-product__favorite" href="#"><i class="furniture-heart"></i></a><img src=<?php echo "public/imagenes/productos/".$listaProducto[$i]['imagen_producto'];?> alt=""><a class="ps-product__overlay" href=""></a>
+                  <div class="ps-badge"><span><?php echo "-".$listaProducto[$i]['porcenta_descuento_producto']." %";?></span></div>
+                  <div class="ps-product__content full">
                           <select class="ps-rating">
                             <option value="1">1</option>
                             <option value="1">2</option>
                             <option value="1">3</option>
                             <option value="1">4</option>
                             <option value="1">5</option>
-                          </select><a class="ps-product__title" href="#"><?php echo $listaProducto[$i]['nombre_producto'];?></a>
+                          </select><a class="ps-product__title" href="#"><?php echo "#".$listaProducto[$i]['cod_item_producto']." ".$listaProducto[$i]['nombre_producto'];?></a>
                       <div class="ps-product__categories"><a href="#"><?php echo $listaProducto[$i]['descripcion_producto'];?></a></div>
-                      <p class="ps-product__price">
+                      <p >
+                          <?php echo "Solo en la Sucursal de ".$listaProducto[$i]['nombre_almacenamiento'];?>
                       </p><a class="ps-btn ps-btn--sm" href="#">STOCK DISPONIBLE</a>
                       <p class="ps-product__feature"><i class="furniture-delivery-truck-2"></i>Comuniquese con nosotros</p>
                     </div>
@@ -121,7 +136,7 @@ $listaProducto = $modelo->listaCategoriaProductosPagina($datos);
 
         function prueba(codigo){
           localStorage.setItem("cat", codigo);
-          location.href="mis-productos.php?c="+codigo;
+          location.href = "mis-productos.php?c="+codigo;
         }
     </script>
   </body>

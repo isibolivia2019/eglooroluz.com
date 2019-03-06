@@ -6,6 +6,9 @@ $action = '';
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
     switch ($action) {
+        case 'ingresarEmail' :
+            ingresarEmail();
+            break;
         case 'actualizarPrecio' :
             actualizarPrecio();
             break;
@@ -15,6 +18,17 @@ if (isset($_POST['action'])) {
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function ingresarEmail(){
+    $email = $_POST['email'];
+    
+    $datos = array($email);
+    $modelo = modelo('Configuracion');
+    $resp = $modelo->ingresarEmail($datos);
+
+    $data = ['resp' => $resp];
+    echo json_encode($data);
 }
 
 function actualizarPrecio(){
