@@ -12,6 +12,9 @@ if (isset($_POST['action'])) {
         case 'actualizarPrecio' :
             actualizarPrecio();
             break;
+        case 'actualizarCantidad' :
+            actualizarCantidad();
+            break;
     }
 }
 
@@ -75,6 +78,32 @@ function actualizarPrecio(){
     $data = ['resp' => $resp];
     echo json_encode($data);
 
+}
+
+function actualizarCantidad(){
+    $cod_almacenamiento = $_POST['cod_almacenamiento'];
+    $cantidadNueva = $_POST['cantidadNueva'];
+    $cantidadAntertior = $_POST['cantidadAntertior'];
+    $cod_inventario = $_POST['cod_inventario'];
+    $observacion = $_POST['observacion'];
+    $usuario = $_SESSION['codigo'];
+    date_default_timezone_set('America/La_Paz');
+    $hora = date("H:i:s");
+    $fecha = date("Y-m-d");
+    $resp = "";
+    $observacion = 'Cantidad Anterior:'.$cantidadAntertior.' Uds. Nueva Cantidad:'.$cantidadNueva.' Uds. ('.$observacion.')';
+ 
+    $datos = array($cantidadNueva, $cod_inventario);
+    $modelo = modelo('ActualizarCantidad');
+    $resp = $modelo->actualizarCantidadInventario($datos);
+
+    $datos = array($cod_inventario, $cod_almacenamiento, $cantidadNueva, $observacion, $fecha, $hora, $usuario);
+    $modelo = modelo('ActualizarCantidad');
+    $resp = $modelo->agregarRegistroEditarCantidad($datos);
+ 
+
+    $data = ['resp' => $resp];
+    echo json_encode($data);
 }
 
 ?>

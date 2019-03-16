@@ -16,7 +16,7 @@ class Configuracion{
 		return $this->db->insert($sql, $datos);
 	}
     
-    public function actualizarPreciosInventarios($datos){
+  public function actualizarPreciosInventarios($datos){
 		$sql = "UPDATE inventario SET compra_unit_producto = ?, precio_sugerido_venta = ? WHERE cod_inventario = ?";
 		return $this->db->update($sql, $datos);
 	}

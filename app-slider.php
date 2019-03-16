@@ -208,12 +208,12 @@
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Configuraciones</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Tipo de Cambio</a></li>
-                                <li><a href="verificacion-1.php">Datos Empresa</a></li>
-                                <li><a href="verificacion-1.php">Datos Facturacion</a></li>
-                                <li><a href="verificacion-1.php">Prueba Certificacion</a></li>
-                                <li><a href="verificacion-1.php">Eliminar Compra</a></li>
-                                <li><a href="verificacion-1.php">Actualizar Cant Inven</a></li>
+                                <?php //<li><a href="verificacion-1.php">Tipo de Cambio</a></li>?>
+                                <?php //<li><a href="verificacion-1.php">Datos Empresa</a></li>?>
+                                <?php //<li><a href="verificacion-1.php">Datos Facturacion</a></li>?>
+                                <?php //<li><a href="verificacion-1.php">Prueba Certificacion</a></li>?>
+                                <?php //<li><a href="verificacion-1.php">Eliminar Compra</a></li>?>
+                                <li><a href="editar-cantidad.php">Cantidad Inventario</a></li>
                                 <li><a href="editar-precio.php">Editar precios</a></li>
                             </ul>
                         </div>
