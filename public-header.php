@@ -26,7 +26,16 @@
                         </div>
                     </div>
                 </li>
-                <li class="menu-item-has-children"><a href="mis-productos-descuentos.php">Ofertas</a>
+                <li class="menu-item-has-children has-mega-menu"><a href="#">Ofertas</a>
+                    <div class="mega-menu">
+                        <div class="mega-wrap">
+                            <div class="mega-column">
+                                <h4 class="mega-heading">Ofertas</h4>
+                                <ul class="mega-item" id="idListaOferta">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <li class="menu-item-has-children"><a href="#">Contactos</a>
                       <ul class="sub-menu">

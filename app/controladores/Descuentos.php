@@ -18,6 +18,9 @@ if (isset($_POST['action'])) {
         case 'agregarDescuento' :
             agregarDescuento();
             break;
+        case 'listaCategoriasDescuentos' :
+            listaCategoriasDescuentos();
+            break;
     }
 }
 
@@ -111,6 +114,16 @@ function listaDescuentosActivos(){
         }
     }
 
+
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
+function listaCategoriasDescuentos(){
+    $datos = array();
+    $modelo = modelo('Descuento');
+    $lista = $modelo->listaCategoriasDescuentos($datos);
 
     $data = array();
     $data = ['data' => $lista];

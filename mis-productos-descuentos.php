@@ -10,9 +10,11 @@ $datos = array();
     $modelo = modelo('Almacen');
     $listaAlmacenes = $modelo->listaAlmacenes($datos);
 
-$datos = array("1");
+$categoria = $_GET['c'];
+$categoria = str_replace('_', ' ', $categoria); 
+$datos = array("1", $categoria);
 $modelo = modelo('Descuento');
-$listaProducto = $modelo->listaDescuentosActivos($datos);
+$listaProducto = $modelo->listaDescuentosActivosCategorias($datos);
 
 for($i = 0 ; $i < sizeof($listaProducto) ; $i++){
   for($j = 0 ; $j < sizeof($listaSucursales) ; $j++){
@@ -60,6 +62,10 @@ for($i = 0 ; $i < sizeof($listaProducto) ; $i++){
     </div>
     <main class="ps-main">
       <div class="ps-container">
+      <div class="ps-section__header text-center">
+          <p>Promociones por</p>
+          <h1 class="ps-section__title"><?php echo strtoupper($listaProducto[0]['observacion_descuento_producto']);?></h1><span class="ps-section__line"></span>
+        </div>
 
         <div class="row" id="listaProductosCategoria">
 

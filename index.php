@@ -411,6 +411,25 @@ $listaDescuento = $modelo->listaDescuentoProducto($datos);
                 document.getElementById("idListaCategoria").innerHTML = contenido;
               }
             })
+
+            parametros = {
+                "action" : "listaCategoriasDescuentos",
+            };
+            $.ajax({
+              type:'POST',
+              data: parametros,
+              url:'app/controladores/Descuentos.php',
+              success:function(data){
+                datos = JSON.parse(data);
+                datos = datos.data;
+                let contenido = ""
+                for(i = 0 ; i < datos.length ; i++){
+                    var res = datos[i].observacion_descuento_producto.replace(" ", "_");
+                    contenido = contenido + "<li><a href='mis-productos-descuentos.php?c="+res+"'>" + datos[i].observacion_descuento_producto + "</a></li>";
+                }
+                document.getElementById("idListaOferta").innerHTML = contenido;
+              }
+            })
         });
 
         function ingresarEmail(){
