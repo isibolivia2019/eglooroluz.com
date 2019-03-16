@@ -194,16 +194,16 @@
                         </div>
                     </li>
                 <?php }?>
-                <?php /*if($_SESSION['Permiso_Cliente'] == 1){?>
+                <?php if($_SESSION['Permiso_Cliente'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Clientes</a>
                         <div class="collapsible-body">
                             <ul>
-                                <li><a href="verificacion-1.php">Lista de Clientes</a></li>
-                                <li><a href="verificacion-1.php">Agregar Cliente</a></li>
+                                <li><a href="cliente-email.php">Correos Electronicos</a></li>
+                                <?php //<li><a href="verificacion-1.php">Agregar Cliente</a></li>?>
                             </ul>
                         </div>
                     </li>
-                <?php }*/?>
+                <?php }?>
                 <?php if($_SESSION['Permiso_Configuracion'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Configuraciones</a>
                         <div class="collapsible-body">

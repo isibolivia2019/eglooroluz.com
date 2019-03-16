@@ -9,6 +9,9 @@ if (isset($_POST['action'])) {
         case 'ingresarEmail' :
             ingresarEmail();
             break;
+        case 'listaEmailCliente' :
+            listaEmailCliente();
+            break;
         case 'actualizarPrecio' :
             actualizarPrecio();
             break;
@@ -23,10 +26,23 @@ function modelo($modelo){
     return new $modelo();
 }
 
+function listaEmailCliente(){
+    $datos = array();
+    $modelo = modelo('Configuracion');
+    $lista = $modelo->listaEmailCliente($datos);
+
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
 function ingresarEmail(){
     $email = $_POST['email'];
+    date_default_timezone_set('America/La_Paz');
+    $hora = date("H:i:s");
+    $fecha = date("Y-m-d");
     
-    $datos = array($email);
+    $datos = array($email, $fecha, $hora);
     $modelo = modelo('Configuracion');
     $resp = $modelo->ingresarEmail($datos);
 

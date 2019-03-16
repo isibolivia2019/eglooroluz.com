@@ -7,7 +7,7 @@ class Configuracion{
 	}
 
 	public function ingresarEmail($datos){
-		$sql = "INSERT INTO email_cliente(email) VALUES(?)";
+		$sql = "INSERT INTO email_cliente(email, fecha, hora) VALUES(?,?,?)";
 		return $this->db->insert($sql, $datos);
 	}
 
@@ -16,9 +16,14 @@ class Configuracion{
 		return $this->db->insert($sql, $datos);
 	}
     
-  public function actualizarPreciosInventarios($datos){
+  	public function actualizarPreciosInventarios($datos){
 		$sql = "UPDATE inventario SET compra_unit_producto = ?, precio_sugerido_venta = ? WHERE cod_inventario = ?";
 		return $this->db->update($sql, $datos);
+	}
+
+	public function listaEmailCliente($datos){
+		$sql = "SELECT * FROM email_cliente";
+		return $this->db->select($sql, $datos);
 	}
 }
 ?>
