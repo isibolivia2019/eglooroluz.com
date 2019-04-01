@@ -32,10 +32,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Reportes de Inventario</h5>
+                                    <h5 class="breadcrumbs-title">Reportes de Productos Perdidos</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Inventario de Productos</li>
+                                        <li class="active">Inventario de Productos Perdidos</li>
                                     </ol>
                                 </div>
                             </div>
@@ -122,7 +122,7 @@ session_start();
         function generarReporte(){
             verificarAcceso("Permiso_Reporte");
             var cboxAlmacenamiento = document.getElementById("cboxAlmacenamiento").value;
-            window.open("reportes/reporte-inventario.php?suc="+cboxAlmacenamiento,'New Window'); 
+            window.open("reportes/reporte-perdido.php?suc="+cboxAlmacenamiento,'New Window'); 
         }
         
     </script>

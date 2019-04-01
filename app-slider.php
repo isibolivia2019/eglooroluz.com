@@ -168,6 +168,7 @@
                                 <li><a href="reporte-traspaso.php">Traspasos</a></li>
                                 <li><a href="reporte-descuento">Descuentos</a></li>
                                 <li><a href="reporte-inventario.php">Inventario</a></li>
+                                <li><a href="reporte-perdido.php">Productos Perdidos</a></li>
                             </ul>
                         </div>
                     </li>

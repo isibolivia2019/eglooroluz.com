@@ -26,7 +26,7 @@ class Inventario{
 		return $this->db->select($sql, $datos);
 	}
     
-    public function listaInventarioActualStock($datos){
+  public function listaInventarioActualStock($datos){
 		$sql = "SELECT cod_inventario, cod_almacenamiento, producto.cod_producto, cod_item_producto, imagen_producto, nombre_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, imagen_producto FROM inventario, producto WHERE inventario.cod_producto = producto.cod_producto and cant_producto > 0 and cod_almacenamiento = ? ORDER BY cod_item_producto";
 		return $this->db->select($sql, $datos);
 	}

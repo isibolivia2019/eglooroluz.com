@@ -6,6 +6,11 @@ class ProductoPerdido{
 		$this->db = new Base;
 	}
 
+	public function listaProductoPerdidoActualStock($datos){
+		$sql = "SELECT cod_producto_perdido, cod_almacenamiento, producto.cod_producto, cod_item_producto, imagen_producto, nombre_producto, cant_producto, compra_unit_producto, precio_sugerido_venta, imagen_producto FROM producto_perdido, producto WHERE producto_perdido.cod_producto = producto.cod_producto and cant_producto > 0 and cod_almacenamiento = ? ORDER BY cod_item_producto";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function listaProductoPerdidos($datos){
 		$sql = "SELECT * FROM producto_perdido";
 		return $this->db->select($sql, $datos);
