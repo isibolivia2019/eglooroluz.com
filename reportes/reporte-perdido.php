@@ -91,7 +91,7 @@ $pdf->SetWidths(array(100));
 $style = array('B');
 $pdf -> SetFont('Arial','B', 20);
 $pdf -> Cell(80, 15, "", 0, 0, 'C');
-$empty = array(utf8_decode("REPORTE DE INVENTARIO PRODUCTOS PERDIDOS"));
+$empty = array(utf8_decode("PRODUCTOS PERDIDOS"));
 $pdf->FancyRow($empty, $border, $align, $style);
 $pdf->Ln(5);
 
