@@ -51,8 +51,8 @@ function planillaSueldo(){
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
-
-        $fechats = strtotime($lista[$i]["fecha_reg_hr"]);
+        $fechaFormat = date("d-m-Y", strtotime($lista[$i]["fecha_reg_hr"]));
+        $fechats = strtotime($fechaFormat);
         switch (date('w', $fechats)){ 
             case 0: $lista[$i]["fecha_reg_hr"]." "."Domingo"; break; 
             case 1: $lista[$i]["fecha_reg_hr"]." "."Lunes"; break; 
