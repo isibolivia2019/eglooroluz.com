@@ -52,6 +52,17 @@ function planillaSueldo(){
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
 
+        $fechats = strtotime($lista[$i]["fecha_reg_hr"]);
+        switch (date('w', $fechats)){ 
+            case 0: $lista[$i]["fecha_reg_hr"]." "."Domingo"; break; 
+            case 1: $lista[$i]["fecha_reg_hr"]." "."Lunes"; break; 
+            case 2: $lista[$i]["fecha_reg_hr"]." "."Martes"; break; 
+            case 3: $lista[$i]["fecha_reg_hr"]." "."Miercoles"; break; 
+            case 4: $lista[$i]["fecha_reg_hr"]." "."Jueves"; break; 
+            case 5: $lista[$i]["fecha_reg_hr"]." "."Viernes"; break; 
+            case 6: $lista[$i]["fecha_reg_hr"]." "."Sabado"; break; 
+        }
+
         $f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
         $f2 = new DateTime($lista[$i]["salida_horario_reg_hr"]);
         $d = $f1->diff($f2);
