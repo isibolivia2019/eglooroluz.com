@@ -41,6 +41,22 @@ function modelo($modelo){
     return new $modelo();
 }
 
+function planillaSueldo(){
+    $usuario = $_POST['usuario'];
+    date_default_timezone_set('America/La_Paz');
+    $mes =  $_POST['mes'];
+    $año =  $_POST['año'];
+    $datos = array($usuario, $mes, $año);
+    $modelo = modelo('HuellaDactilar');
+    $lista = $modelo->listaRegistroHorarioEspecifico($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+    }
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
 function listaSueldos(){
     $datos = array();
     $usuarioModelo = modelo('Sueldo');

@@ -148,13 +148,12 @@ session_start();
                 data: parametros,
                 url:'app/controladores/Usuarios.php',
                 success:function(data){
-                    console.log("data", data)
                     datos = JSON.parse(data);
                     datos = datos.data
                     for(let i=0 ; i<datos.length ; i++){
                         var tag = document.createElement('option');
                         tag.setAttribute('value', datos[i].cod_usuario);
-                        tag.innerHTML = datos[i].nombre_usuario;
+                        tag.innerHTML = datos[i].nombre_usuario + " " + datos[i].appat_usuario + " " + datos[i].apmat_usuario;
                         cboxPersonal.appendChild(tag);
                     }
                 }
@@ -178,7 +177,7 @@ session_start();
             
             var parametros = {
                 "action" : "planillaSueldo",
-                "sucursal" : cboxPersonal,
+                "usuario" : cboxPersonal,
                 "año" : cboxAño,
                 "mes" : cboxMes
             };
@@ -187,17 +186,16 @@ session_start();
                 "ajax":{
                     "method": "POST",
                     "data":  parametros,
-                    "url": "app/controladores/Ventas.php"
+                    "url": "app/controladores/Sueldos.php"
                 },
                 "columns": [
-                    {"data" : "fecha_venta_producto"},
-                    {"data" : "cod_item_producto"},
-                    {"data" : "nombre_producto"},
-                    {"data" : "cant_venta_producto"},
-                    {"data" : "descuento_porcentaje_venta_producto"},
-                    {"data" : "precio_unitario"},
-                    {"data" : "total_venta_producto"},
-                    {"data" : "personal"}
+                    {"data" : "fecha_reg_hr"},
+                    {"data" : "fecha_reg_hr"},
+                    {"data" : "fecha_reg_hr"},
+                    {"data" : "fecha_reg_hr"},
+                    {"data" : "fecha_reg_hr"},
+                    {"data" : "fecha_reg_hr"},
+                    {"data" : "fecha_reg_hr"}
                 ],
                 "columnDefs": [
    		        	{ "type": "date-euro", "targets": 0 }
