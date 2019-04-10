@@ -68,10 +68,10 @@ function planillaSueldo(){
             $fechats = strtotime($lista[$c]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
             $dia = $dias[date('w', $fechats)];
 
-            $f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
-            $f2 = new DateTime($lista[$i]["salida_horario_reg_hr"]);
+            $f1 = new DateTime($lista[$c]["entrada_horario_reg_hr"]);
+            $f2 = new DateTime($lista[$c]["salida_horario_reg_hr"]);
             $d = $f1->diff($f2);
-            $planilla[$j]["diferenciaHora"] = $d->format('%H:%I:%S');
+            $planilla[$j-1]["diferenciaHora"] = $d->format('%H:%I:%S');
 
             $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$c]["fecha_reg_hr"]))." ".$dia;
             $planilla[$j-1]["entrada_horario_reg_hr"] = $lista[$c]["entrada_horario_reg_hr"];
