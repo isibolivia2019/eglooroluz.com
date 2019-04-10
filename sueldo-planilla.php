@@ -140,7 +140,8 @@ session_start();
             var cboxPersonal = document.getElementById("cboxPersonal");
             var cboxAño = document.getElementById("cboxAño");
             var parametros = {
-                "action" : "listaUsuarioSinCargo"        
+                "action" : "listaUsuarioEstado",
+                "estado" : "1"
             };
             $.ajax({
                 type:'POST',
