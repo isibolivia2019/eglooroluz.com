@@ -53,7 +53,7 @@ function planillaSueldo(){
 
         $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
         $fechats = strtotime($lista[$i]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
-        $dia = $dias[date('w', $fechats)];
+        $dia = $dias[date('w', $fechats)-2];
 
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]))." ".$dia;
 
