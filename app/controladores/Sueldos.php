@@ -50,9 +50,15 @@ function planillaSueldo(){
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
     for($i = 0 ; $i < sizeof($lista) ; $i++){
-        $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+
+        $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+        $fechats = strtotime($lista[$i]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
+        $dia = $dias[date('w', $fechats)-1];
+
+        $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]))." ".$dia;
+
         
-        $fechaFormat = date("d-m-Y", strtotime($lista[$i]["fecha_reg_hr"]));
+        /*$fechaFormat = date("d-m-Y", strtotime($lista[$i]["fecha_reg_hr"]));
         $fechats = strtotime($fechaFormat);
         switch (date('w', $fechats)){ 
             case 0: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Domingo"; break; 
@@ -62,7 +68,7 @@ function planillaSueldo(){
             case 4: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Jueves"; break; 
             case 5: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Viernes"; break; 
             case 6: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Sabado"; break; 
-        }
+        }*/
 
         $f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
         $f2 = new DateTime($lista[$i]["salida_horario_reg_hr"]);
