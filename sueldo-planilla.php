@@ -147,6 +147,7 @@ session_start();
                 data: parametros,
                 url:'app/controladores/Usuarios.php',
                 success:function(data){
+                    console.log("data", "")
                     datos = JSON.parse(data);
                     datos = datos.data
                     for(let i=0 ; i<datos.length ; i++){
