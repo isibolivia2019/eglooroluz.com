@@ -51,7 +51,7 @@ function planillaSueldo(){
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
     $diaMes = UltimoDia($año, $mes);
     $planilla = "";
-    for($j = 1 ; $j <= 31 ; $j++){
+    for($j = 1 ; $j <= $diaMes ; $j++){
         $sw = false;
         /*$c = 0;
         for($i = 0 ; $i < sizeof($lista) ; $i++){
