@@ -74,7 +74,7 @@ session_start();
                                             </select>
                                         </div>
                                         <div class="col s12 m12 l4">
-                                            <label>Año</label>
+                                            <label>Personal</label>
                                             <select class="browser-default" id="cboxSucursal">
                                                 <option value="" disabled selected>Seleccione el Personal</option>
                                             </select>
@@ -82,7 +82,7 @@ session_start();
                                         <div class="row">
                                             <div class="input-field col s12 submitBtn">
                                                 <div class="input-field col s12 right ">
-                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Generar Planilla de Sueldo</a>
+                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Obtener Datos</a>
                                                 </div>
                                             </div>
                                         </div>
