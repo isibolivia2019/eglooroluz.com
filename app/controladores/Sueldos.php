@@ -64,10 +64,18 @@ function planillaSueldo(){
         }
 
         if($sw == true){
-            $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$c]["fecha_reg_hr"]));
+            $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado");
+            $fechats = strtotime($lista[$c]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
+            $dia = $dias[date('w', $fechats)];
+
+            $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$c]["fecha_reg_hr"]))." ".$dia;
             $planilla[$j-1]["entrada_horario_reg_hr"] = $lista[$c]["entrada_horario_reg_hr"];
         }else{
-            $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j));
+            $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado");
+            $fechats = strtotime($año."-".$mes."-".$j); //fecha en yyyy-mm-dd
+            $dia = $dias[date('w', $fechats)];
+
+            $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j))." ".$dia;
             $planilla[$j-1]["entrada_horario_reg_hr"] = "No";
         }
     }
