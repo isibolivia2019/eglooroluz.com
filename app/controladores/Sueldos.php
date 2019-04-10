@@ -49,14 +49,35 @@ function planillaSueldo(){
     $datos = array($usuario, $mes, $año);
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
-    for($i = 0 ; $i < sizeof($lista) ; $i++){
+    $diaMes = UltimoDia();
+    $planilla = "";
+    for($j = 1 ; $j <= sizeof($diaMes) ; $j++){
+        $sw = false;
+        $c = 0;
+        for($i = 0 ; $i < sizeof($lista) ; $i++){
+            $diaNum = date("d", strtotime($lista[$i]["fecha_reg_hr"]));
+            if($diaNum == $j){
+                $c = $i;
+                $sw = true;
+                break;
+            }
+        }
 
-        $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado");
+        if($sw == true){
+            $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+        }else{
+            $planilla[$j-1]["fecha_reg_hr"] = "NO";
+        }
+    }
+
+    /*for($i = 0 ; $i < sizeof($lista) ; $i++){
+
+        $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado");
         $fechats = strtotime($lista[$i]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
         $dia = $dias[date('w', $fechats)];
-
+        $diaNum = date("d", strtotime($lista[$i]["fecha_reg_hr"]));
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]))." ".$dia;
-
+*/
         
         /*$fechaFormat = date("d-m-Y", strtotime($lista[$i]["fecha_reg_hr"]));
         $fechats = strtotime($fechaFormat);
@@ -70,14 +91,14 @@ function planillaSueldo(){
             case 6: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Sabado"; break; 
         }*/
 
-        $f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
+        /*$f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
         $f2 = new DateTime($lista[$i]["salida_horario_reg_hr"]);
         $d = $f1->diff($f2);
         $lista[$i]["diferenciaHora"] = $d->format('%H:%I:%S');
 
-    }
+    }*/
     $data = array();
-    $data = ['data' => $lista];
+    $data = ['data' => $planilla];
     echo json_encode($data);
 }
 
@@ -185,4 +206,26 @@ function actualizarSueldo(){
     $data = ['resp' => $resp];
     echo json_encode($data);
 }
+
+function UltimoDia($anho,$mes){
+    if (((fmod($anho,4)==0) and (fmod($anho,100)!=0)) or (fmod($anho,400)==0)) {
+        $dias_febrero = 29; 
+    } else {
+        $dias_febrero = 28; 
+    } 
+    switch($mes) {
+        case 01: return 31; break;
+        case 02: return $dias_febrero; break;
+        case 03: return 31; break;
+        case 04: return 30; break;
+        case 05: return 31; break;
+        case 06: return 30; break;
+        case 07: return 31; break;
+        case 8: return 31; break;
+        case 9: return 30; break;
+        case 10: return 31; break;
+        case 11: return 30; break;
+        case 12: return 31; break;
+    } 
+ }
 ?>
