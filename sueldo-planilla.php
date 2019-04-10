@@ -201,9 +201,9 @@ session_start();
                 "columns": [
                     {"data" : "fecha_reg_hr"},
                     {"data" : "entrada_horario_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
+                    {"data" : "salida_horario_reg_hr"},
+                    {"data" : "observacion_entrada"},
+                    {"data" : "observacion_salida"},
                     {"data" : "fecha_reg_hr"},
                     {"data" : "fecha_reg_hr"}
                 ],
