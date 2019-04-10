@@ -76,14 +76,14 @@ session_start();
                                         </div>
                                         <div class="col s12 m12 l4">
                                             <label>Personal</label>
-                                            <select class="browser-default" id="cboxSucursal">
+                                            <select class="browser-default" id="cboxPersonal">
                                                 <option value="" disabled selected>Seleccione al Personal</option>
                                             </select>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12 submitBtn">
                                                 <div class="input-field col s12 right ">
-                                                  <a class="btn waves-effect waves-light col s12" onclick="listaVentas()">Buscar Horarios</a>
+                                                  <a class="btn waves-effect waves-light col s12" onclick="buscarHorarios()">Buscar Horarios</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -136,24 +136,24 @@ session_start();
 
     <script>
         $(document).ready(function() {
-            verificarAcceso("Permiso_Venta");
-            var cboxSucursal = document.getElementById("cboxSucursal");
+            verificarAcceso("Permiso_Sueldo");
+            var cboxPersonal = document.getElementById("cboxPersonal");
             var cboxAño = document.getElementById("cboxAño");
             var parametros = {
-                "action" : "listaAccesosSucursales"        
+                "action" : "listaUsuarioSinCargo"        
             };
             $.ajax({
                 type:'POST',
                 data: parametros,
-                url:'app/controladores/Accesos.php',
+                url:'app/controladores/Usuarios.php',
                 success:function(data){
                     datos = JSON.parse(data);
                     datos = datos.data
                     for(let i=0 ; i<datos.length ; i++){
                         var tag = document.createElement('option');
-                        tag.setAttribute('value', datos[i].cod_sucursal);
-                        tag.innerHTML = datos[i].nombre_sucursal;
-                        cboxSucursal.appendChild(tag);
+                        tag.setAttribute('value', datos[i].cod_usuario);
+                        tag.innerHTML = datos[i].nombre_usuario;
+                        cboxPersonal.appendChild(tag);
                     }
                 }
             })
@@ -168,15 +168,15 @@ session_start();
             }
         });
 
-        function listaVentas(){
-            verificarAcceso("Permiso_Venta");
-            var cboxSucursal = document.getElementById("cboxSucursal").value;
+        function buscarHorarios(){
+            verificarAcceso("Permiso_Sueldo");
+            var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             
             var parametros = {
-                "action" : "listaVentas",
-                "sucursal" : cboxSucursal,
+                "action" : "planillaSueldo",
+                "sucursal" : cboxPersonal,
                 "año" : cboxAño,
                 "mes" : cboxMes
             };

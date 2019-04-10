@@ -30,6 +30,9 @@ if (isset($_POST['action'])) {
         case 'asignarUsuarioSueldo' :
             asignarUsuarioSueldo();
             break;
+        case 'planillaSueldo' :
+            planillaSueldo();
+            break;
     }
 }
 
