@@ -66,7 +66,7 @@ function planillaSueldo(){
         if($sw == true){
             $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$c]["fecha_reg_hr"]));
         }else{
-            $planilla[$j-1]["fecha_reg_hr"] = "NO";
+            $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j));
         }
     }
 
