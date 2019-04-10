@@ -51,6 +51,12 @@ function planillaSueldo(){
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
     for($i = 0 ; $i < sizeof($lista) ; $i++){
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+
+        $f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
+        $f2 = new DateTime($lista[$i]["salida_horario_reg_hr"]);
+        $d = $f1->diff($f2);
+        $lista[$i]["diferenciaHora"] = $d->format('%H:%I:%S');
+
     }
     $data = array();
     $data = ['data' => $lista];
