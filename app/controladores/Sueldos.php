@@ -49,7 +49,7 @@ function planillaSueldo(){
     $datos = array($usuario, $mes, $año);
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
-    //$diaMes = UltimoDia();
+    $diaMes = UltimoDia($año, $mes);
     $planilla = "";
     for($j = 1 ; $j <= 31 ; $j++){
         $sw = false;
