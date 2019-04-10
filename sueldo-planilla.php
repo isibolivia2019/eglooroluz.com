@@ -32,10 +32,10 @@ session_start();
                         <div class="container">
                             <div class="row">
                                 <div class="col s12 m12 l12">
-                                    <h5 class="breadcrumbs-title">Planilla de Sueldos</h5>
+                                    <h5 class="breadcrumbs-title">Planilla de Sueldo</h5>
                                     <ol class="breadcrumb">
                                         <li><a href="inicio.php">Inicio</a></li>
-                                        <li class="active">Planilla</li>
+                                        <li class="active">Sueldos</li>
                                     </ol>
                                 </div>
                             </div>
@@ -44,6 +44,7 @@ session_start();
 
                     <div class="container">
                         <div class="section">
+                            <p class="caption">Generador de Planilla de Sueldo</p>
                             <div class="divider"></div>
                             <div class="row">
                                 <form class="col s12">
@@ -76,19 +77,52 @@ session_start();
                                         <div class="col s12 m12 l4">
                                             <label>Personal</label>
                                             <select class="browser-default" id="cboxSucursal">
-                                                <option value="" disabled selected>Seleccione el Personal</option>
+                                                <option value="" disabled selected>Seleccione al Personal</option>
                                             </select>
                                         </div>
                                         <div class="row">
                                             <div class="input-field col s12 submitBtn">
                                                 <div class="input-field col s12 right ">
-                                                  <a class="btn waves-effect waves-light col s12" onclick="generarReporte()">Obtener Datos</a>
+                                                  <a class="btn waves-effect waves-light col s12" onclick="listaVentas()">Buscar Horarios</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+                            <br>
+                            <div class="divider"></div> 
+                            <div id="table-datatables">
+                                <h4 class="header">Registros del Personal</h4>
+                                <div class="row">
+                                    <div class="col s12">
+                                        <table id="table-simple" class="responsive-table display" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Entrada</th>
+                                                    <th>Salida</th>
+                                                    <th>Obs. Entrada</th>
+                                                    <th>Obs. Salida</th>
+                                                    <th>Total</th>
+                                                    <th>Pagar</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>Fecha</th>
+                                                    <th>Entrada</th>
+                                                    <th>Salida</th>
+                                                    <th>Obs. Entrada</th>
+                                                    <th>Obs. Salida</th>
+                                                    <th>Total</th>
+                                                    <th>Pagar</th>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div> 
                             <br>
                             <div class="divider"></div> 
                         </div>
@@ -102,7 +136,7 @@ session_start();
 
     <script>
         $(document).ready(function() {
-            verificarAcceso("Permiso_Reporte");
+            verificarAcceso("Permiso_Venta");
             var cboxSucursal = document.getElementById("cboxSucursal");
             var cboxAño = document.getElementById("cboxAño");
             var parametros = {
@@ -134,12 +168,43 @@ session_start();
             }
         });
 
-        function generarReporte(){
-            verificarAcceso("Permiso_Reporte");
+        function listaVentas(){
+            verificarAcceso("Permiso_Venta");
             var cboxSucursal = document.getElementById("cboxSucursal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            window.open("reportes/reporte-venta.php?suc="+cboxSucursal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+            
+            var parametros = {
+                "action" : "listaVentas",
+                "sucursal" : cboxSucursal,
+                "año" : cboxAño,
+                "mes" : cboxMes
+            };
+            var table = $('#table-simple').DataTable({
+                "destroy":true,
+                "ajax":{
+                    "method": "POST",
+                    "data":  parametros,
+                    "url": "app/controladores/Ventas.php"
+                },
+                "columns": [
+                    {"data" : "fecha_venta_producto"},
+                    {"data" : "cod_item_producto"},
+                    {"data" : "nombre_producto"},
+                    {"data" : "cant_venta_producto"},
+                    {"data" : "descuento_porcentaje_venta_producto"},
+                    {"data" : "precio_unitario"},
+                    {"data" : "total_venta_producto"},
+                    {"data" : "personal"}
+                ],
+                "columnDefs": [
+   		        	{ "type": "date-euro", "targets": 0 }
+                ],
+                "order": [[ 0, "desc" ]],
+                "language": {
+                    "url": "public/Spanish.lang"
+                }
+            });
         }
         
     </script>
