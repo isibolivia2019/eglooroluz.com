@@ -53,7 +53,7 @@ function planillaSueldo(){
     $planilla = "";
     for($j = 1 ; $j <= sizeof($diaMes) ; $j++){
         $sw = false;
-        $c = 0;
+        /*$c = 0;
         for($i = 0 ; $i < sizeof($lista) ; $i++){
             $diaNum = date("d", strtotime($lista[$i]["fecha_reg_hr"]));
             if($diaNum == $j){
@@ -61,7 +61,7 @@ function planillaSueldo(){
                 $sw = true;
                 break;
             }
-        }
+        }*/
 
         if($sw == true){
             $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
