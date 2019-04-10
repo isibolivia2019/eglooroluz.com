@@ -204,7 +204,7 @@ session_start();
                     {"data" : "salida_horario_reg_hr"},
                     {"data" : "observacion_entrada"},
                     {"data" : "observacion_salida"},
-                    {"data" : "fecha_reg_hr"},
+                    {"data" : "diferenciaHora"},
                     {"data" : "fecha_reg_hr"}
                 ],
                 "language": {
