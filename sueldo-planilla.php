@@ -181,7 +181,17 @@ session_start();
                 "año" : cboxAño,
                 "mes" : cboxMes
             };
-            var table = $('#table-simple').DataTable({
+            $.ajax({
+                type:'POST',
+                data: parametros,
+                url:'app/controladores/Sueldos.php',
+                success:function(data){
+                    console.log("data", data);
+                    datos = JSON.parse(data);
+                    datos = datos.data
+                }
+            })
+            /*var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -200,7 +210,7 @@ session_start();
                 "language": {
                     "url": "public/Spanish.lang"
                 }
-            });
+            });*/
         }
         
     </script>
