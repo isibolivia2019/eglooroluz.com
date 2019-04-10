@@ -84,11 +84,11 @@ function planillaSueldo(){
             $dia = $dias[date('w', $fechats)];
 
             $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j))." ".$dia;
-            $planilla[$j-1]["entrada_horario_reg_hr"] = "Sin datos";
-            $planilla[$j-1]["salida_horario_reg_hr"] = "Sin datos";
-            $planilla[$j-1]["observacion_entrada"] = "Sin datos";
-            $planilla[$j-1]["observacion_salida"] = "Sin datos";
-            $planilla[$j-1]["diferenciaHora"] = "Sin datos";
+            $planilla[$j-1]["entrada_horario_reg_hr"] = "- -";
+            $planilla[$j-1]["salida_horario_reg_hr"] = "- -";
+            $planilla[$j-1]["observacion_entrada"] = "- -";
+            $planilla[$j-1]["observacion_salida"] = "- -";
+            $planilla[$j-1]["diferenciaHora"] = "- -";
         }
     }
 
