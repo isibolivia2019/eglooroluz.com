@@ -61,6 +61,7 @@
                                 <li><a href="sueldo.php">Lista de Sueldos</a></li>
                                 <li><a href="sueldo-agregar.php">Agregar Nuevo Sueldo</a></li>
                                 <li><a href="sueldo-asignar.php">Asignar Sueldos</a></li>
+                                <li><a href="sueldo-planilla.php">Planilla de Sueldos</a></li>
                             </ul>
                         </div>
                     </li>
