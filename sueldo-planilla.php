@@ -200,7 +200,7 @@ session_start();
                 },
                 "columns": [
                     {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
+                    {"data" : "entrada_horario_reg_hr"},
                     {"data" : "fecha_reg_hr"},
                     {"data" : "fecha_reg_hr"},
                     {"data" : "fecha_reg_hr"},
