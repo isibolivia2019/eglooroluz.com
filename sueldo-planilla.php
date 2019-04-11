@@ -105,7 +105,7 @@ session_start();
                                                     <th>Obs. Entrada</th>
                                                     <th>Obs. Salida</th>
                                                     <th>Total</th>
-                                                    <th>Pagar</th>
+                                                    <th>Eliminar Dia</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
@@ -116,7 +116,7 @@ session_start();
                                                     <th>Obs. Entrada</th>
                                                     <th>Obs. Salida</th>
                                                     <th>Total</th>
-                                                    <th>Pagar</th>
+                                                    <th>Eliminar Dia</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
@@ -211,6 +211,37 @@ session_start();
                     "url": "public/Spanish.lang"
                 }
             });
+            btn_deshabilitar("#table-simple tbody", table);
+        }
+
+        var btn_deshabilitar = function(tbody, table){
+                $(tbody).on("click", "button.deshabilitar", function(){
+                    var data = table.row( $(this).parents("tr") ).data();
+                    var tableRemove = $(this).parents("tr");
+                    var parametros = {
+                       "action" : "cambiarEstado",
+                       "codigo" : data.cod_usuario,
+                       "estado" : "0",
+                    };
+                    /*$.ajax({
+                      type:'POST',
+                      data: parametros,
+                      url:'app/controladores/Usuarios.php',
+                      success:function(data){
+                          datos = JSON.parse(data);
+                          if(datos.resp == "true"){
+                              Materialize.toast('Datos del Usuario actualizado con exito', 5000)
+                              table.row(tableRemove).remove().draw(false);
+                          }
+                          if(datos.resp == "false"){
+                              Materialize.toast('Hubo un fallo al actualizar el usuario. Vuelva a Intentarlo', 5000)
+                          }
+                          if(datos.resp != "true" && datos.resp != "false"){
+                              Materialize.toast('Hubo un fallo al actualizar el usuario COD:'+datos.resp, 5000)
+                          }
+                      }
+                    })*/
+                })
         }
         
     </script>
