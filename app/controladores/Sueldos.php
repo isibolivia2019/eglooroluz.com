@@ -80,6 +80,8 @@ function planillaSueldo(){
                 if($listaHorario[$k]["dia_lunes"] == "1"){
                     $planilla[$j-1]["fecha_reg_hr"] = $j;
                 }
+            }else{
+                $planilla[$j-1]["fecha_reg_hr"] = "IF 1--NO";
             }
         }
     }
