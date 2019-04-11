@@ -79,7 +79,7 @@ function planillaSueldo(){
                 $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j))." ".$dia;
                 break;
             }else{
-                $planilla[$j-1]["fecha_reg_hr"] = $dia;
+                
             }
         }
     }
