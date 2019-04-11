@@ -218,9 +218,11 @@ session_start();
                 $(tbody).on("click", "button.deshabilitar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
                     console.log("data", data);
-                    console.log("miTabla", table.data());
+                    console.log("miTabla", table.data().length());
                     var tableRemove = $(this).parents("tr");
-                    table.row(tableRemove).remove().draw(false);
+                    table.row(0).remove().draw(false);
+                    
+                    
                     /*var parametros = {
                        "action" : "cambiarEstado",
                        "codigo" : data.cod_usuario,
