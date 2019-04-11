@@ -7,7 +7,7 @@ class Horario{
 	}
 
 	public function horarioEspecificoUsuario($datos){
-		$sql = "select entrada_horario, salida_horario, tiempo_espera, dia_lunes, dia_martes, dia_miercoles, dia_jueves, dia_viernes, dia_sabado, dia_domingo from horario_usuario, horario WHERE horario.cod_horario = horario_usuario.cod_horario and cod_usuario = ?;";
+		$sql = "SELECT entrada_horario, salida_horario, tiempo_espera, dia_lunes, dia_martes, dia_miercoles, dia_jueves, dia_viernes, dia_sabado, dia_domingo FROM horario_usuario, horario WHERE horario.cod_horario = horario_usuario.cod_horario and cod_usuario = ?;";
 		return $this->db->select($sql, $datos);
 	}
     
