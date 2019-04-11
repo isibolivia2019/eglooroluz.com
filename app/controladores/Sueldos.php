@@ -79,7 +79,7 @@ function planillaSueldo(){
 
         $cc = 0;
         while($cc < sizeof($listaHorario)){
-            if($listaHorario[$k][$diaLiteral] == "1"){
+            if($listaHorario[$cc][$diaLiteral] == "1"){
                 $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$diaLiteral;
                 $c++;
             }
