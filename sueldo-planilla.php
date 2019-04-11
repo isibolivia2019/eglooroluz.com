@@ -222,9 +222,10 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
-                    table.row( tableRemove ).edit( {
+                    $(this).parents("tr").html("").append("<input type='text' value=\""+"EDITAR"+"\">");
+                    /*table.row( tableRemove ).edit( {
                         title: 'Edit first row'
-                    } );
+                    } );*/
 
                     /*var rows = $('#table tbody tr');
                     $.each(rows, function(i,v){
