@@ -46,6 +46,11 @@ function planillaSueldo(){
     date_default_timezone_set('America/La_Paz');
     $mes =  $_POST['mes'];
     $año =  $_POST['año'];
+
+    
+
+
+
     $datos = array($usuario, $mes, $año);
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
