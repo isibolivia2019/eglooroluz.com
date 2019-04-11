@@ -181,7 +181,8 @@ session_start();
                 "action" : "planillaSueldo",
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
-                "mes" : cboxMes
+                "mes" : cboxMes,
+                "diasPost" : 0
             };
             /*$.ajax({
                 type:'POST',

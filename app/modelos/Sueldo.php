@@ -5,8 +5,13 @@ class Sueldo{
 	public function __construct(){
 		$this->db = new Base;
 	}
+
+	public function sueldoEspecificoUsuario($datos){
+		$sql = "SELECT sueldo FROM sueldo_usuario, sueldo WHERE sueldo.cod_sueldo = sueldo_usuario.cod_sueldo and cod_usuario = ?;";
+		return $this->db->select($sql, $datos);
+	}
     
-    public function listaSueldos($datos){
+  public function listaSueldos($datos){
 		$sql = "SELECT * FROM sueldo";
 		return $this->db->select($sql, $datos);
 	}

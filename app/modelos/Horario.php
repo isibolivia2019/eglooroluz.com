@@ -5,8 +5,13 @@ class Horario{
 	public function __construct(){
 		$this->db = new Base;
 	}
+
+	public function horarioEspecificoUsuario($datos){
+		$sql = "select entrada_horario, salida_horario, tiempo_espera, dia_lunes, dia_martes, dia_miercoles, dia_jueves, dia_viernes, dia_sabado, dia_domingo from horario_usuario, horario WHERE horario.cod_horario = horario_usuario.cod_horario and cod_usuario = ?;";
+		return $this->db->select($sql, $datos);
+	}
     
-    public function listaHorarios($datos){
+  public function listaHorarios($datos){
 		$sql = "SELECT * FROM horario";
 		return $this->db->select($sql, $datos);
 	}
