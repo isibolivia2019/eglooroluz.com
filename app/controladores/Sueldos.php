@@ -74,16 +74,8 @@ function planillaSueldo(){
         $fechats = strtotime($año."-".$mes."-".$j); //fecha en yyyy-mm-dd
         $dia = $dias[date('w', $fechats)];
         $diaLiteral = "dia_".strtolower($dia);
-
-        for($k = 0; $k < sizeof($listaHorario) ; $k++){
-            if($dia == "Lunes"){
-                if($listaHorario[$k]["dia_lunes"] == "1"){
-                    $planilla[$j-1]["fecha_reg_hr"] = $j;
-                }
-            }else{
-                $planilla[$j-1]["fecha_reg_hr"] = "IF 1--NO";
-            }
-        }
+        
+        $planilla[$j-1]["fecha_reg_hr"] = $diaLiteral;
     }
 
     /*for($k = 0; $k < 2 ; $k++){
