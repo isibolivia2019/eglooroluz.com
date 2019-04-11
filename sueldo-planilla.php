@@ -222,7 +222,7 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
-                    myTable.row( tableRemove ).edit( {
+                    table.row( tableRemove ).edit( {
                         title: 'Edit first row'
                     } );
 
