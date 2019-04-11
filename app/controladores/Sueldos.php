@@ -76,8 +76,10 @@ function planillaSueldo(){
         $diaLiteral = "dia_".strtolower($dia);
 
         for($k = 0; $k < sizeof($listaHorario) ; $k++){
-            if($listaHorario[$k]["dia_viernes"] == "1"){
-                $planilla[$j-1]["fecha_reg_hr"] = $j;
+            if($dia == "Lunes"){
+                if($listaHorario[$k]["dia_lunes"] == "1"){
+                    $planilla[$j-1]["fecha_reg_hr"] = $j;
+                }
             }
         }
     }
