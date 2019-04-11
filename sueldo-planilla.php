@@ -222,7 +222,10 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
-                    $(this).parents("tr").html("").append("<input type='text' value=\""+"EDITAR"+"\">");
+                    var cell = table.cell(0,0).data("editar").draw();
+
+                    //$(this).parents("tr").html("").append("<input type='text' value=\""+"EDITAR"+"\">");
+                    
                     /*table.row( tableRemove ).edit( {
                         title: 'Edit first row'
                     } );*/
