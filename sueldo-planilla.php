@@ -219,12 +219,13 @@ session_start();
                     console.log("click");
                     var data = table.row( $(this).parents("tr") ).data();
                     var tableRemove = $(this).parents("tr");
-                    var parametros = {
+                    table.row(tableRemove).remove().draw(false);
+                    /*var parametros = {
                        "action" : "cambiarEstado",
                        "codigo" : data.cod_usuario,
                        "estado" : "0",
                     };
-                    /*$.ajax({
+                    $.ajax({
                       type:'POST',
                       data: parametros,
                       url:'app/controladores/Usuarios.php',
@@ -232,7 +233,7 @@ session_start();
                           datos = JSON.parse(data);
                           if(datos.resp == "true"){
                               Materialize.toast('Datos del Usuario actualizado con exito', 5000)
-                              table.row(tableRemove).remove().draw(false);
+                              
                           }
                           if(datos.resp == "false"){
                               Materialize.toast('Hubo un fallo al actualizar el usuario. Vuelva a Intentarlo', 5000)
