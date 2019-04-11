@@ -78,7 +78,7 @@ function planillaSueldo(){
             if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
                 $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j))." ".$dia." SI";
             }else{
-                $planilla[$j-1]["fecha_reg_hr"] = $dia." NO";
+                
             }
         }
     }
