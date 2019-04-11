@@ -216,6 +216,7 @@ session_start();
 
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
+                    console.log("click");
                     var data = table.row( $(this).parents("tr") ).data();
                     var tableRemove = $(this).parents("tr");
                     var parametros = {
