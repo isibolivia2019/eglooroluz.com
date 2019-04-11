@@ -83,6 +83,8 @@ function planillaSueldo(){
             $planilla[$j-1]["salida_horario_reg_hr"] = $lista[$c]["salida_horario_reg_hr"];
             $planilla[$j-1]["observacion_entrada"] = $lista[$c]["observacion_entrada"];
             $planilla[$j-1]["observacion_salida"] = $lista[$c]["observacion_salida"];
+
+            $planilla[$j-1]["totalPago"] = '0.00';
         }else{
             $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado");
             $fechats = strtotime($año."-".$mes."-".$j); //fecha en yyyy-mm-dd
@@ -94,6 +96,7 @@ function planillaSueldo(){
             $planilla[$j-1]["observacion_entrada"] = "- -";
             $planilla[$j-1]["observacion_salida"] = "- -";
             $planilla[$j-1]["diferenciaHora"] = "- -";
+            $planilla[$j-1]["totalPago"] = '0.00';
         }
     }
 

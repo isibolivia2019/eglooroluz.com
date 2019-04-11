@@ -104,7 +104,8 @@ session_start();
                                                     <th>Salida</th>
                                                     <th>Obs. Entrada</th>
                                                     <th>Obs. Salida</th>
-                                                    <th>Total</th>
+                                                    <th>Hrs/Trabajo</th>
+                                                    <th>Total de Pago</th>
                                                     <th>Eliminar Dia</th>
                                                 </tr>
                                             </thead>
@@ -115,7 +116,8 @@ session_start();
                                                     <th>Salida</th>
                                                     <th>Obs. Entrada</th>
                                                     <th>Obs. Salida</th>
-                                                    <th>Total</th>
+                                                    <th>Hrs/Trabajo</th>
+                                                    <th>Total de Pago</th>
                                                     <th>Eliminar Dia</th>
                                                 </tr>
                                             </tfoot>
@@ -205,6 +207,7 @@ session_start();
                     {"data" : "observacion_entrada"},
                     {"data" : "observacion_salida"},
                     {"data" : "diferenciaHora"},
+                    {"data" : "totalPago"},
                     {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-navigation-close'></i></button>"}
                 ],
                 "language": {
