@@ -65,6 +65,42 @@ function planillaSueldo(){
 
     if($diasPost == 0){
         $diaMes = UltimoDia($año, $mes);
+    }else{
+        $diaMes = $diasPost;
+    }
+
+    for($j = 1 ; $j <= $diaMes ; $j++){
+        $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
+        $fechats = strtotime($año."-".$mes."-".$j); //fecha en yyyy-mm-dd
+        $dia = $dias[date('w', $fechats)];
+
+        for($k = 0; $k < sizeof($listaHorario) ; $k++){
+            if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
+                $planilla[$j-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$j))." ".$dia;
+                break;
+            }
+        }
+    }
+
+    /*for($k = 0; $k < 2 ; $k++){
+        if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
+            $f1 = new DateTime($listaHorario[$k]["entrada_horario"]);
+            $f2 = new DateTime($listaHorario[$c]["salida_horario"]);
+            $d = $f1->diff($f2);
+            $horaTrabajo = $d->format('%H:%I:%S');
+
+            $f3 = new DateTime($horaTrabajo);
+            $f4 = new DateTime($listaHorario[$k]["tiempo_espera"]);
+            $d = $f3->diff($f4);
+            $horaTrabajo = $d->format('%H:%I:%S');
+
+
+        }
+    }
+    
+
+    if($diasPost == 0){
+        $diaMes = UltimoDia($año, $mes);
         for($j = 1 ; $j <= $diaMes ; $j++){
             $sw = false;
             $c = 0;
@@ -78,7 +114,7 @@ function planillaSueldo(){
             }
     
             if($sw == true){
-                $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado");
+                $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
                 $fechats = strtotime($lista[$c]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
                 $dia = $dias[date('w', $fechats)];
     
@@ -119,16 +155,16 @@ function planillaSueldo(){
     
     
 
-    /*for($i = 0 ; $i < sizeof($lista) ; $i++){
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
 
         $dias = array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado");
         $fechats = strtotime($lista[$i]["fecha_reg_hr"]); //fecha en yyyy-mm-dd
         $dia = $dias[date('w', $fechats)];
         $diaNum = date("d", strtotime($lista[$i]["fecha_reg_hr"]));
         $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]))." ".$dia;
-*/
+
         
-        /*$fechaFormat = date("d-m-Y", strtotime($lista[$i]["fecha_reg_hr"]));
+        $fechaFormat = date("d-m-Y", strtotime($lista[$i]["fecha_reg_hr"]));
         $fechats = strtotime($fechaFormat);
         switch (date('w', $fechats)){ 
             case 0: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Domingo"; break; 
@@ -138,9 +174,9 @@ function planillaSueldo(){
             case 4: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Jueves"; break; 
             case 5: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Viernes"; break; 
             case 6: $lista[$i]["fecha_reg_hr"] = $lista[$i]["fecha_reg_hr"]." "."Sabado"; break; 
-        }*/
+        }
 
-        /*$f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
+        $f1 = new DateTime($lista[$i]["entrada_horario_reg_hr"]);
         $f2 = new DateTime($lista[$i]["salida_horario_reg_hr"]);
         $d = $f1->diff($f2);
         $lista[$i]["diferenciaHora"] = $d->format('%H:%I:%S');
