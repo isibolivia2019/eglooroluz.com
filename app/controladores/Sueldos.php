@@ -78,9 +78,9 @@ function planillaSueldo(){
 
         $cc = 0;
         while($cc < sizeof($listaHorario)){
+            $planilla[$c-1]["fecha_reg_hr"] = $c."-".$diaLiteral;
             $c++;
             $diaMes++;
-            $planilla[$c-1]["fecha_reg_hr"] = $c."-".$diaLiteral;
             $cc++;
         }
         
