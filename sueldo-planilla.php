@@ -220,7 +220,17 @@ session_start();
                     console.log("data", data);
                     console.log("miTabla", table.data().length());
                     var tableRemove = $(this).parents("tr");
-                    table.row(0).remove().draw(false);
+                    //table.row(tableRemove).remove().draw(false);
+
+                    myTable.row( tableRemove ).edit( {
+                        title: 'Edit first row'
+                    } );
+
+                    /*var rows = $('#table tbody tr');
+                    $.each(rows, function(i,v){
+                      var dato = "";
+                      var fechaHr = $($(v).find('td')[2]).text();
+                    });*/
                     
                     
                     /*var parametros = {
