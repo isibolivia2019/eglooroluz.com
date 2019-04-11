@@ -218,6 +218,8 @@ session_start();
                 $(tbody).on("click", "button.deshabilitar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
                     console.log("data", data);
+                    miTabla = document.getElementsByTagName("table-simple")[0];
+                    console.log("miTabla", miTabla);
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
                     /*var parametros = {
