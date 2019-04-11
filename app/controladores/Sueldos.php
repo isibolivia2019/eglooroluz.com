@@ -70,7 +70,8 @@ function planillaSueldo(){
     }
 
     $c = 1;
-    while($c <= $diaMes){
+    $cDias = 1;
+    while($cDias <= $diaMes){
         $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
         $fechats = strtotime($año."-".$mes."-".$c); //fecha en yyyy-mm-dd
         $dia = $dias[date('w', $fechats)];
@@ -84,7 +85,7 @@ function planillaSueldo(){
             $c++;
         }
         
-
+        $cDias++;
         /*for($cc = 0 ; $cc < sizeof($listaHorario) ; $cc++){
             $planilla[$c-1]["fecha_reg_hr"] = $c."-".$diaLiteral;
         }*/
