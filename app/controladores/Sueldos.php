@@ -74,8 +74,8 @@ function planillaSueldo(){
         $fechats = strtotime($año."-".$mes."-".$j); //fecha en yyyy-mm-dd
         $dia = $dias[date('w', $fechats)];
         $diaLiteral = "dia_".strtolower($dia);
-        
-        $planilla[$j-1]["fecha_reg_hr"] = $diaLiteral;
+
+        $planilla[$j-1]["fecha_reg_hr"] = $j."-".$diaLiteral;
     }
 
     /*for($k = 0; $k < 2 ; $k++){
