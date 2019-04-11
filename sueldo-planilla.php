@@ -218,7 +218,7 @@ session_start();
                 $(tbody).on("click", "button.deshabilitar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
                     console.log("data", data);
-                    console.log("miTabla", table.data().length());
+                    //console.log("miTabla", table.data());
                     var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
