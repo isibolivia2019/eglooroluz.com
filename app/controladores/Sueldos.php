@@ -69,17 +69,27 @@ function planillaSueldo(){
         $diaMes = $diasPost;
     }
 
-    for($j = 1 ; $j <= $diaMes ; $j++){
+    $c = 1;
+    while($c <= $diaMes){
         $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
-        $fechats = strtotime($año."-".$mes."-".$j); //fecha en yyyy-mm-dd
+        $fechats = strtotime($año."-".$mes."-".$c); //fecha en yyyy-mm-dd
         $dia = $dias[date('w', $fechats)];
         $diaLiteral = "dia_".strtolower($dia);
 
-        
-        for($cc = 0 ; $cc < sizeof($listaHorario) ; $cc++){
-            $planilla[$j-1]["fecha_reg_hr"] = $j."-".$diaLiteral;
+        $cc = 0;
+        while($cc < sizeof($listaHorario)){
+            $c++;
+            $diaMes++;
+            $planilla[$c-1]["fecha_reg_hr"] = $c."-".$diaLiteral;
+            $cc++;
         }
+        
+        $c++;
+        /*for($cc = 0 ; $cc < sizeof($listaHorario) ; $cc++){
+            $planilla[$c-1]["fecha_reg_hr"] = $c."-".$diaLiteral;
+        }*/
     }
+
 
     /*for($k = 0; $k < 2 ; $k++){
         if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
