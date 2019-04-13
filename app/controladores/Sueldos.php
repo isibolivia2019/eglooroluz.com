@@ -80,7 +80,24 @@ function planillaSueldo(){
         $cc = 0;
         while($cc < sizeof($listaHorario)){
             if($listaHorario[$cc][$diaLiteral] == "1"){
-                $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$diaLiteral;
+                //$planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$diaLiteral;
+                $sw = false;
+                $cLista = 0;
+                for($a=0;$a<sizeof($lista);$a++){
+                    $diaLista = date("d", strtotime($lista[$a]["fecha_reg_hr"]));
+                    if($cDias == $diaLista){
+                        $sw = true;
+                        $cLista = $a;
+                        break;
+                    }
+                }
+
+                if($sw == true){
+                    $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." Si Trabajo";
+                }else{
+                    $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." NO Trabajo";
+                }
+                
                 $c++;
             }
             $cc++;
