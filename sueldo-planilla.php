@@ -184,7 +184,7 @@ session_start();
                 "mes" : cboxMes,
                 "diasPost" : 0
             };
-            $.ajax({
+            /*$.ajax({
                 type:'POST',
                 data: parametros,
                 url:'app/controladores/Sueldos.php',
@@ -193,8 +193,8 @@ session_start();
                     datos = JSON.parse(data);
                     datos = datos.data
                 }
-            })
-            /*var table = $('#table-simple').DataTable({
+            })*/
+            var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -227,7 +227,7 @@ session_start();
                     //table.row(tableRemove).remove().draw(false);
 
                     var cell = table.cell(0,0).data("editar").draw();
-                })*/
+                })
         }
         
     </script>
