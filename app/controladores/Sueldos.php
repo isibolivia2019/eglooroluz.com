@@ -135,7 +135,7 @@ function planillaSueldo(){
     $sueldoDia = round($listaSueldo[0]["sueldo"] / ($c-1), 2);;
     for($i=0;$i<sizeof($planilla);$i++){
         $planilla[$i]["totalPago"] = $sueldoDia;
-        if($planilla[$i]["diferenciaHora"] = "00:00:00"){
+        if($planilla[$i]["diferenciaHora"] == "00:00:00"){
             $planilla[$i]["totalPago"] = "0.00";
         }
 
