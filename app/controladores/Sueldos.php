@@ -120,7 +120,7 @@ function planillaSueldo(){
                     $planilla[$c-1]["salida_horario_reg_hr"] = "- -";
                     $planilla[$c-1]["observacion_entrada"] = "- -";
                     $planilla[$c-1]["observacion_salida"] = "- -";
-                    $planilla[$c-1]["diferenciaHora"] = "- -";
+                    $planilla[$c-1]["diferenciaHora"] = "00:00:00";
                     $planilla[$c-1]["totalPago"] = '0.00';
                 }
                 
@@ -135,6 +135,24 @@ function planillaSueldo(){
     $sueldoDia = round($listaSueldo[0]["sueldo"] / ($c-1), 2);;
     for($i=0;$i<sizeof($planilla);$i++){
         $planilla[$i]["totalPago"] = $sueldoDia;
+        if($planilla[$i]["diferenciaHora"] = "00:00:00"){
+            $planilla[$i]["totalPago"] = "0.00";
+        }
+
+        if($planilla[$i]["diferenciaHora"] >= $planilla[$i]["diferenciaTrabajo"]){
+            $planilla[$i]["totalPago"] = $sueldoDia;
+        }else{
+            list($horas, $minutos, $segundos) = explode(':', $planilla[$i]["diferenciaHora"]);
+            $minutosDiferencia= ($horas * 60 ) + $minutos;
+            $minutosDiferencia;  
+
+            list($horas, $minutos, $segundos) = explode(':', $planilla[$i]["diferenciaTrabajo"]);
+            $minutosTrabajo= ($horas * 60 ) + $minutos;
+            $minutosTrabajo;  
+
+            $sueldoMinuto = round($sueldoDia / $minutosTrabajo, 2);
+            $planilla[$i]["totalPago"] = $sueldoMinuto * $minutosDiferencia;
+        }
     }
     /*for($k = 0; $k < 2 ; $k++){
         if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
