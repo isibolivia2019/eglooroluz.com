@@ -203,12 +203,12 @@ session_start();
                 },
                 "columns": [
                     {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
-                    {"data" : "fecha_reg_hr"},
+                    {"data" : "entrada_horario_reg_hr"},
+                    {"data" : "salida_horario_reg_hr"},
+                    {"data" : "observacion_entrada"},
+                    {"data" : "observacion_salida"},
+                    {"data" : "diferenciaHora"},
+                    {"data" : "totalPago"},
                     {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-navigation-close'></i></button>"}
                 ],
                 "language": {
