@@ -106,7 +106,7 @@ function planillaSueldo(){
                     $planilla[$c-1]["observacion_entrada"] = $lista[$cLista]["observacion_entrada"];
                     $planilla[$c-1]["observacion_salida"] = $lista[$cLista]["observacion_salida"];
                     
-                    $planilla[$c-1]["totalPago"] = $sueldoDia;
+                    $planilla[$c-1]["totalPago"] = "0.00";
                 }else{
                     $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
                     $planilla[$c-1]["entrada_horario_reg_hr"] = "- -";
@@ -125,10 +125,10 @@ function planillaSueldo(){
         $cDias++;
     }
 
-    //$sueldoDia = $listaSueldo[0]["sueldo"] / 28;
-    /*for($i=0;$i<sizeof($planilla);$i++){
+    $sueldoDia = $listaSueldo[0]["sueldo"] / ($c-1);
+    for($i=0;$i<sizeof($planilla);$i++){
         $planilla[$i]["totalPago"] = $sueldoDia;
-    }*/
+    }
     /*for($k = 0; $k < 2 ; $k++){
         if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
             $f1 = new DateTime($listaHorario[$k]["entrada_horario"]);
