@@ -92,18 +92,16 @@ function planillaSueldo(){
                     }
                 }
 
+                $f1 = new DateTime($listaHorario[$cc]["entrada_horario"]);
+                $f2 = new DateTime($listaHorario[$cc]["salida_horario"]);
+                $d = $f1->diff($f2);
+                $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
+                $f1 = new DateTime($listaHorario[$cc]["tiempo_espera"]);
+                $f2 = new DateTime($planilla[$c-1]["diferenciaTrabajo"]);
+                $d = $f1->diff($f2);
+                $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
+
                 if($sw == true){
-                    $f1 = new DateTime($listaHorario[$cc]["entrada_horario"]);
-                    $f2 = new DateTime($listaHorario[$cc]["salida_horario"]);
-                    $d = $f1->diff($f2);
-                    $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
-
-                    $f1 = new DateTime($listaHorario[$cc]["tiempo_espera"]);
-                    $f2 = new DateTime($planilla[$c-1]["diferenciaTrabajo"]);
-                    $d = $f1->diff($f2);
-                    $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
-
-
                     $f1 = new DateTime($lista[$cLista]["entrada_horario_reg_hr"]);
                     $f2 = new DateTime($lista[$cLista]["salida_horario_reg_hr"]);
                     $d = $f1->diff($f2);
