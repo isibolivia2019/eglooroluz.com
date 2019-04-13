@@ -81,7 +81,6 @@ function planillaSueldo(){
         $cc = 0;
         while($cc < sizeof($listaHorario)){
             if($listaHorario[$cc][$diaLiteral] == "1"){
-                //$planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$diaLiteral;
                 $sw = false;
                 $cLista = 0;
                 for($a=0;$a<sizeof($lista);$a++){
@@ -94,12 +93,22 @@ function planillaSueldo(){
                 }
 
                 if($sw == true){
+                    $f1 = new DateTime($listaHorario[$cc]["entrada_horario"]);
+                    $f2 = new DateTime($listaHorario[$cc]["salida_horario"]);
+                    $d = $f1->diff($f2);
+                    $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
+
+                    $f1 = new DateTime($listaHorario[$cc]["tiempo_espera"]);
+                    $f2 = new DateTime($planilla[$c-1]["diferenciaTrabajo"]);
+                    $d = $f1->diff($f2);
+                    $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
+
+
                     $f1 = new DateTime($lista[$cLista]["entrada_horario_reg_hr"]);
                     $f2 = new DateTime($lista[$cLista]["salida_horario_reg_hr"]);
                     $d = $f1->diff($f2);
-
-                    $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
                     $planilla[$c-1]["diferenciaHora"] = $d->format('%H:%I:%S');
+                    $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
 
                     $planilla[$c-1]["entrada_horario_reg_hr"] = $lista[$cLista]["entrada_horario_reg_hr"];
                     $planilla[$c-1]["salida_horario_reg_hr"] = $lista[$cLista]["salida_horario_reg_hr"];
@@ -125,7 +134,7 @@ function planillaSueldo(){
         $cDias++;
     }
 
-    $sueldoDia = $listaSueldo[0]["sueldo"] / ($c-1);
+    $sueldoDia = round($listaSueldo[0]["sueldo"] / ($c-1), 2);;
     for($i=0;$i<sizeof($planilla);$i++){
         $planilla[$i]["totalPago"] = $sueldoDia;
     }
