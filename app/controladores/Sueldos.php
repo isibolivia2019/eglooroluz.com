@@ -125,7 +125,7 @@ function planillaSueldo(){
         $cDias++;
     }
 
-    $sueldoDia = $listaSueldo[0]["sueldo"] / ($c-1);
+    $sueldoDia = $listaSueldo[0]["sueldo"] / $c;
     for($i=0;$i<sizeof($planilla);$i++){
         $planilla[$i]["totalPago"] = $sueldoDia;
        
