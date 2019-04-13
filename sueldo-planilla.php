@@ -184,7 +184,7 @@ session_start();
                 "mes" : cboxMes,
                 "diasPost" : 0
             };
-            /*$.ajax({
+            $.ajax({
                 type:'POST',
                 data: parametros,
                 url:'app/controladores/Sueldos.php',
@@ -193,8 +193,8 @@ session_start();
                     datos = JSON.parse(data);
                     datos = datos.data
                 }
-            })*/
-            var table = $('#table-simple').DataTable({
+            })
+            /*var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -216,7 +216,7 @@ session_start();
                 }
             });
             btn_deshabilitar("#table-simple tbody", table);
-        }
+        }*/
 
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
