@@ -208,7 +208,7 @@ session_start();
                     {"data" : "observacion_entrada"},
                     {"data" : "observacion_salida"},
                     {"data" : "diferenciaHora"},
-                    {"data" : "totalPago"},
+                    {"data" : "fecha_reg_hr"},
                     {"defaultContent" : "<button id='deshabilitar' class='deshabilitar btn waves-effect red' type='submit' name='action'><i class='mdi-navigation-close'></i></button>"}
                 ],
                 "language": {
@@ -216,7 +216,7 @@ session_start();
                 }
             });
             btn_deshabilitar("#table-simple tbody", table);
-        }*/
+        }
 
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
@@ -227,44 +227,7 @@ session_start();
                     //table.row(tableRemove).remove().draw(false);
 
                     var cell = table.cell(0,0).data("editar").draw();
-
-                    //$(this).parents("tr").html("").append("<input type='text' value=\""+"EDITAR"+"\">");
-                    
-                    /*table.row( tableRemove ).edit( {
-                        title: 'Edit first row'
-                    } );*/
-
-                    /*var rows = $('#table tbody tr');
-                    $.each(rows, function(i,v){
-                      var dato = "";
-                      var fechaHr = $($(v).find('td')[2]).text();
-                    });*/
-                    
-                    
-                    /*var parametros = {
-                       "action" : "cambiarEstado",
-                       "codigo" : data.cod_usuario,
-                       "estado" : "0",
-                    };
-                    $.ajax({
-                      type:'POST',
-                      data: parametros,
-                      url:'app/controladores/Usuarios.php',
-                      success:function(data){
-                          datos = JSON.parse(data);
-                          if(datos.resp == "true"){
-                              Materialize.toast('Datos del Usuario actualizado con exito', 5000)
-                              
-                          }
-                          if(datos.resp == "false"){
-                              Materialize.toast('Hubo un fallo al actualizar el usuario. Vuelva a Intentarlo', 5000)
-                          }
-                          if(datos.resp != "true" && datos.resp != "false"){
-                              Materialize.toast('Hubo un fallo al actualizar el usuario COD:'+datos.resp, 5000)
-                          }
-                      }
-                    })*/
-                })
+                })*/
         }
         
     </script>
