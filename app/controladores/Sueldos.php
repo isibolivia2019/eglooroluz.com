@@ -71,8 +71,7 @@ function planillaSueldo(){
 
     $c = 1;
     $cDias = 1;
-    $sueldoDia = $listaSueldo[0]["sueldo"] / $diaMes;
-
+    
     while($cDias <= $diaMes){
         $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
         $fechats = strtotime($año."-".$mes."-".$cDias); //fecha en yyyy-mm-dd
@@ -126,7 +125,11 @@ function planillaSueldo(){
         $cDias++;
     }
 
-
+    $sueldoDia = $listaSueldo[0]["sueldo"] / ($c-1);
+    for($i=0;$i<sizeof($planilla);$i++){
+        $planilla[$i]["totalPago"] = $sueldoDia;
+       
+    }
     /*for($k = 0; $k < 2 ; $k++){
         if($listaHorario[$k]["dia_".strtolower($dia)] == 1){
             $f1 = new DateTime($listaHorario[$k]["entrada_horario"]);
