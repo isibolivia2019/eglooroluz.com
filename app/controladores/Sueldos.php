@@ -71,6 +71,8 @@ function planillaSueldo(){
 
     $c = 1;
     $cDias = 1;
+    $sueldoDia = $listaSueldo[0]["sueldo"] / $diaMes;
+
     while($cDias <= $diaMes){
         $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
         $fechats = strtotime($año."-".$mes."-".$cDias); //fecha en yyyy-mm-dd
@@ -105,7 +107,7 @@ function planillaSueldo(){
                     $planilla[$c-1]["observacion_entrada"] = $lista[$cLista]["observacion_entrada"];
                     $planilla[$c-1]["observacion_salida"] = $lista[$cLista]["observacion_salida"];
                     
-                    $planilla[$c-1]["totalPago"] = $listaSueldo[0]["sueldo"];
+                    $planilla[$c-1]["totalPago"] = $sueldoDia;
                 }else{
                     $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
                     $planilla[$c-1]["entrada_horario_reg_hr"] = "- -";
