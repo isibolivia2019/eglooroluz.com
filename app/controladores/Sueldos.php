@@ -102,14 +102,24 @@ function planillaSueldo(){
                 $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
 
                 if($sw == true){
-                    $f1 = new DateTime($lista[$cLista]["entrada_horario_reg_hr"]);
-                    $f2 = new DateTime($lista[$cLista]["salida_horario_reg_hr"]);
-                    $d = $f1->diff($f2);
-                    $planilla[$c-1]["diferenciaHora"] = $d->format('%H:%I:%S');
+                    if($lista[$cLista]["entrada_horario_reg_hr"]){
+                        if($lista[$cLista]["salida_horario_reg_hr"]){
+                            $f1 = new DateTime($lista[$cLista]["entrada_horario_reg_hr"]);
+                            $f2 = new DateTime($lista[$cLista]["salida_horario_reg_hr"]);
+                            $d = $f1->diff($f2);
+                            $planilla[$c-1]["diferenciaHora"] = $d->format('%H:%I:%S');
+                            $planilla[$c-1]["entrada_horario_reg_hr"] = $lista[$cLista]["entrada_horario_reg_hr"];
+                            $planilla[$c-1]["salida_horario_reg_hr"] = $lista[$cLista]["salida_horario_reg_hr"];
+                        }else{
+                            $planilla[$c-1]["salida_horario_reg_hr"] = "- -";
+                            $planilla[$c-1]["diferenciaHora"] = "00:00:00";
+                        }
+                    }else{
+                        $planilla[$c-1]["entrada_horario_reg_hr"] = "- -";
+                        $planilla[$c-1]["diferenciaHora"] = "00:00:00";
+                    }
                     $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
 
-                    $planilla[$c-1]["entrada_horario_reg_hr"] = $lista[$cLista]["entrada_horario_reg_hr"];
-                    $planilla[$c-1]["salida_horario_reg_hr"] = $lista[$cLista]["salida_horario_reg_hr"];
                     $planilla[$c-1]["observacion_entrada"] = $lista[$cLista]["observacion_entrada"];
                     $planilla[$c-1]["observacion_salida"] = $lista[$cLista]["observacion_salida"];
                     
@@ -151,7 +161,7 @@ function planillaSueldo(){
             $minutosTrabajo;  
 
             $sueldoMinuto = round($sueldoDia / $minutosTrabajo, 3);
-            $planilla[$i]["totalPago"] = $sueldoMinuto * $minutosDiferencia;
+            $planilla[$i]["totalPago"] = round($sueldoMinuto * $minutosDiferencia, 2);
         }
     }
     /*for($k = 0; $k < 2 ; $k++){
