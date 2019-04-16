@@ -187,7 +187,8 @@ session_start();
 
         function generarPlanilla(){
             verificarAcceso("Permiso_Sueldo");
-            var cboxPersonal = document.getElementById("cboxPersonal").value;
+            console.log("click")
+            /*var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             var parametros = {
@@ -204,7 +205,7 @@ session_start();
                 success:function(data){
                     console.log("data:", data);
                 }
-            })
+            })*/
 
             /*var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
