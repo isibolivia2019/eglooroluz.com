@@ -141,6 +141,7 @@ session_start();
     <script>
         diasPost = 31;
         diasElminados = []
+        var parametrosTabla;
         //var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
@@ -182,7 +183,7 @@ session_start();
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             diasElminados = [];
-            var parametros = {
+            parametrosTabla = {
                 "action" : "planillaSueldoInicio",
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
@@ -227,8 +228,13 @@ session_start();
 
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
+
+                    var cboxPersonal = document.getElementById("cboxPersonal").value;
+                    var cboxAño = document.getElementById("cboxAño").value;
+                    var cboxMes = document.getElementById("cboxMes").value;
                     
                    var data = table.row( $(this).parents("tr") ).data();
+
                     //console.log("data", data);
                     //console.log("miTabla", table.data());
                     console.log("Total:", table.data().length);
@@ -240,9 +246,20 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
 
-                    table.clear().draw();
+                    parametrosTabla = {
+                        "action" : "planillaSueldoInicio",
+                        "usuario" : cboxPersonal,
+                        "año" : cboxAño,
+                        "mes" : cboxMes,
+                        "diasPost" : 0,
+                        "diasElminados" : JSON.stringify(diasElminados)
+                    };
 
-                    buscarHorarios();
+                    table.ajax({
+                        type:'POST',
+                        data: parametrosTabla,
+                        url:'app/controladores/Sueldos.php'
+                    }).reload();
                 })
         }
 
