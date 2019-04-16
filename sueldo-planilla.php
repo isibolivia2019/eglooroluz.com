@@ -104,9 +104,9 @@ session_start();
                                                     <th>Salida</th>
                                                     <th>Obs. Entrada</th>
                                                     <th>Obs. Salida</th>
-                                                    <th>Hrs/Trabajo</th>
-                                                    <th>Total de Pago</th>
-                                                    <th>diferenciaTrabajo</th>
+                                                    <th>Hrs de Trabajo</th>
+                                                    <th>Hrs de Cumplimiento</th>
+                                                    <th>Pago Diario</th>
                                                     <th>Eliminar Dia</th>
                                                 </tr>
                                             </thead>
@@ -124,6 +124,13 @@ session_start();
                                                 </tr>
                                             </tfoot>
                                         </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12 submitBtn">
+                                        <div class="input-field col s12 right ">
+                                          <a class="btn waves-effect waves-light col s12" onclick="buscarHorarios()">Generar Planilla</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div> 
