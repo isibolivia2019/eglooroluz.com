@@ -51,7 +51,7 @@ function planillaSueldoInicio(){
     $mes =  $_POST['mes'];
     $año =  $_POST['año'];
     $diasPost =  $_POST['diasPost'];
-    $diasElminados = unserialize(stripslashes($_POST["diasElminados"]));
+    $diasElminados = stripslashes($_POST["diasElminados"]);
     $diaMes = 0;
 
     $datos = array($usuario, $mes, $año);
