@@ -140,7 +140,7 @@ session_start();
 
     <script>
         diasPost = 31;
-        var table
+        //var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
             var cboxPersonal = document.getElementById("cboxPersonal");
@@ -198,7 +198,7 @@ session_start();
                     datos = datos.data
                 }
             })*/
-            table = $('#table-simple').DataTable({
+            var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -235,7 +235,7 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
 
-                    tableCarrito.ajax.reload();
+                    table.ajax.reload();
                 })
         }
         
