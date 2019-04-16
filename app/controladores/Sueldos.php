@@ -126,8 +126,6 @@ function planillaSueldo(){
                         $planilla[$c-1]["diferenciaHora"] = "00:00:00";
                     }
 
-
-
                     $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
 
                     $planilla[$c-1]["observacion_entrada"] = $lista[$cLista]["observacion_entrada"];

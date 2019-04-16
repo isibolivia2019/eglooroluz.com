@@ -139,6 +139,7 @@ session_start();
         <?php require("app-foot.php");?>
 
     <script>
+        diasPost = 31;
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
             var cboxPersonal = document.getElementById("cboxPersonal");
@@ -184,7 +185,7 @@ session_start();
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
                 "mes" : cboxMes,
-                "diasPost" : 0
+                "diasPost" : diasPost
             };
             /*$.ajax({
                 type:'POST',
@@ -225,11 +226,11 @@ session_start();
                 $(tbody).on("click", "button.deshabilitar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
                     console.log("data", data);
-                    //console.log("miTabla", table.data());
-                    var tableRemove = $(this).parents("tr");
+                    console.log("miTabla", table.data());
+                    //var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
-                    var cell = table.cell(0,0).data("editar").draw();
+                    //var cell = table.cell(0,0).data("editar").draw();
                 })
         }
         
