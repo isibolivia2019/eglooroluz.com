@@ -211,7 +211,7 @@ session_start();
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             window.open("reportes/reporte-caja-chica.php?usu="+cboxPersonal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
-        
+      */  
         }
 
         function buscarHorarios(){
