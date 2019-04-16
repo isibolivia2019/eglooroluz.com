@@ -242,7 +242,7 @@ session_start();
                     diasPost = table.data().length
                     diasPost = diasPost - 1
                     if(diasElminados.length>0){
-                        diasElminados = diasElminados + "," data.fecha_reg_hr.substring(0, 2)
+                        diasElminados = diasElminados + "," + data.fecha_reg_hr.substring(0, 2)
                     }else{
                         diasElminados = data.fecha_reg_hr.substring(0, 2)
                     }
