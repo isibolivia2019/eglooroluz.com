@@ -149,7 +149,6 @@ session_start();
         diasPost = 31;
         diasElminados = []
         var table
-        //var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
             var cboxPersonal = document.getElementById("cboxPersonal");
@@ -186,8 +185,24 @@ session_start();
 
         function generarPlanilla(){
             verificarAcceso("Permiso_Sueldo");
-            console.log("miTabla", table.data());
-
+            var cboxPersonal = document.getElementById("cboxPersonal").value;
+            var cboxAño = document.getElementById("cboxAño").value;
+            var cboxMes = document.getElementById("cboxMes").value;
+            var parametros = {
+                "action" : "generarPlanillaSueldo",
+                "usuario" : cboxPersonal,
+                "año" : cboxAño,
+                "mes" : cboxMes,
+                "datos" : table.data()
+            };
+            $.ajax({
+                type:'POST',
+                data: parametros,
+                url:'app/controladores/Sueldos.php',
+                success:function(data){
+                    console.log("data:", data);
+                }
+            })
 
 
 

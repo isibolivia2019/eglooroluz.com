@@ -33,8 +33,8 @@ if (isset($_POST['action'])) {
         case 'planillaSueldoInicio' :
             planillaSueldoInicio();
             break;
-        case 'planillaSueldoModificado' :
-            planillaSueldoModificado();
+        case 'generarPlanillaSueldo' :
+            generarPlanillaSueldo();
             break;
     }
 }
@@ -42,6 +42,21 @@ if (isset($_POST['action'])) {
 function modelo($modelo){
     require_once '../modelos/'.$modelo.'.php';
     return new $modelo();
+}
+
+function generarPlanillaSueldo(){
+    $usuario = $_POST['usuario'];
+    date_default_timezone_set('America/La_Paz');
+    $mes =  $_POST['mes'];
+    $año =  $_POST['año'];
+    $datos =  $_POST['datos'];
+
+    echo $datos;
+    /*$datos = array($cod_sueldo);
+    $modelo = modelo('Sueldo');
+    $resp = $modelo->eliminarSueldo($datos);*/
+
+
 }
 
 function planillaSueldoInicio(){

@@ -112,7 +112,7 @@ $pdf -> Cell(260, 10, utf8_decode('CAJA CHICA DEL MES DE '.strtoupper ($nombreMe
 $pdf -> SetFont('Arial','B', 11);
 $pdf->SetWidths(array(15,40,40,55,55,55));
 $pdf->SetAligns(array('C','C','C','C','C','C'));
-$pdf->Row(array('NRO.', 'FECHA / HORA', 'MONTO GASTO', 'DETALLE', 'COMPROBANTE', 'PERSONAL'));
+$pdf->Row(array('NRO.', 'FECHA', 'HORA', 'GASTO', 'DETALLE', 'COMPROBANTE', 'PERSONAL'));
 
 $totalMonto = 0;
 for($i=0;$i<sizeof($lista);$i++){
