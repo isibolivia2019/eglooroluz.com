@@ -225,9 +225,11 @@ session_start();
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
                     var data = table.row( $(this).parents("tr") ).data();
-                    console.log("data", data);
-                    console.log("miTabla", table.data());
-                    console.log("Total:", table.data().length);
+                    //console.log("data", data);
+                    //console.log("miTabla", table.data());
+                    //console.log("Total:", table.data().length);
+                    diasPost = table.data().length
+                    diasPost = diasPost - 1
                     //var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
