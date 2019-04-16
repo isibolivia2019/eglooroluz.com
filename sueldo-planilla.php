@@ -148,6 +148,7 @@ session_start();
     <script>
         diasPost = 31;
         diasElminados = []
+        var table
         //var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
@@ -183,6 +184,22 @@ session_start();
             }
         });
 
+        function generarPlanilla(){
+            verificarAcceso("Permiso_Sueldo");
+            console.log("miTabla", table.data());
+
+
+
+
+
+
+            /*var cboxPersonal = document.getElementById("cboxPersonal").value;
+            var cboxAño = document.getElementById("cboxAño").value;
+            var cboxMes = document.getElementById("cboxMes").value;
+            window.open("reportes/reporte-caja-chica.php?usu="+cboxPersonal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+        */
+        }
+
         function buscarHorarios(){
             verificarAcceso("Permiso_Sueldo");
             var cboxPersonal = document.getElementById("cboxPersonal").value;
@@ -207,7 +224,7 @@ session_start();
                     datos = datos.data
                 }
             })*/
-            var table = $('#table-simple').DataTable({
+            table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",

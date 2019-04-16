@@ -191,7 +191,7 @@ function planillaSueldoInicio(){
     }
     
     $data = array();
-    $data = ['data' => $planilla];
+    $data =  ['data' => $planilla];
     echo json_encode($data);
 }
 
