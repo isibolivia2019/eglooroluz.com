@@ -77,6 +77,7 @@ function planillaSueldoInicio(){
     $c = 1;
     $cDias = 1;
     echo "dias:".$diasElminados;
+    echo "resultado:".$diasElminados[0];
     echo "Total:".sizeOf($diasElminados);
     while($cDias <= $diaMes){
         $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
