@@ -84,7 +84,7 @@ function planillaSueldoInicio(){
 
         $swDiaEliminado = false;
         for($aa = 0 ; $aa < sizeOf($diasElminados) ; $aa++){
-            if($diasElminados[$aa] == $cDias){
+            if((integer)$diasElminados[$aa] == (integer)$cDias){
                 $swDiaEliminado = true;
                 break;
             }
