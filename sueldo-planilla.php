@@ -141,7 +141,6 @@ session_start();
     <script>
         diasPost = 31;
         diasElminados = []
-        var parametrosTabla;
         //var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
@@ -183,7 +182,7 @@ session_start();
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             diasElminados = [];
-            parametrosTabla = {
+            var parametros = {
                 "action" : "planillaSueldoInicio",
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
@@ -205,7 +204,14 @@ session_start();
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
-                    "data":  parametros,
+                    "data":  function ( d ) {
+                        d.action = "planillaSueldoInicio";
+                        d.usuario = cboxPersonal;
+                        d.año = cboxAño;
+                        d.mes = cboxMes;
+                        d.diasPost = 0;
+                        d.diasElminados = JSON.stringify(diasElminados);
+                    },
                     "url": "app/controladores/Sueldos.php"
                 },
                 "columns": [
@@ -228,13 +234,8 @@ session_start();
 
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
-
-                    var cboxPersonal = document.getElementById("cboxPersonal").value;
-                    var cboxAño = document.getElementById("cboxAño").value;
-                    var cboxMes = document.getElementById("cboxMes").value;
                     
                    var data = table.row( $(this).parents("tr") ).data();
-
                     //console.log("data", data);
                     //console.log("miTabla", table.data());
                     console.log("Total:", table.data().length);
@@ -246,20 +247,7 @@ session_start();
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
 
-                    parametrosTabla = {
-                        "action" : "planillaSueldoInicio",
-                        "usuario" : cboxPersonal,
-                        "año" : cboxAño,
-                        "mes" : cboxMes,
-                        "diasPost" : 0,
-                        "diasElminados" : JSON.stringify(diasElminados)
-                    };
-
-                    table.ajax({
-                        type:'POST',
-                        data: parametrosTabla,
-                        url:'app/controladores/Sueldos.php'
-                    }).reload();
+                    table.ajax.reload();
                 })
         }
 
