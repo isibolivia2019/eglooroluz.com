@@ -75,9 +75,6 @@ function planillaSueldoInicio(){
 
     $c = 1;
     $cDias = 1;
-    echo "dias:".$diasElminados;
-    echo "resultado:".$diasElminados[0];
-    echo "Total:".sizeOf($diasElminados);
     while($cDias <= $diaMes){
         $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
         $fechats = strtotime($año."-".$mes."-".$cDias); //fecha en yyyy-mm-dd
@@ -86,7 +83,7 @@ function planillaSueldoInicio(){
 
         $swDiaEliminado = false;
         for($aa = 0 ; $aa < sizeOf($diasElminados) ; $aa++){
-            echo "ifCONDICION:".$diasElminados[0]."==".(integer)$cDias;
+            echo "ifCONDICION:".$diasElminados[$aa]."==".(integer)$cDias;
             if((integer)$diasElminados[$aa] == (integer)$cDias){
                 echo "if:SII".(integer)$diasElminados[$aa];
                 $swDiaEliminado = true;
