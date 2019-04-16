@@ -227,6 +227,7 @@ session_start();
                     var data = table.row( $(this).parents("tr") ).data();
                     console.log("data", data);
                     console.log("miTabla", table.data());
+                    console.log("Total:", table.data().length);
                     //var tableRemove = $(this).parents("tr");
                     //table.row(tableRemove).remove().draw(false);
 
