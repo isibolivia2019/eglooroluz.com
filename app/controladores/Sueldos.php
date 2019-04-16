@@ -153,7 +153,7 @@ function planillaSueldoInicio(){
                         $planilla[$c-1]["observacion_entrada"] = "- -";
                         $planilla[$c-1]["observacion_salida"] = "- -";
                         $planilla[$c-1]["diferenciaHora"] = "00:00:00";
-                        $planilla[$c-1]["totalPago"] = '0.00';
+                        $planilla[$c-1]["totalPago"] = 'Bs. 0.00';
                     }
                     
                     $c++;
@@ -171,149 +171,11 @@ function planillaSueldoInicio(){
     for($i=0;$i<sizeof($planilla);$i++){
         $planilla[$i]["totalPago"] = $sueldoDia;
         if($planilla[$i]["diferenciaHora"] == "00:00:00"){
-            $planilla[$i]["totalPago"] = "0.00";
+            $planilla[$i]["totalPago"] = "Bs. 0.00";
         }
 
         if($planilla[$i]["diferenciaHora"] >= $planilla[$i]["diferenciaTrabajo"]){
-            $planilla[$i]["totalPago"] = $sueldoDia;
-        }else{
-            list($horas, $minutos, $segundos) = explode(':', $planilla[$i]["diferenciaHora"]);
-            $minutosDiferencia= ($horas * 60 ) + $minutos;
-            $minutosDiferencia;  
-
-            list($horas, $minutos, $segundos) = explode(':', $planilla[$i]["diferenciaTrabajo"]);
-            $minutosTrabajo= ($horas * 60 ) + $minutos;
-            $minutosTrabajo;  
-
-            $sueldoMinuto = round($sueldoDia / $minutosTrabajo, 3);
-            $planilla[$i]["totalPago"] = round($sueldoMinuto * $minutosDiferencia, 2);
-        }
-    }
-    
-    $data = array();
-    $data = ['data' => $planilla];
-    echo json_encode($data);
-}
-
-function planillaSueldoModificado(){
-    $usuario = $_POST['usuario'];
-    date_default_timezone_set('America/La_Paz');
-    $mes =  $_POST['mes'];
-    $año =  $_POST['año'];
-    $diasPost =  $_POST['diasPost'];
-    
-    $diaMes = 0;
-
-    $datos = array($usuario, $mes, $año);
-    $modelo = modelo('HuellaDactilar');
-    $lista = $modelo->listaRegistroHorarioEspecifico($datos);
-
-    $datos = array($usuario);
-    $modelo = modelo('Horario');
-    $listaHorario = $modelo->horarioEspecificoUsuario($datos);
-
-    $datos = array($usuario);
-    $modelo = modelo('Sueldo');
-    $listaSueldo = $modelo->sueldoEspecificoUsuario($datos);
-
-    $planilla = "";
-
-    if($diasPost == 0){
-        $diaMes = UltimoDia($año, $mes);
-    }else{
-        $diaMes = $diasPost;
-    }
-
-    $c = 1;
-    $cDias = 1;
-    
-    while($cDias <= $diaMes){
-        $dias = array("Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado");
-        $fechats = strtotime($año."-".$mes."-".$cDias); //fecha en yyyy-mm-dd
-        $dia = $dias[date('w', $fechats)];
-        $diaLiteral = "dia_".strtolower($dia);
-
-        $cc = 0;
-        while($cc < sizeof($listaHorario)){
-            if($listaHorario[$cc][$diaLiteral] == "1"){
-                $sw = false;
-                $cLista = 0;
-                for($a=0;$a<sizeof($lista);$a++){
-                    $diaLista = date("d", strtotime($lista[$a]["fecha_reg_hr"]));
-                    if($cDias == $diaLista){
-                        $sw = true;
-                        $cLista = $a;
-                        break;
-                    }
-                }
-
-                $f1 = new DateTime($listaHorario[$cc]["entrada_horario"]);
-                $f2 = new DateTime($listaHorario[$cc]["salida_horario"]);
-                $d = $f1->diff($f2);
-                $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
-                $f1 = new DateTime($listaHorario[$cc]["tiempo_espera"]);
-                $f2 = new DateTime($planilla[$c-1]["diferenciaTrabajo"]);
-                $d = $f1->diff($f2);
-                $planilla[$c-1]["diferenciaTrabajo"] = $d->format('%H:%I:%S');
-
-                if($sw == true){
-                    if($lista[$cLista]["entrada_horario_reg_hr"]){
-                        $planilla[$c-1]["entrada_horario_reg_hr"] = $lista[$cLista]["entrada_horario_reg_hr"];
-                    }else{
-                        $planilla[$c-1]["entrada_horario_reg_hr"] = "- -";
-                    }
-                    if($lista[$cLista]["salida_horario_reg_hr"]){
-                        $planilla[$c-1]["salida_horario_reg_hr"] = $lista[$cLista]["salida_horario_reg_hr"];
-                    }else{
-                        $planilla[$c-1]["salida_horario_reg_hr"] = "- -";
-                    }
-
-                    if($lista[$cLista]["entrada_horario_reg_hr"]){
-                        if($lista[$cLista]["salida_horario_reg_hr"]){
-                            $f1 = new DateTime($lista[$cLista]["entrada_horario_reg_hr"]);
-                            $f2 = new DateTime($lista[$cLista]["salida_horario_reg_hr"]);
-                            $d = $f1->diff($f2);
-                            $planilla[$c-1]["diferenciaHora"] = $d->format('%H:%I:%S');
-                        }else{
-                            $planilla[$c-1]["diferenciaHora"] = "00:00:00";
-                        }
-                    }else{
-                        $planilla[$c-1]["diferenciaHora"] = "00:00:00";
-                    }
-
-                    $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
-
-                    $planilla[$c-1]["observacion_entrada"] = $lista[$cLista]["observacion_entrada"];
-                    $planilla[$c-1]["observacion_salida"] = $lista[$cLista]["observacion_salida"];
-                    
-                    $planilla[$c-1]["totalPago"] = "0.00";
-                }else{
-                    $planilla[$c-1]["fecha_reg_hr"] = date("d/m/Y", strtotime($año."-".$mes."-".$cDias))." ".$dia;
-                    $planilla[$c-1]["entrada_horario_reg_hr"] = "- -";
-                    $planilla[$c-1]["salida_horario_reg_hr"] = "- -";
-                    $planilla[$c-1]["observacion_entrada"] = "- -";
-                    $planilla[$c-1]["observacion_salida"] = "- -";
-                    $planilla[$c-1]["diferenciaHora"] = "00:00:00";
-                    $planilla[$c-1]["totalPago"] = '0.00';
-                }
-                
-                $c++;
-            }
-            $cc++;
-        }
-        
-        $cDias++;
-    }
-
-    $sueldoDia = round($listaSueldo[0]["sueldo"] / ($c-1), 2);;
-    for($i=0;$i<sizeof($planilla);$i++){
-        $planilla[$i]["totalPago"] = $sueldoDia;
-        if($planilla[$i]["diferenciaHora"] == "00:00:00"){
-            $planilla[$i]["totalPago"] = "0.00";
-        }
-
-        if($planilla[$i]["diferenciaHora"] >= $planilla[$i]["diferenciaTrabajo"]){
-            $planilla[$i]["totalPago"] = $sueldoDia;
+            $planilla[$i]["totalPago"] = "Bs. ".$sueldoDia;
         }else{
             list($horas, $minutos, $segundos) = explode(':', $planilla[$i]["diferenciaHora"]);
             $minutosDiferencia= ($horas * 60 ) + $minutos;
