@@ -186,7 +186,7 @@ function planillaSueldoInicio(){
             $minutosTrabajo;  
 
             $sueldoMinuto = round($sueldoDia / $minutosTrabajo, 3);
-            $planilla[$i]["totalPago"] = round($sueldoMinuto * $minutosDiferencia, 2);
+            $planilla[$i]["totalPago"] = "Bs. ".round($sueldoMinuto * $minutosDiferencia, 2);
         }
     }
     
