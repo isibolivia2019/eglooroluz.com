@@ -140,6 +140,7 @@ session_start();
 
     <script>
         diasPost = 31;
+        var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
             var cboxPersonal = document.getElementById("cboxPersonal");
@@ -197,7 +198,7 @@ session_start();
                     datos = datos.data
                 }
             })*/
-            var table = $('#table-simple').DataTable({
+            table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -227,13 +228,14 @@ session_start();
                     var data = table.row( $(this).parents("tr") ).data();
                     //console.log("data", data);
                     //console.log("miTabla", table.data());
-                    //console.log("Total:", table.data().length);
+                    console.log("Total:", table.data().length);
                     diasPost = table.data().length
                     diasPost = diasPost - 1
-                    //var tableRemove = $(this).parents("tr");
-                    //table.row(tableRemove).remove().draw(false);
 
-                    //var cell = table.cell(0,0).data("editar").draw();
+                    var tableRemove = $(this).parents("tr");
+                    table.row(tableRemove).remove().draw(false);
+
+                    tableCarrito.ajax.reload();
                 })
         }
         
