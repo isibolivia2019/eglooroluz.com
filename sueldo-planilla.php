@@ -191,7 +191,7 @@ session_start();
             var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            var parametros = {
+            var parametross = {
                 "action" : "generarPlanillaSueldo",
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
@@ -200,7 +200,7 @@ session_start();
             };
             $.ajax({
                 type:'POST',
-                data: parametros,
+                data: parametross,
                 url:'app/controladores/Sueldos.php',
                 success:function(data){
                     console.log("data:", data);
