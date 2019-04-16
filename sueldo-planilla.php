@@ -187,7 +187,8 @@ session_start();
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
                 "mes" : cboxMes,
-                "diasPost" : diasPost,
+                "diasPost" : 0,
+                "diasElminados" : diasElminados
             };
             /*$.ajax({
                 type:'POST',
