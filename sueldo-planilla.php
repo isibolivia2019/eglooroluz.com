@@ -181,14 +181,14 @@ session_start();
             var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            
+            diasElminados = [];
             var parametros = {
                 "action" : "planillaSueldoInicio",
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
                 "mes" : cboxMes,
                 "diasPost" : 0,
-                "diasElminados" : diasElminados
+                "diasElminados" : JSON.stringify(diasElminados)
             };
             $.ajax({
                 type:'POST',
