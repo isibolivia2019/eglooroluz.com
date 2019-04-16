@@ -232,7 +232,7 @@ session_start();
                     console.log("Total:", table.data().length);
                     diasPost = table.data().length
                     diasPost = diasPost - 1
-                    diasElminados[diasElminados.length + 1] = data.fecha_reg_hr.substring(0, 2)
+                    diasElminados[diasElminados.length] = data.fecha_reg_hr.substring(0, 2)
                     console.log("diasEliminados:", diasElminados);
                     
                     var tableRemove = $(this).parents("tr");
