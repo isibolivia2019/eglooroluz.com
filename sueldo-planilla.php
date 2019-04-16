@@ -227,7 +227,7 @@ session_start();
 
         var btn_deshabilitar = function(tbody, table){
                 $(tbody).on("click", "button.deshabilitar", function(){
-                    table.destroy();
+                    table.clear();
                    /*var data = table.row( $(this).parents("tr") ).data();
                     //console.log("data", data);
                     //console.log("miTabla", table.data());
