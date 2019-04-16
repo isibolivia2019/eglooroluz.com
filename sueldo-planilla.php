@@ -238,8 +238,7 @@ session_start();
                     
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
-                    
-                    buscarHorarios();
+                    table.ajax.reload(null, false)
                 })
         }
 
