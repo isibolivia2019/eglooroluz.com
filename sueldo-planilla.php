@@ -181,7 +181,7 @@ session_start();
             var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            diasElminados = ["04"];
+            diasElminados = [4];
             var parametros = {
                 "action" : "planillaSueldoInicio",
                 "usuario" : cboxPersonal,
