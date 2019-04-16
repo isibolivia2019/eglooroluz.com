@@ -129,7 +129,7 @@ session_start();
                                 <div class="row">
                                     <div class="input-field col s12 submitBtn">
                                         <div class="input-field col s12 right ">
-                                          <a class="btn waves-effect waves-light col s12" onclick="buscarHorarios()">Generar Planilla</a>
+                                          <a class="btn waves-effect waves-light col s12" onclick="generarPlanilla()">Generar Planilla</a>
                                         </div>
                                     </div>
                                 </div>
