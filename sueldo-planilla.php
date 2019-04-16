@@ -188,7 +188,7 @@ session_start();
         function generarPlanilla(){
             verificarAcceso("Permiso_Sueldo");
             console.log("click")
-            /*var cboxPersonal = document.getElementById("cboxPersonal").value;
+            var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             var parametros = {
@@ -198,7 +198,7 @@ session_start();
                 "mes" : cboxMes,
                 "datos" : table.data()
             };
-            $.ajax({
+            /*$.ajax({
                 type:'POST',
                 data: parametros,
                 url:'app/controladores/Sueldos.php',
@@ -211,7 +211,7 @@ session_start();
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
             window.open("reportes/reporte-caja-chica.php?usu="+cboxPersonal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
-        */
+        
         }
 
         function buscarHorarios(){
