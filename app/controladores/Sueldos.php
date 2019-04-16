@@ -85,6 +85,7 @@ function planillaSueldoInicio(){
 
         $swDiaEliminado = false;
         for($aa = 0 ; $aa < sizeOf($diasElminados) ; $aa++){
+            echo "ifCONDICION:".(integer)$diasElminados[$aa]."==".(integer)$cDias;
             if((integer)$diasElminados[$aa] == (integer)$cDias){
                 echo "if:SII".(integer)$diasElminados[$aa];
                 $swDiaEliminado = true;
