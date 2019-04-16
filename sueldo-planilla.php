@@ -200,7 +200,7 @@ session_start();
                     datos = datos.data
                 }
             })
-            /*var table = $('#table-simple').DataTable({
+            var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -221,7 +221,7 @@ session_start();
                 "language": {
                     "url": "public/Spanish.lang"
                 }
-            });*/
+            });
             btn_deshabilitar("#table-simple tbody", table);
         }
 
@@ -238,7 +238,7 @@ session_start();
                     
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
-
+                    table.ajax.reload();
                 })
         }
         
