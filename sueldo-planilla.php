@@ -190,7 +190,7 @@ session_start();
                 "diasPost" : 0,
                 "diasElminados" : JSON.stringify(diasElminados)
             };
-            $.ajax({
+            /*$.ajax({
                 type:'POST',
                 data: parametros,
                 url:'app/controladores/Sueldos.php',
@@ -199,7 +199,7 @@ session_start();
                     datos = JSON.parse(data);
                     datos = datos.data
                 }
-            })
+            })*/
             var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
@@ -238,9 +238,12 @@ session_start();
                     
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
-                    table.ajax.reload();
+                    
+                    buscarHorarios();
                 })
         }
+
+        
         
     </script>
 </body>
