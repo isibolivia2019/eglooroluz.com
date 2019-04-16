@@ -126,13 +126,15 @@ session_start();
                                         </table>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="input-field col s12 submitBtn">
-                                        <div class="input-field col s12 right ">
-                                          <a class="btn waves-effect waves-light col s12" onclick="generarPlanilla()">Generar Planilla</a>
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <div class="input-field col s12 right ">
+                                              <a class="btn waves-effect waves-light col s12" onclick="generarPlanilla()">Generar Planilla</a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                </form>
                             </div> 
                             <br>
                             <div class="divider"></div> 
