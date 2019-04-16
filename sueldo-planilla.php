@@ -181,7 +181,7 @@ session_start();
             var cboxPersonal = document.getElementById("cboxPersonal").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            diasElminados = "04";
+            diasElminados = "";
             var parametros = {
                 "action" : "planillaSueldoInicio",
                 "usuario" : cboxPersonal,
@@ -190,7 +190,7 @@ session_start();
                 "diasPost" : 0,
                 "diasElminados" : diasElminados
             };
-            $.ajax({
+            /*$.ajax({
                 type:'POST',
                 data: parametros,
                 url:'app/controladores/Sueldos.php',
@@ -199,8 +199,8 @@ session_start();
                     datos = JSON.parse(data);
                     datos = datos.data
                 }
-            })
-            /*var table = $('#table-simple').DataTable({
+            })*/
+            var table = $('#table-simple').DataTable({
                 "destroy":true,
                 "ajax":{
                     "method": "POST",
@@ -210,7 +210,7 @@ session_start();
                         d.año = cboxAño;
                         d.mes = cboxMes;
                         d.diasPost = 0;
-                        d.diasElminados = JSON.stringify(diasElminados);
+                        d.diasElminados = diasElminados;
                     },
                     "url": "app/controladores/Sueldos.php"
                 },
@@ -228,7 +228,7 @@ session_start();
                 "language": {
                     "url": "public/Spanish.lang"
                 }
-            });*/
+            });
             btn_deshabilitar("#table-simple tbody", table);
         }
 
@@ -241,7 +241,12 @@ session_start();
                     console.log("Total:", table.data().length);
                     diasPost = table.data().length
                     diasPost = diasPost - 1
-                    diasElminados[diasElminados.length] = data.fecha_reg_hr.substring(0, 2)
+                    if(diasElminados.length>0){
+                        diasElminados = diasElminados + "," data.fecha_reg_hr.substring(0, 2)
+                    }else{
+                        diasElminados = data.fecha_reg_hr.substring(0, 2)
+                    }
+                    
                     console.log("diasEliminados:", diasElminados);
                     
                     var tableRemove = $(this).parents("tr");
