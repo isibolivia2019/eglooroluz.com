@@ -140,6 +140,7 @@ session_start();
 
     <script>
         diasPost = 31;
+        diasElminados = []
         //var table
         $(document).ready(function() {
             verificarAcceso("Permiso_Sueldo");
@@ -182,11 +183,11 @@ session_start();
             var cboxMes = document.getElementById("cboxMes").value;
             
             var parametros = {
-                "action" : "planillaSueldo",
+                "action" : "planillaSueldoInicio",
                 "usuario" : cboxPersonal,
                 "año" : cboxAño,
                 "mes" : cboxMes,
-                "diasPost" : diasPost
+                "diasPost" : diasPost,
             };
             /*$.ajax({
                 type:'POST',
@@ -231,11 +232,12 @@ session_start();
                     console.log("Total:", table.data().length);
                     diasPost = table.data().length
                     diasPost = diasPost - 1
-
+                    diasElminados[diasElminados.length + 1] = data.fecha_reg_hr.substring(0, 2)
+                    console.log("diasEliminados:", diasElminados);
+                    
                     var tableRemove = $(this).parents("tr");
                     table.row(tableRemove).remove().draw(false);
 
-                    table.ajax.reload();
                 })
         }
         
