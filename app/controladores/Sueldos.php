@@ -45,15 +45,14 @@ function modelo($modelo){
 }
 
 function planillaSueldoInicio(){
-    $diasElminados = array();
     $usuario = $_POST['usuario'];
     date_default_timezone_set('America/La_Paz');
     $mes =  $_POST['mes'];
     $año =  $_POST['año'];
     $diasPost =  $_POST['diasPost'];
-    $diasElminados = stripslashes($_POST["diasElminados"]);
+    $diasElminados = $_POST["diasElminados"];
     $diaMes = 0;
-
+    $diasElminados = explode(",", $diasElminados);
     $datos = array($usuario, $mes, $año);
     $modelo = modelo('HuellaDactilar');
     $lista = $modelo->listaRegistroHorarioEspecifico($datos);
