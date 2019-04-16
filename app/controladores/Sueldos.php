@@ -150,7 +150,7 @@ function planillaSueldo(){
             $minutosTrabajo= ($horas * 60 ) + $minutos;
             $minutosTrabajo;  
 
-            $sueldoMinuto = round($sueldoDia / $minutosTrabajo, 2);
+            $sueldoMinuto = round($sueldoDia / $minutosTrabajo, 3);
             $planilla[$i]["totalPago"] = $sueldoMinuto * $minutosDiferencia;
         }
     }
