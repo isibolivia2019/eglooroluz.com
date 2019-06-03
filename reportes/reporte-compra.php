@@ -122,7 +122,7 @@ $pdf -> SetTextColor(0, 0, 0);
 $pdf -> SetFont('Arial','B', 11);
 $pdf -> Cell(260, 10, utf8_decode('COMPRAS DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
 $pdf -> SetFont('Arial','B', 11);
-$pdf->SetWidths(array(10,25,20,25,15,20,20,25,33,33,20));
+$pdf->SetWidths(array(10,25,20,25,15,20,20,25,33,33,25));
 $pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C','C'));
 $pdf->Row(array(utf8_decode('N°'), 'FECHA', 'COD ITEM', 'NOMBRE PRODUCTO', 'CANT.', 'COSTO UNIT.', 'COSTO TOTAL', 'PRECIO DE VENTA', 'ALMACENADO EN', 'OBSERVACION','PERSONAL'));
 
@@ -146,11 +146,11 @@ for($i=0;$i<sizeof($lista);$i++){
 	)); 
 }
 $pdf -> SetFont('Arial','B', 13);
-$border = array("","","","","", "", "1", "1","", "", "", "");
+$border = array("","","","","1", "", "1", "","", "", "", "");
 $align = array('C','C','C','C','C','C','C','C','C','C','C');
-$style = array("","","","","", "", "B","B", "", "", "");
-$pdf->SetWidths(array(10,25,20,25,15,20,20,25,33,33,20));
-$empty = array("","","","", "", "", $cant." Uds.", '$us '.$total, "", "", "");
+$style = array("","","","","B", "", "B","", "", "", "");
+$pdf->SetWidths(array(10,25,20,25,15,20,20,25,33,33,25));
+$empty = array("","","","", $cant." Uds.", "", '$us '.$total, "", "", "", "");
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Output();
