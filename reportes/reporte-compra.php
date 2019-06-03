@@ -122,9 +122,9 @@ $pdf -> SetTextColor(0, 0, 0);
 $pdf -> SetFont('Arial','B', 11);
 $pdf -> Cell(260, 10, utf8_decode('COMPRAS DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
 $pdf -> SetFont('Arial','B', 11);
-$pdf->SetWidths(array(10,30,35,25,15,30,40,35,40,30));
-$pdf->SetAligns(array('C','C','C','C','C','C','C','C','C'));
-$pdf->Row(array(utf8_decode('N°'), 'FECHA', 'COD ITEM', 'NOMBRE PRODUCTO', 'CANT.', 'COSTO DE ADQUISICION', 'ALMACENADO EN', 'OBSERVACION','PERSONAL'));
+$pdf->SetWidths(array(10,30,20,25,15,15,30,15,30,30,30,20));
+$pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C','C'));
+$pdf->Row(array(utf8_decode('N°'), 'FECHA', 'COD ITEM', 'NOMBRE PRODUCTO', 'CANT.', 'COSTO UNIT', 'COSTO DE ADQUISICION', 'PRECIO DE VENTA', 'ALMACENADO EN', 'OBSERVACION','PERSONAL'));
 
 $cant = 0;
 $total = 0;
@@ -137,18 +137,20 @@ for($i=0;$i<sizeof($lista);$i++){
 		utf8_decode($lista[$i]['cod_item_producto']),
 		utf8_decode($lista[$i]['nombre_producto']),
 		utf8_decode($lista[$i]['cantidad_compra_producto']." Uds."),
+		utf8_decode('$us '.$lista[$i]['precio_unit_compra_producto']),
 		utf8_decode('$us '.($lista[$i]['precio_unit_compra_producto'] * $lista[$i]['cantidad_compra_producto'])),
+		utf8_decode('Bs. '.$lista[$i]['precio_unit_compra_producto']),
 		utf8_decode($lista[$i]['nombre_almacenamiento']),
 		utf8_decode($lista[$i]['observacion_compra_producto']),
 		utf8_decode($lista[$i]['personal'])
 	)); 
 }
 $pdf -> SetFont('Arial','B', 13);
-$border = array("","","", "", "1", "1","", "", "", "");
-$align = array('C','C','C','C','C','C','C','C','C','C');
-$style = array("","","", "", "B","B", "", "", "");
-$pdf->SetWidths(array(10,30,35,25,15,30,40,35,40,30));
-$empty = array("","", "", "", $cant." Uds.", '$us '.$total, "", "", "", "");
+$border = array("","","","","", "", "1", "1","", "", "", "");
+$align = array('C','C','C','C','C','C','C','C','C','C','C','C');
+$style = array("","","","","", "", "B","B", "", "", "");
+$pdf->SetWidths(array(10,30,20,25,15,15,30,15,30,30,30,20));
+$empty = array("","", "", "", $cant." Uds.", '$us '.$total, "", "", "", "", "", "");
 $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Output();
