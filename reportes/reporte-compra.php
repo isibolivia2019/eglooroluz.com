@@ -122,9 +122,9 @@ $pdf -> SetTextColor(0, 0, 0);
 $pdf -> SetFont('Arial','B', 11);
 $pdf -> Cell(260, 10, utf8_decode('COMPRAS DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
 $pdf -> SetFont('Arial','B', 11);
-$pdf->SetWidths(array(10,30,20,25,15,15,30,15,30,30,30,20));
+$pdf->SetWidths(array(10,25,20,25,15,20,20,25,35,30,30,17));
 $pdf->SetAligns(array('C','C','C','C','C','C','C','C','C','C','C'));
-$pdf->Row(array(utf8_decode('N°'), 'FECHA', 'COD ITEM', 'NOMBRE PRODUCTO', 'CANT.', 'COSTO UNIT', 'COSTO DE ADQUISICION', 'PRECIO DE VENTA', 'ALMACENADO EN', 'OBSERVACION','PERSONAL'));
+$pdf->Row(array(utf8_decode('N°'), 'FECHA', 'COD ITEM', 'NOMBRE PRODUCTO', 'CANT.', 'COSTO UNIT.', 'COSTO TOTAL', 'PRECIO DE VENTA', 'ALMACENADO EN', 'OBSERVACION','PERSONAL'));
 
 $cant = 0;
 $total = 0;
