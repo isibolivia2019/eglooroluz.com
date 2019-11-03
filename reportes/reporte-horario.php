@@ -88,7 +88,7 @@ $pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Cell(180, 10, "", 0, 0, 'C');
 if(sizeof($lista) > 0){
-	$empty = array(utf8_decode(strtoupper($lista[0]['nombre_sucursal'])));
+	$empty = array(utf8_decode(strtoupper($lista[0]['personal'])));
 }else{
 	$empty = array("SIN RESULTADOS");
 }
