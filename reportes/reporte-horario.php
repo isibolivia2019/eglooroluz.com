@@ -117,7 +117,6 @@ $pdf->Row(array('NRO.', 'FECHA', 'ENTRADA', 'SALIDA', 'PERSONAL', ''));
 $totalMonto = 0;
 for($i=0;$i<sizeof($lista);$i++){
 	$pdf -> SetFont('Arial','', 11);
-	$totalMonto = $totalMonto + $lista[$i]['monto_gasto'];
 
 	$pdf->Row(array(($i + 1),
 		utf8_decode($lista[$i]['fecha_reg_hr']),
