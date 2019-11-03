@@ -170,6 +170,7 @@
                                 <li><a href="reporte-descuento">Descuentos</a></li>
                                 <li><a href="reporte-inventario.php">Inventario</a></li>
                                 <li><a href="reporte-perdido.php">Productos Perdidos</a></li>
+                                <li><a href="reporte-horario.php">Horarios</a></li>
                             </ul>
                         </div>
                     </li>
