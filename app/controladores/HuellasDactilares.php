@@ -66,6 +66,22 @@ function listaRegistroHorario(){
     echo json_encode($data);
 }
 
+function listaRegistroHorarioPersonal(){
+    $mes = $_POST['mes'];
+    $año = $_POST['año'];
+    $per = $_POST['per'];
+
+    $datos = array($mes, $año, $per);
+    $modelo = modelo('HuellaDactilar');
+    $lista = $modelo->listaRegistroHorarioPersonal($datos);
+    for($i = 0 ; $i < sizeof($lista) ; $i++){
+        $lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
+    }
+    $data = array();
+    $data = ['data' => $lista];
+    echo json_encode($data);
+}
+
 function listaRegistroHorarioEspecifico(){
     $usuario = $_SESSION['codigo'];
     date_default_timezone_set('America/La_Paz');

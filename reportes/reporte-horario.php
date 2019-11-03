@@ -43,11 +43,11 @@ if($mes == 10){$nombreMes = "Octubre";}
 if($mes == 11){$nombreMes = "Novimebre";}
 if($mes == 12){$nombreMes = "Diciembre";}
 
-$datos = array($sucursal, $mes, $año);
-$modelo = modelo('CajaChica');
-$lista = $modelo->reporteListaCajaChica($datos);
+$datos = array($mes, $año, $per);
+$modelo = modelo('HuellaDactilar');
+$lista = $modelo->listaRegistroHorarioPersonal($datos);
 for($i = 0 ; $i < sizeof($lista) ; $i++){
-    $lista[$i]["fecha"] = date("d/m/Y", strtotime($lista[$i]["fecha"])).' '.$lista[$i]["hora"];
+	$lista[$i]["fecha_reg_hr"] = date("d/m/Y", strtotime($lista[$i]["fecha_reg_hr"]));
 }
 $nombreMes = "";
 if($mes == 1){$nombreMes = "Enero";}
@@ -100,7 +100,7 @@ $pdf->SetWidths(array(100));
 $style = array('B');
 $pdf -> SetFont('Arial','B', 20);
 $pdf -> Cell(80, 15, "", 0, 0, 'C');
-$empty = array(utf8_decode("REPORTE DE CAJA CHICA"));
+$empty = array(utf8_decode("REGISTRO DE HORARIO"));
 $pdf->FancyRow($empty, $border, $align, $style);
 $pdf->Ln(5);
 
@@ -108,11 +108,11 @@ $pdf -> SetDrawColor(33, 152, 158);
 $pdf -> SetTextColor(0, 0, 0);
 
 $pdf -> SetFont('Arial','B', 11);
-$pdf -> Cell(260, 10, utf8_decode('CAJA CHICA DEL MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
+$pdf -> Cell(260, 10, utf8_decode('MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
 $pdf -> SetFont('Arial','B', 11);
 $pdf->SetWidths(array(15,40,40,55,55,55));
 $pdf->SetAligns(array('C','C','C','C','C','C'));
-$pdf->Row(array('NRO.', 'FECHA / HORA', 'MONTO GASTO', 'DETALLE', 'COMPROBANTE', 'PERSONAL'));
+$pdf->Row(array('NRO.', 'FECHA', 'ENTRADA', 'SALIDA', 'PERSONAL', ''));
 
 $totalMonto = 0;
 for($i=0;$i<sizeof($lista);$i++){
@@ -120,20 +120,13 @@ for($i=0;$i<sizeof($lista);$i++){
 	$totalMonto = $totalMonto + $lista[$i]['monto_gasto'];
 
 	$pdf->Row(array(($i + 1),
-		utf8_decode($lista[$i]['fecha']),
-		utf8_decode('Bs. '.$lista[$i]['monto_gasto']),
-		utf8_decode($lista[$i]['detalle']),
-		utf8_decode($lista[$i]['comprobante']),
-		utf8_decode($lista[$i]['personal'])
+		utf8_decode($lista[$i]['fecha_reg_hr']),
+		utf8_decode($lista[$i]['entrada_horario_reg_hr']),
+		utf8_decode($lista[$i]['salida_horario_reg_hr']),
+		utf8_decode($lista[$i]['personal']),
+		utf8_decode("")
 	)); 
 }
-$pdf -> SetFont('Arial','B', 13);
-$border = array("","","1", "", "", "");
-$align = array('C','C','C','C','C','C');
-$style = array("","","B", "", "", "");
-$pdf->SetWidths(array(15,40,40,45,45,45));
-$empty = array("","","Bs. ".$totalMonto, "", "", "");
-$pdf->FancyRow($empty, $border, $align, $style);
 
 $pdf -> Output();
 ?>

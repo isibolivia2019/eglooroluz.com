@@ -21,6 +21,11 @@ class HuellaDactilar{
 		return $this->db->select($sql, $datos);
 	}
 
+	public function listaRegistroHorarioPersonal($datos){
+		$sql = "SELECT cod_reg_hr, fecha_reg_hr, entrada_horario_reg_hr, salida_horario_reg_hr, CONCAT(nombre_usuario, ' ', appat_usuario, ' ', apmat_usuario) as 'personal', observacion_entrada, observacion_salida FROM registro_horario, usuario WHERE registro_horario.cod_usuario = usuario.cod_usuario and MONTH(fecha_reg_hr) = ? and YEAR(fecha_reg_hr) = ? and registro_horario.cod_usuario = ?;";
+		return $this->db->select($sql, $datos);
+	}
+
 	public function ultimoRegistroHuella($datos){
 		$sql = "SELECT * FROM registro_horario WHERE cod_usuario = ? ORDER BY cod_reg_hr desc LIMIT 1";
 		return $this->db->select($sql, $datos);
