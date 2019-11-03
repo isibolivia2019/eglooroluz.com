@@ -75,7 +75,7 @@ session_start();
                                         </div>
                                         <div class="col s12 m12 l4">
                                             <label>Personal</label>
-                                            <select class="browser-default" id="cboxPersonal">
+                                            <select class="browser-default" id="cboxUsuario">
                                                 <option value="" disabled selected>Seleccione el Personal</option>
                                             </select>
                                         </div>
@@ -123,6 +123,15 @@ session_start();
                     }
                 }
             })
+
+            var fecha = new Date();
+            var año = fecha.getFullYear();
+            for(let i=2019 ; i<=año ; i++){
+                var tag = document.createElement('option');
+                tag.setAttribute('value', i);
+                tag.innerHTML = i;
+                cboxAño.appendChild(tag);
+            }
         });
 
         function generarReporte(){
@@ -130,7 +139,7 @@ session_start();
             var cboxUsuario = document.getElementById("cboxUsuario").value;
             var cboxAño = document.getElementById("cboxAño").value;
             var cboxMes = document.getElementById("cboxMes").value;
-            window.open("reportes/reporte-caja-chica.php?suc="+cboxSucursal+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
+            window.open("reportes/reporte-horario.php?per="+cboxUsuario+"&a="+cboxAño+"&m="+cboxMes,'New Window'); 
         }
         
     </script>
