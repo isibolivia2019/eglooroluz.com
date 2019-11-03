@@ -110,9 +110,9 @@ $pdf -> SetTextColor(0, 0, 0);
 $pdf -> SetFont('Arial','B', 11);
 $pdf -> Cell(260, 10, utf8_decode('MES DE '.strtoupper ($nombreMes)." DEL AÑO ".$año), 0, 1, 'C');
 $pdf -> SetFont('Arial','B', 11);
-$pdf->SetWidths(array(15,40,40,55,55,55));
-$pdf->SetAligns(array('C','C','C','C','C','C'));
-$pdf->Row(array('NRO.', 'FECHA', 'ENTRADA', 'SALIDA', 'PERSONAL', ''));
+$pdf->SetWidths(array(15,30,30,50,45,45,45));
+$pdf->SetAligns(array('C','C','C','C','C','C','C'));
+$pdf->Row(array('NRO.', 'FECHA', 'ENTRADA', 'SALIDA', 'OBS. ENTRADA', 'OBS. SALIDA', 'PERSONAL'));
 
 $totalMonto = 0;
 for($i=0;$i<sizeof($lista);$i++){
@@ -122,8 +122,9 @@ for($i=0;$i<sizeof($lista);$i++){
 		utf8_decode($lista[$i]['fecha_reg_hr']),
 		utf8_decode($lista[$i]['entrada_horario_reg_hr']),
 		utf8_decode($lista[$i]['salida_horario_reg_hr']),
+		utf8_decode($lista[$i]['observacion_entrada']),
+		utf8_decode($lista[$i]['observacion_salida']),
 		utf8_decode($lista[$i]['personal']),
-		utf8_decode("")
 	)); 
 }
 
