@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', '1');
 define('DB_USER', "root"); // Usuario
-define('DB_PASSWORD', '$IsiBolivia2018'); // Contraseña
+define('DB_PASSWORD', '$IsiBolivia14'); // Contraseña
 define('DB_DATABASE', "eglooroluz_bd"); // Nombre de la base de datos
 define('DB_LOCALHOST', "localhost:3306"); // localhost
 
