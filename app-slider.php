@@ -20,7 +20,7 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li class="bold"><a href="inicio.php" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Inicio</a></li>
-                <?php if($_SESSION['Permiso_Usuario'] == 1){?>
+                <?php /*if($_SESSION['Permiso_Usuario'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Usuarios</a>
                         <div class="collapsible-body">
                             <ul>
@@ -65,7 +65,7 @@
                             </ul>
                         </div>
                     </li>
-                <?php }?>
+                <?php }*/?>
                 <?php if($_SESSION['Permiso_Sucursal'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Sucursales</a>
                         <div class="collapsible-body">
