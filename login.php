@@ -98,6 +98,7 @@ session_start();
           data: parametros,
           url:'app/controladores/Usuarios.php',
           success:function(data){
+            console.log("data", data);
             $datos = JSON.parse(data);
             if($datos.length > 0){
               if($datos[0].estado_usuario == "1"){
