@@ -68,9 +68,9 @@ function autentificacionUsuario(){
             $_SESSION['Permiso_Venta']=$permisos[0]['itemVentas'];
             $_SESSION['Permiso_Reporte']=$permisos[0]['itemReportes'];
             $_SESSION['Permiso_Acceso']=$permisos[0]['itemAccesos'];
-            $_SESSION['Permiso_CajaChica']=$permisos[0]['itemCajaChica'];
-            $_SESSION['Permiso_Cliente']=$permisos[0]['itemCliente'];
-            $_SESSION['Permiso_Configuracion']=$permisos[0]['itemConfiguracion'];
+            //$_SESSION['Permiso_CajaChica']=$permisos[0]['itemCajaChica'];
+            //$_SESSION['Permiso_Cliente']=$permisos[0]['itemCliente'];
+            //$_SESSION['Permiso_Configuracion']=$permisos[0]['itemConfiguracion'];
         }
     }
     echo json_encode($usuario);
