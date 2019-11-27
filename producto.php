@@ -98,7 +98,7 @@ session_start();
                 },
                 "columns": [
                     {"render": function (data, type, JsonResultRow, meta) {
-                            return "<img width='150'src=public/imagenes/productos/"+JsonResultRow.imagen_producto+">";
+                            return "<h6>sin imagen</h6>";
                         }
                     },
                     {"data" : "cod_item_producto"},
