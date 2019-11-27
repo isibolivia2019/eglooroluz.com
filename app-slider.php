@@ -97,7 +97,7 @@
                         </div>
                     </li>
                 <?php }?>
-                <?php if($_SESSION['Permiso_Categoria'] == 1){?>
+                <?php/* if($_SESSION['Permiso_Categoria'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Categorias</a>
                         <div class="collapsible-body">
                             <ul>
@@ -158,7 +158,7 @@
                             </ul>
                         </div>
                     </li>
-                <?php }?>
+                <?php }*/?>
                 <?php if($_SESSION['Permiso_Reporte'] == 1){?>
                     <li class="bold"><a class="collapsible-header  waves-effect waves-cyan"><i class="mdi-editor-border-all"></i>Reportes</a>
                         <div class="collapsible-body">
